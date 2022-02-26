@@ -2,11 +2,12 @@ GetPopularProductsQuery -> GetPopularProductsHandler
 
 
 Argumente : nrOfProducts
-Dependinte externe : unit of work - unitOfWork.ProductsRepository.GetProductOrdersCountDictionary();
+Dependinte externe : - IUnitOfWork, IMapper
+ 		     - unitOfWork.ProductsRepository.GetProductOrdersCountDictionary(); - returneaza un dictionar care contine perechi {produs:nr. comenzi}
 
 Un produs este mai popular decat altul daca acesta are mai multe comenzi
 
-Trebuie sa acceseze din db toate produsele impreuna cu orderer ele lor direct din db(in singur query spre DB)
+Returneaza : O Lista de marime egala cu valoarea 'nrOfProducts', care reprezinta cele mai populare produse
 ---------------------------------------------------------------------------------------------------------------
 
 
