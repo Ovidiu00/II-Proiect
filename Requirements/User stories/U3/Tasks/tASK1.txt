@@ -1,0 +1,8 @@
+Role de user si de admin
+
+
+Operatii crud entitate Categorie
+
+Operatii crud entitate Produs
+
+Interfata vizualizare comenzi facute,endpoint get comenzi 

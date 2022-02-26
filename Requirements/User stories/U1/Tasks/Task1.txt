@@ -1,0 +1,37 @@
+Endpoint pentru a returna cele mai populare produse
+
+
+Endpoint: popularProducts
+Argument : nrOfProducts
+Trinite query prin mediator pentru o lista cu primele n produse populare:GetPopularProductsQuery->GetPopularProductsHandler(vezi task5)
+Mapeaza din DTO in VM
+
+Returneaza o lista de ProductVM
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+TestCases
+----------		
+Primeste ca si arg(nrOfRecords) = 3, sa returneze o lista de 3 elemente - ok
+
+Service-ul returneaza 2 dto,uri, sa returneze 2 - ok
+
+
+Daca nr=0 sa returneze o lista goala - ok
+
+Daca nr = nr neg sa returneze o lista goala - ok
+
+Daca queryul returneaza null, sa retunreze o lista goala - ok
+
+Daca query ul returneaza o lista goala, spre client sa se returneze o lista goala - ok
+
+Daca apare orice exceptie sa se returneze 500;	
+
+
+

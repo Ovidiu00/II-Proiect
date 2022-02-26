@@ -1,0 +1,16 @@
+<app-layout >
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation">
+      <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content >
+      <app-header  (sidenavToggle)="sidenav.toggle()"></app-header>
+        <app-category-dropdown-list [categories$]="categories$"></app-category-dropdown-list>
+
+   
+     
+        <router-outlet style="display: block;"></router-outlet>
+      
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</app-layout>

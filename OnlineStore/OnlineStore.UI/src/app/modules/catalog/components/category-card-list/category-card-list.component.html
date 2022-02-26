@@ -1,0 +1,5 @@
+
+
+<div class="row">
+  <app-category-card [routerLink] = "['/catalog/categorii',category.id]" *ngFor="let category of categories$ | async"  class="col-sm-4 mt-4" [category]="category"></app-category-card>
+</div>

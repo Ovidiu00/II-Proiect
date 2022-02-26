@@ -1,0 +1,1 @@
+Endpoint pentru register, se trimite la server emailu si parola, apoi se verifca in DB, se returneaza jwt tokenu daca este succes

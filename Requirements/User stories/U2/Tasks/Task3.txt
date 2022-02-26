@@ -1,0 +1,1 @@
+Endpoint Register , se trimite informatiile din form si se salveaza in db

@@ -1,0 +1,13 @@
+
+
+<div (mouseenter)="showToolTip()" (mouseleave)="hideToolTip()">
+
+
+<button >{{category.name}} <span>&#9660;</span></button>
+
+
+<app-sub-categories-tooltip (mouseEnter)="this.toolTipHovered = true" (mouseLeave)="this.toolTipHovered = false"
+[show]="this.showSubCategories" [subCategories]="category.subCategories" ></app-sub-categories-tooltip>
+
+
+</div>

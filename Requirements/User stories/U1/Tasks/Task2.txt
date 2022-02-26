@@ -1,0 +1,28 @@
+Endpoint:Categories
+Args:nici unu
+
+Un endpoint in backend care sa returneze o lista de categorii
+
+prin mediator trimite GetCategoriesQuery pentru a obtine o lista de CategoryDTO
+
+Returneaza o lista de CategoryVM
+
+
+
+TestCases
+----------
+
+Daca queryul returneaza null, sa retunreze o lista goala - ok
+
+Daca query ul returneaza o lista goala, spre client sa se returneze o lista goala - ok
+
+Sa se apeleze metoda send al mediator-ului odata
+
+daca este exceptie sa se returneze status code 500
+
+Sa se returneze o lsita de VM
+
+Daca se executa, sa se apeleze mediator.send odata
+
+Daca se executa corect, se returneaza status code 200
+

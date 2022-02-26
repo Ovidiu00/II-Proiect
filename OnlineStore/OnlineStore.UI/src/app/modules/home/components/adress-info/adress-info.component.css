@@ -1,0 +1,14 @@
+:host(){
+  position: absolute;
+  top: 66%;
+  left: 5%;
+  font-family: "Poppins", sans-serif;
+  transform: translateY(-50%);
+  width: 100%;
+  color: white;
+  font-size: 50px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: bolder;
+  text-shadow: 2px 2px 4px black;
+}

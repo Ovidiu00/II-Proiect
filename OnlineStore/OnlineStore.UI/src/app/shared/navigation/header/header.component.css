@@ -1,0 +1,58 @@
+
+.navbar-color{
+  background-color:#212529;
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+.store-name{
+  font-family: fantasy;
+  font-size: xxx-large;
+  margin-left: 100px;
+  color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover, a:active{
+    color: grey;
+    cursor: pointer;
+
+}
+
+.navigation-items{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+mat-toolbar{
+  height: 80px;
+}
+mat-icon{
+  color: white;
+}
+
+@media(max-width: 959px){
+    mat-toolbar{
+        border-radius: 0px;
+    }
+    .store-name{
+      font-size: large;
+      margin-left: 0px;
+
+    }
+}
+
+fa-icon {
+  transition: transform .2s; /* Animation */
+
+}
+fa-icon:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  cursor: pointer;
+
+}

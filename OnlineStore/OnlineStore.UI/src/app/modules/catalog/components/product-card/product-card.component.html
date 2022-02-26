@@ -1,0 +1,11 @@
+<div class="card" (mouseenter)="mouseHover()" (mouseleave)="mouseHover()" [ngClass]="status ? 'card-shadow' : 'card-shadow-revert'">
+  <div class="card-body">
+      <div class="card-img-actions"> <img [src] = "product.displayPhoto" class="card-img img-fluid" alt=""> </div>
+  </div>
+  <div class="card-body bg-light text-center">
+      <div class="mb-2">
+          <h6 class="font-weight-semibold mb-2"> <a href="#" class="text-default mb-2" data-abc="true">Categoria X </a> </h6> <a href="#" class="text-muted" style="font-size:large"> {{product.name}}</a>
+      </div>
+      <h3 class="mb-0 font-weight-semibold">{{product.price |currency:"RON ":"symbol"}}</h3>
+  </div>
+</div>

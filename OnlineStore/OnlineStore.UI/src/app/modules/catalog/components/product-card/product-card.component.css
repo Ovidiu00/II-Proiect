@@ -1,0 +1,82 @@
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 0;
+  text-align: center
+}
+
+.card-shadow{
+  box-shadow: 7px 7px 7px #888888;
+  cursor: pointer;
+
+  transition: transform .4s; /* Animation */
+  transform: scale(1.06); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+.card-shadow-revert{
+  transition: transform .4s; /* Animation */
+  transform: scale(1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.card-img {
+  width: 350px;
+
+  overflow: hidden;
+}
+
+.star {
+  color: red
+}
+
+.bg-cart {
+  background-color: orange;
+  color: #fff
+}
+
+.bg-cart:hover.mt-50 {
+  margin-top: 50px
+}
+
+.mb-50 {
+  margin-bottom: 50px
+}
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .1875rem
+}
+
+.card-img-actions {
+  position: relative
+}
+
+
+.bg-buy {
+  background-color: green;
+  color: #fff;
+  padding-right: 29px
+}
+
+.card-body{
+  max-height: 400px;
+
+}
+.bg-buy:hover {
+  color: #fff
+}
+
+a {
+  text-decoration: none !important
+}
+
+img{
+  max-height:320px
+}
