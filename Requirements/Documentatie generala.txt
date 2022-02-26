@@ -1,0 +1,35 @@
+Controllerele trebuie sa fie 'thick', doar se primeste un request, si se trimite intr-o linie spre mediator(business layer)
+Controllerele trebuie sa fie acoperite de acele teste default in documentatie(vezi), nu neaparat intrat in corner case-uri si detalii
+
+Testele urmaresc urmatoare conventie
+	Nume : NumeleMetodeiTestata_ConditiileCareSuntImpuse_CeVremSaExecuteMetodaAvandAceleConditiiImpuse()
+	Body : //ARRANGE  - iti prepari datele doar, mockuiesti dependintele, pregatesti parametrii pentru metoda ce urmeaza a fi testata
+	       //ACT  - apelezi metoda ce vrei sa o testezi, salveazi raspunsul acesteia intr o variabila 
+	       //ASERT - verifici daca ce a returnat metoda mai sus, este rezultat asteptat
+
+
+Exista 3 layere : API,Business,DataAccess
+
+pentru fiecare exista un DTO - DATA TRANSFER OBJECT
+
+Inspre API vin modele de tip VIEWMODEL, si pleaca modele de tip VIEWMODEL
+Inspre Business vin modele de tip DTO si pleaca modele de tip DTO
+Inspre DataAcces vin modele simple, entitatile care modeleaza DB-ul, din data acess pleaca aceleasi entitatii
+
+Pentru a face aceasta tranzitie intre layere, folosim mapper
+Use case demonstrativ :
+Avem endpoint  GetCategoryById(int id), care evident va trebui sa returneze acea categorie si o va returna un obiect de tip VIEWMODEL
+
+in endpoint se apeleaza mediator.send(GetCategoryById(id)), aceasta metoda va returna CategoryDTO
+trebuie sa transformam din DTO IN ViewModel prin mapper
+
+pentru a face posibila aceasta transformare avem in layer-ul de api AutomapperApiProfile, trebuie sa creeam aici un CreateMap<CategoryDTO,CategoryVM>
+
+si atat din partea endpoint-ului, a trimis request pentru o categorie cu un anumit id, a primit un dto, la tranfsormat in vm si l a returnat la client
+
+pentru mediator/business
+
+se apeleage o metoda din data acess care returneaza o entiate de tip Category, noi trebuie sa returnam CategoryDTO
+
+in  AutoMapperBusinessProfile vom crea maparea intre Category si CategoryDTO si gata, acum este posibil
+
