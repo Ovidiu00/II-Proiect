@@ -3,7 +3,8 @@ Endpoint pentru a returna cele mai populare produse
 
 Endpoint: popularProducts
 Argument : nrOfProducts
-Trinite query prin mediator pentru o lista cu primele n produse populare:GetPopularProductsQuery->GetPopularProductsHandler(vezi task5)
+Dependente : - IMapper,IMediator
+	     - trimite query prin mediator pentru o lista cu primele n produse populare:GetPopularProductsQuery->GetPopularProductsHandler(vezi task5)
 Mapeaza din DTO in VM
 
 Returneaza o lista de ProductVM
