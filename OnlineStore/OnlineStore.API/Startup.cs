@@ -36,6 +36,8 @@ namespace OnlineStore.API
             services.AddAutoMapper(typeof(AutoMapperBussinesProfile), typeof(AutoMapperApiProfile));
             services.AddDbContext<OnlineStoreDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStoreDB")));
 
+
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMediatR(typeof(MediatrEntryPoint).Assembly);
 
