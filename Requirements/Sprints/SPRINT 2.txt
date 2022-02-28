@@ -1,0 +1,12 @@
+Sprint 2 : Admin operations
+-------------------------------------------
+
+Create category
+Add subcatefories to category
+
+Create product
+Add product to categories
+
+Crud categories/products
+
+View orders
