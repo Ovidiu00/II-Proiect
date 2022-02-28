@@ -90,7 +90,7 @@ namespace OnlineStore.UnitTests.API.CategoryController_Tests
             Assert.Equal(expectedCount, actualCategories.Count());
         }
         [Fact]
-        public async Task PopularProducts_QueryReturnsEmptyList_ReturnsEmptyList()
+        public async Task Categories_QueryReturnsEmptyList_ReturnsEmptyList()
         {
             // Arrange
 
