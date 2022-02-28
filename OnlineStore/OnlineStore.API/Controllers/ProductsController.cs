@@ -5,7 +5,6 @@ using OnlineStore.API.ViewModels;
 using OnlineStore.Business.Mediator.Requests.Queries;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineStore.API.Controllers
