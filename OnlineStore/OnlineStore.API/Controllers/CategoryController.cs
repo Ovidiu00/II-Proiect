@@ -23,7 +23,7 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CategoryVM>> Categories()
+        public async Task<ActionResult<IEnumerable<CategoryVM>>> Categories()
         {
             try
             {
@@ -35,6 +35,12 @@ namespace OnlineStore.API.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CategoryVM>> GetCategoryById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
