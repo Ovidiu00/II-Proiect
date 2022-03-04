@@ -27,9 +27,8 @@ namespace OnlineStore.API.Controllers
         {
             try
             {
-                var categoriesDTO =  await mediator.Send(new GetCategoriesQuery());
+                throw new NotImplementedException();
 
-                return Ok(mapper.Map<IEnumerable<CategoryVM>>(categoriesDTO));
             }
             catch (Exception)
             {

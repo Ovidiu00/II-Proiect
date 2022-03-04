@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineStore.DataAccess.Models.AppDbContext;
 
 namespace OnlineStore.DataAccess.Migrations
 {
     [DbContext(typeof(OnlineStoreDbContext))]
-    partial class OnlineStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220228200723_AddedFilePathToProduct")]
+    partial class AddedFilePathToProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,26 +111,6 @@ namespace OnlineStore.DataAccess.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.ProductPhoto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FilePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductPhotos");
-                });
-
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.User", b =>
                 {
                     b.Property<string>("UserId")
@@ -195,13 +177,6 @@ namespace OnlineStore.DataAccess.Migrations
                         .HasForeignKey("OrderId");
                 });
 
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.ProductPhoto", b =>
-                {
-                    b.HasOne("OnlineStore.DataAccess.Models.Entities.Product", null)
-                        .WithMany("Photos")
-                        .HasForeignKey("ProductId");
-                });
-
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.UserProduct", b =>
                 {
                     b.HasOne("OnlineStore.DataAccess.Models.Entities.Product", "Product")
@@ -229,11 +204,6 @@ namespace OnlineStore.DataAccess.Migrations
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Product", b =>
-                {
-                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }

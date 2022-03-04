@@ -33,7 +33,6 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
             controller = new ProductsController(mockMediator.Object, mapper);
         }
-
         [Fact]
         public async Task PopularProducts_ExceptionIsThrown_Returns500Status()
         {

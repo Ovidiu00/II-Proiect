@@ -20,8 +20,6 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
 
         public async Task<IEnumerable<CategoryDTO>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
-            //return await unitOfWork.CategoryRepository.GetAll();
-
             throw new NotImplementedException();
         }
     }

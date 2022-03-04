@@ -4,9 +4,6 @@ Dependente : -mediator,mapper
 	     - prin mediator trimite un GetCategoriesQuery -> GetCategoriesHandler	
 
 Un endpoint in backend care sa returneze o lista de categorii
-
-
-
 Returneaza o lista de CategoryVM
 
 

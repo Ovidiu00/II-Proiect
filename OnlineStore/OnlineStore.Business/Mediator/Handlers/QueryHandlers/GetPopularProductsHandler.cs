@@ -24,7 +24,7 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
         public async Task<IEnumerable<ProductDTO>> Handle(GetPopularProductsQuery request, CancellationToken cancellationToken)
         {
             Dictionary<Product, int> productOrdersCount = await unitOfWork.ProductRepository.GetProductOrdersCountDictionary();
-            if(productOrdersCount is null)
+            if (productOrdersCount is null)
             {
                 return new List<ProductDTO>();
             }
