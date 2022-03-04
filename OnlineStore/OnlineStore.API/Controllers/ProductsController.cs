@@ -5,7 +5,6 @@ using OnlineStore.API.ViewModels;
 using OnlineStore.Business.Mediator.Requests.Queries;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineStore.API.Controllers
@@ -23,8 +22,8 @@ namespace OnlineStore.API.Controllers
             this.mapper = mapper;
         }
 
-
-        [HttpGet]
+        
+        [HttpGet("popular-products")]
         public async Task<ActionResult<IEnumerable<PopularProductVM>>> PopularProducts(int count)
         {
             try
@@ -38,6 +37,11 @@ namespace OnlineStore.API.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        public async Task<ActionResult<IEnumerable<RecentProductVM>>> RecentProducts(int count)
+        {
+            throw new NotImplementedException();
         }
     }
 }

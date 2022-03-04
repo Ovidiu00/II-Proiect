@@ -4,10 +4,8 @@ using OnlineStore.Business.DTOs;
 using OnlineStore.Business.Mediator.Requests.Queries;
 using OnlineStore.DataAccess.Models.Entities;
 using OnlineStore.DataAccess.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

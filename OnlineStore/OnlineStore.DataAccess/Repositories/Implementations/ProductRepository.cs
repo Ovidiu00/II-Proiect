@@ -24,5 +24,10 @@ namespace OnlineStore.DataAccess.Repositories.Implementations
             return null;
            
         }
+
+        public Task<IEnumerable<Product>> GetMostRecentProducts(int count)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
