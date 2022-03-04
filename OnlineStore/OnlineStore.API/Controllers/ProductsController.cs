@@ -22,8 +22,8 @@ namespace OnlineStore.API.Controllers
             this.mapper = mapper;
         }
 
-
-        [HttpGet]
+        
+        [HttpGet("popular-products")]
         public async Task<ActionResult<IEnumerable<PopularProductVM>>> PopularProducts(int count)
         {
             try
@@ -37,6 +37,11 @@ namespace OnlineStore.API.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        public async Task<ActionResult<IEnumerable<RecentProductVM>>> RecentProducts(int count)
+        {
+            throw new NotImplementedException();
         }
     }
 }
