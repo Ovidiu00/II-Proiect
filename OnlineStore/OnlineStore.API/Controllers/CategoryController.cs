@@ -23,13 +23,12 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CategoryVM>> Categories()
+        public async Task<ActionResult<CategoryVM>> categories()
         {
             try
             {
-                var categoriesDTO =  await mediator.Send(new GetCategoriesQuery());
+                throw new NotImplementedException();
 
-                return Ok(mapper.Map<IEnumerable<CategoryVM>>(categoriesDTO));
             }
             catch (Exception)
             {

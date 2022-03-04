@@ -16,13 +16,11 @@ namespace OnlineStore.DataAccess.Repositories.Implementations
 
         public Task<Dictionary<Product, int>> GetProductOrdersCountDictionary()
         {
-
             var productsOrdered = _db.Orders.SelectMany(x => x.Products);
 
             var results = productsOrdered.GroupBy(x => x.Id);
 
-            return null;
-           
+            return null;          
         }
     }
 }
