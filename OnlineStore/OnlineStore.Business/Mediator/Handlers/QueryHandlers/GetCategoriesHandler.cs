@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using OnlineStore.Business.DTOs;
 using OnlineStore.Business.Mediator.Requests.Queries;
 using OnlineStore.DataAccess.Repositories;
@@ -13,7 +14,7 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
     {
         private readonly IUnitOfWork unitOfWork;
             
-        public GetCategoriesHandler(IUnitOfWork unitOfWork)
+        public GetCategoriesHandler(IUnitOfWork unitOfWork,IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
         }
