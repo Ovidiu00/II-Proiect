@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.API.ViewModels;
-using OnlineStore.Business.Mediator.Requests.Queries;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

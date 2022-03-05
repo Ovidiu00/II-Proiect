@@ -95,10 +95,9 @@ namespace OnlineStore.UnitTests.API.CategoryController_Tests
             // Arrange
 
 
-            var products = new List<CategoryDTO>();
 
             mockMediator.Setup(repo => repo.Send(It.IsAny<GetCategoriesQuery>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(null as IEnumerable<CategoryDTO>);
+                .ReturnsAsync(new List<CategoryDTO>());
 
 
             //// Act
@@ -111,7 +110,7 @@ namespace OnlineStore.UnitTests.API.CategoryController_Tests
             Assert.Equal(expectedCount, actualCategories.Count());
         }
         [Fact]
-        public async Task PopularProducts_WhenExecuted_Returns200StatusCode()
+        public async Task Categories_WhenExecuted_Returns200StatusCode()
         {
             // Arrange
 
