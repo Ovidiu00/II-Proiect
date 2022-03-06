@@ -4,8 +4,9 @@ Get categories
 Get category by id
 
 Get popular products
-Get recent products
-
 Get product by id
+Get products for a given category
+
+
 
 
