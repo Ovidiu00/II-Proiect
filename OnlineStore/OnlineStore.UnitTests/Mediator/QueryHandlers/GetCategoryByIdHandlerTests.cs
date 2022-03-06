@@ -31,7 +31,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
 
 
         [Fact]
-        public async Task GetProductById_IdIs0_ThrowsException()
+        public async Task GetCategoryById_IdIs0_ThrowsException()
         {
             GetCategoryByIdQuery query = new GetCategoryByIdQuery(0);
 
@@ -41,7 +41,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
             await Assert.ThrowsAsync<Exception>(async () => await handler.Handle(query, new System.Threading.CancellationToken()));
         }
         [Fact]
-        public async Task GetProductById_IdIsMinus1_ThrowsException()
+        public async Task GetCategoryById_IdIsMinus1_ThrowsException()
         {
             GetCategoryByIdQuery query = new GetCategoryByIdQuery(-1);
 
@@ -52,7 +52,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
         }
 
         [Fact]
-        public async Task GetProductById_DataAccesMethodDoesntFindCategoryWithGivenId_ReturnsNull()
+        public async Task GetCategoryById_DataAccesMethodDoesntFindCategoryWithGivenId_ReturnsNull()
         {
             //Arange
             GetCategoryByIdQuery query = new GetCategoryByIdQuery(It.IsAny<int>());
@@ -68,7 +68,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
 
         }
         [Fact]
-        public async Task GetProductById_DataAccesMethodReturnsDTO_ReturnsVM()
+        public async Task GetCategoryById_DataAccesMethodReturnsDTO_ReturnsVM()
         {
             //Arange
             GetCategoryByIdQuery query = new GetCategoryByIdQuery(It.IsAny<int>());
@@ -84,14 +84,14 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
             Assert.IsAssignableFrom<CategoryDTO>(categoryReturnedWithGivenId);
         }
         [Fact]
-        public async Task GetProductById_DataAccesMethodReturnsCategoryObject_ReturnsTheSameObjectAsDataAccesReturned()
+        public async Task GetCategoryById_DataAccesMethodReturnsCategoryObject_ReturnsTheSameObjectAsDataAccesReturned()
         {
             //Arange
             GetCategoryByIdQuery query = new GetCategoryByIdQuery(It.IsAny<int>());
             var categoryReturnedByDb = new Category() { Name = "A1" };
 
             mockUnitOfWork.Setup(w => w.CategoryRepository.FindSingle(It.IsAny<Expression<Func<Category, bool>>>()))
-                .ReturnsAsync(new Category());
+                .ReturnsAsync(categoryReturnedByDb);
 
             //Act
             var categoryReturnedWithGivenId = await handler.Handle(query, new System.Threading.CancellationToken());
