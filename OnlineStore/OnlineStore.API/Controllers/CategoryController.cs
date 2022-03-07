@@ -10,6 +10,7 @@ namespace OnlineStore.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+
     public class CategoryController : ControllerBase
     {
         private readonly IMediator mediator;
