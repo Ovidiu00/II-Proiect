@@ -41,7 +41,15 @@ namespace OnlineStore.API.Controllers
 
         public async Task<ActionResult<IEnumerable<RecentProductVM>>> RecentProducts(int count)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Ok(mapper.Map<IEnumerable<RecentProductVM>>(
+                    await mediator.Send(new GetRecentProductsQuery(count))));
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

@@ -20,9 +20,9 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
             this.mapper = mapper;
         }
         
-        public Task<IEnumerable<ProductDTO>> Handle(GetRecentProductsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProductDTO>> Handle(GetRecentProductsQuery request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            return mapper.Map<IEnumerable<ProductDTO>>(await unitOfWork.ProductRepository.GetMostRecentProducts(request.count)) ;
         }
     }
 }
