@@ -22,7 +22,7 @@ namespace OnlineStore.API.Controllers
             this.mapper = mapper;
         }
 
-        
+
         [HttpGet("popular-products")]
         public async Task<ActionResult<IEnumerable<PopularProductVM>>> PopularProducts(int count)
         {
@@ -42,6 +42,13 @@ namespace OnlineStore.API.Controllers
         public async Task<ActionResult<IEnumerable<RecentProductVM>>> RecentProducts(int count)
         {
             throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<ProductVM>> GetProductsById(int id)
+        {
+            return mapper.Map<ProductVM>(await mediator.Send(new GetProductByIdQuery(id)));
         }
     }
 }
