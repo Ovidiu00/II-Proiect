@@ -46,9 +46,16 @@ namespace OnlineStore.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult<ProductVM>> GetProductsById(int id)
+        public async Task<ActionResult<ProductVM>> GetProductById(int id)
         {
-            return mapper.Map<ProductVM>(await mediator.Send(new GetProductByIdQuery(id)));
+            if (id <= 0)
+                return BadRequest();
+            var result = mapper.Map<ProductVM>(await mediator.Send(new GetProductByIdQuery(id)));
+
+            if (result != null)
+                return NotFound();
+            return Ok(result);
+
         }
     }
 }
