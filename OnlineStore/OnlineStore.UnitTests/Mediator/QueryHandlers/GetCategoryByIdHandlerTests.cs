@@ -7,7 +7,8 @@ using OnlineStore.Business.Mediator.Requests.Queries;
 using OnlineStore.DataAccess.Models.Entities;
 using OnlineStore.DataAccess.Repositories;
 using System;
-using System.Linq.Expressions;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -29,13 +30,31 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
             handler = new GetCategoryByIdHandler(mockUnitOfWork.Object, mapper);
         }
 
+        [Fact]
+        public async Task GetCategoryById_CategoryContainsSubCategories_CategoryDTOContainsSubCategories()
+        {
+            GetCategoryByIdQuery query = new GetCategoryByIdQuery(0);
+
+            Category categoryReturnedByDb = new Category()
+            {
+                SubCategories = new List<Category>() { new Category() }
+            };
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategory(It.IsAny<int>()))
+                .ReturnsAsync(categoryReturnedByDb);
+
+            var categoryReturned = await handler.Handle(query, new System.Threading.CancellationToken());
+
+
+            Assert.Equal(1, categoryReturned.SubCategories.Count());
+
+        }
 
         [Fact]
         public async Task GetCategoryById_IdIs0_ThrowsException()
         {
             GetCategoryByIdQuery query = new GetCategoryByIdQuery(0);
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.FindSingle(It.IsAny<Expression<Func<Category, bool>>>()))
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategory(It.IsAny<int>()))
                 .Throws(new Exception());
 
             await Assert.ThrowsAsync<Exception>(async () => await handler.Handle(query, new System.Threading.CancellationToken()));
@@ -45,7 +64,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
         {
             GetCategoryByIdQuery query = new GetCategoryByIdQuery(-1);
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.FindSingle(It.IsAny<Expression<Func<Category, bool>>>()))
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategory(It.IsAny<int>()))
                 .Throws(new Exception());
 
             await Assert.ThrowsAsync<Exception>(async () => await handler.Handle(query, new System.Threading.CancellationToken()));
@@ -57,7 +76,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
             //Arange
             GetCategoryByIdQuery query = new GetCategoryByIdQuery(It.IsAny<int>());
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.FindSingle(It.IsAny<Expression<Func<Category, bool>>>()))
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategory(It.IsAny<int>()))
                 .ReturnsAsync(null as Category);
 
             //Act
@@ -73,7 +92,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
             //Arange
             GetCategoryByIdQuery query = new GetCategoryByIdQuery(It.IsAny<int>());
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.FindSingle(It.IsAny<Expression<Func<Category, bool>>>()))
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategory(It.IsAny<int>()))
                 .ReturnsAsync(new Category());
 
             //Act
@@ -90,7 +109,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
             GetCategoryByIdQuery query = new GetCategoryByIdQuery(It.IsAny<int>());
             var categoryReturnedByDb = new Category() { Name = "A1" };
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.FindSingle(It.IsAny<Expression<Func<Category, bool>>>()))
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategory(It.IsAny<int>()))
                 .ReturnsAsync(categoryReturnedByDb);
 
             //Act

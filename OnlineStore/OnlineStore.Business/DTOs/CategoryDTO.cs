@@ -8,6 +8,6 @@ namespace OnlineStore.Business.DTOs
         public string FilePath { get; set; }
         public string Name { get; set; }       
         
-        public IEnumerable<CategoryDTO> Subcategories { get; set; }
+        public IEnumerable<CategoryDTO> SubCategories { get; set; }
     }
 }
