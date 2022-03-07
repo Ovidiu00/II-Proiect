@@ -10,6 +10,8 @@ namespace OnlineStore.API.AutoMapper
         {
             CreateMap<ProductDTO, PopularProductVM>();
             CreateMap<CategoryDTO, PopularProductVM>();
+            CreateMap<CategoryDTO, CategoryVM>();
+
 
         }
     }

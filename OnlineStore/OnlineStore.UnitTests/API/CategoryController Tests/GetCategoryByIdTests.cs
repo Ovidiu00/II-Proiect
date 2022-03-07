@@ -7,6 +7,8 @@ using OnlineStore.API.Controllers;
 using OnlineStore.API.ViewModels;
 using OnlineStore.Business.DTOs;
 using OnlineStore.Business.Mediator.Requests.Queries;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -75,8 +77,8 @@ namespace OnlineStore.UnitTests.API.CategoryController_Tests
 
 
             //// Act
-            var actionResult = await controller.GetCategoryById(It.IsAny<int>());
-            var result = actionResult.Result as StatusCodeResult;
+            var actionResult = await controller.GetCategoryById(2);
+            var result = actionResult.Result as OkObjectResult;
 
             //// Assert
             int expectedStatusCode = 200;
@@ -116,13 +118,36 @@ namespace OnlineStore.UnitTests.API.CategoryController_Tests
 
 
             //// Act
-            var actionResult = await controller.GetCategoryById(It.IsAny<int>());
+            var actionResult = await controller.GetCategoryById(1);
             var result = actionResult.Result as OkObjectResult;
             var categoryWithGivenId = (CategoryVM)result.Value;
 
 
             //// Assert
             Assert.Equal(categoryReturned.Name, categoryWithGivenId.Name);
+        }
+        [Fact]
+        public async Task GetCategoryById_QueryReturnsCorrectCategoryWithSubCategories_CategoryReturnedByEndpointHasSubcategories()
+        {
+            // Arrange
+            var categoryReturned = new CategoryDTO()
+            {
+                Id = 1,
+                Name = "A1",
+                SubCategories = new List<CategoryDTO>() { new CategoryDTO() }
+            };
+            mockMediator.Setup(repo => repo.Send(It.IsAny<GetCategoryByIdQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(categoryReturned);
+
+
+            //// Act
+            var actionResult = await controller.GetCategoryById(1);
+            var result = actionResult.Result as OkObjectResult;
+            var categoryReturnedByEndpoint = (CategoryVM)result.Value;
+
+
+            //// Assert
+            Assert.Equal(1, categoryReturnedByEndpoint.SubCategories.Count());
         }
 
         [Fact]
@@ -139,7 +164,7 @@ namespace OnlineStore.UnitTests.API.CategoryController_Tests
 
 
             //// Act
-            var actionResult = await controller.GetCategoryById(It.IsAny<int>());
+            var actionResult = await controller.GetCategoryById(1);
             var result = actionResult.Result as OkObjectResult;
             var categoryWithGivenId = (CategoryVM)result.Value;
 
@@ -162,8 +187,8 @@ namespace OnlineStore.UnitTests.API.CategoryController_Tests
 
 
             //// Act
-            var actionResult = await controller.GetCategoryById(It.IsAny<int>());
-            var result = actionResult.Result as StatusCodeResult;
+            var actionResult = await controller.GetCategoryById(2);
+            var result = actionResult.Result as OkObjectResult;
 
 
 
