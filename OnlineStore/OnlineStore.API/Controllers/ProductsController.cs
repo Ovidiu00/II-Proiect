@@ -50,10 +50,12 @@ namespace OnlineStore.API.Controllers
         {
             if (id <= 0)
                 return BadRequest();
+
             var result = mapper.Map<ProductVM>(await mediator.Send(new GetProductByIdQuery(id)));
 
-            if (result != null)
+            if (result == null)
                 return NotFound();
+
             return Ok(result);
 
         }
