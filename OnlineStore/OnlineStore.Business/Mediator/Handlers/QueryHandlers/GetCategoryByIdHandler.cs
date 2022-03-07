@@ -4,6 +4,7 @@ using AutoMapper;
 using MediatR;
 using OnlineStore.Business.DTOs;
 using OnlineStore.Business.Mediator.Requests.Queries;
+using OnlineStore.DataAccess.Models.Entities;
 using OnlineStore.DataAccess.Repositories;
 
 namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
@@ -19,9 +20,10 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
             this.mapper = mapper;
         }
 
-        public Task<CategoryDTO> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
+        public async Task<CategoryDTO> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            Category category = await unitOfWork.CategoryRepository.GetCategory(request.id);
+            return mapper.Map<CategoryDTO>(category);
         }
     }
 }

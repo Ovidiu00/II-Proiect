@@ -5,6 +5,8 @@ using OnlineStore.API.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using OnlineStore.Business.DTOs;
+using OnlineStore.Business.Mediator.Requests.Queries;
 
 namespace OnlineStore.API.Controllers
 {
@@ -39,7 +41,7 @@ namespace OnlineStore.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryVM>> GetCategoryById(int id)
         {
-            throw new NotImplementedException();
+            return mapper.Map<CategoryVM>(await mediator.Send(new GetCategoryByIdQuery(id)));
         }
     }
 }
