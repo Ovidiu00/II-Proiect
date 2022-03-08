@@ -45,7 +45,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
 
             //// Act
-            var actionResult = await controller.RecentProducts(It.IsAny<int>());
+            var actionResult = await controller.RecentProducts(2);
             var result = actionResult.Result as OkObjectResult;
 
             var acutalRecentProducts = (IEnumerable<ProductDTO>)result.Value;
@@ -64,7 +64,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
 
             //// Act
-            var actionResult = await controller.RecentProducts(It.IsAny<int>());
+            var actionResult = await controller.RecentProducts(2);
             var result = actionResult.Result as OkObjectResult;
             var actualRecentProducts = (IEnumerable<RecentProductVM>)result.Value;
 
@@ -84,7 +84,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
 
             //// Act
-            var actionResult = await controller.RecentProducts(It.IsAny<int>());
+            var actionResult = await controller.RecentProducts(2);
             var result = actionResult.Result as OkObjectResult;
             var actualRecentProducts = (IEnumerable<RecentProductVM>)result.Value;
 
@@ -104,7 +104,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
 
             //// Act
-            var actionResult = await controller.RecentProducts(It.IsAny<int>());
+            var actionResult = await controller.RecentProducts(2);
             var result = actionResult.Result as StatusCodeResult;
 
             //// Assert
@@ -137,6 +137,66 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
             int expectedCount = 3;
             Assert.Equal(expectedCount, actualRecentProucts.Count());
         }
-     
+
+        [Fact]
+        public async Task RecentProducts_NrOfProductsIs0_ReturnsEmptyList()
+        {
+            // Arrange
+            
+            mockMediator.Setup(repo => repo.Send(It.IsAny<GetRecentProductsQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new List<ProductDTO>() { new ProductDTO(),new ProductDTO() });
+
+
+            //// Act
+            var actionResult = await controller.PopularProducts(0);
+            var result = actionResult.Result as OkObjectResult;
+
+            var actualRecentProucts = (IEnumerable<RecentProductVM>)result.Value;
+
+            //// Assert
+            int expectedCount = 0;
+            Assert.Equal(expectedCount, actualRecentProucts.Count());
+        }
+
+        [Fact]
+        public async Task RecentProducts_NrOfProductsIsNegative_ReturnsEmptyList()
+        {
+            // Arrange
+
+            mockMediator.Setup(repo => repo.Send(It.IsAny<GetRecentProductsQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new List<ProductDTO>() { new ProductDTO(), new ProductDTO() });
+
+
+            //// Act
+            var actionResult = await controller.PopularProducts(-4);
+            var result = actionResult.Result as OkObjectResult;
+
+            var actualRecentProucts = (IEnumerable<RecentProductVM>)result.Value;
+
+            //// Assert
+            int expectedCount = 0;
+            Assert.Equal(expectedCount, actualRecentProucts.Count());
+        }
+
+        [Fact]
+        public async Task RecentProducts_AllIsValid_Returns200StatusCode()
+        {
+            // Arrange
+
+            mockMediator.Setup(repo => repo.Send(It.IsAny<GetRecentProductsQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new List<ProductDTO>() { new ProductDTO(), new ProductDTO() });
+
+
+            //// Act
+            var actionResult = await controller.PopularProducts(2);
+            var result = actionResult.Result as OkObjectResult;
+
+
+            //// Assert
+            int expectedStatusCode = 200;
+            Assert.Equal(expectedStatusCode, result.StatusCode);
+        }
+
     }
 }
+
