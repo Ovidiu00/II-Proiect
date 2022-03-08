@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using OnlineStore.API.AutoMapper;
 using OnlineStore.API.Controllers;
+using OnlineStore.API.ViewModels;
 using OnlineStore.Business.DTOs;
+using OnlineStore.Business.Mediator.Requests.Queries;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -76,7 +78,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
             //// Act
             var actionResult = await controller.GetProductById(1);
-            var result = actionResult.Result as StatusCodeResult;
+            var result = actionResult.Result as OkObjectResult;
 
             //// Assert
             int expectedStatusCode = 200;
@@ -163,7 +165,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
             //// Act
             var actionResult = await controller.GetProductById(1);
-            var result = actionResult.Result as StatusCodeResult;
+            var result = actionResult.Result as OkObjectResult;
 
 
 
