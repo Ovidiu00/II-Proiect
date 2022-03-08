@@ -163,7 +163,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
             //// Act
             var actionResult = await controller.GetProductById(1);
-            var result = actionResult.Result as StatusCodeResult;
+            var result = actionResult.Result as OkObjectResult;
 
 
 
