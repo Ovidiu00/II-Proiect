@@ -13,15 +13,18 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
     public class GetCategoriesHandler : IRequestHandler<GetCategoriesQuery, IEnumerable<CategoryDTO>>
     {
         private readonly IUnitOfWork unitOfWork;
-            
+        private readonly IMapper mapper;
+
         public GetCategoriesHandler(IUnitOfWork unitOfWork,IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
         }
 
         public async Task<IEnumerable<CategoryDTO>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var categories = await unitOfWork.CategoryRepository.GetAll();
+            return mapper.Map<IEnumerable<CategoryDTO>>(categories);
         }
     }
 }
