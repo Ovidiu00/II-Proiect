@@ -59,5 +59,21 @@ namespace OnlineStore.API.Controllers
             return Ok(result);
 
         }
+
+        [HttpGet]
+        [Route("{categoryId}")]
+        public async Task<ActionResult<IEnumerable<ProductVM>>> GetProductsByCategory(int categoryId)
+        {
+            if (categoryId <= 0)
+                return BadRequest();
+
+            var result = mapper.Map<IEnumerable<ProductVM>>(await mediator.Send(new GetProductsByCategoryQuery(categoryId)));
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+
+        }
     }
 }
