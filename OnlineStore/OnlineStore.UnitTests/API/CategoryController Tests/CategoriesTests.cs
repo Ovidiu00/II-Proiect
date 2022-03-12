@@ -131,7 +131,7 @@ namespace OnlineStore.UnitTests.API.CategoryController_Tests
             Assert.Equal(expectedStatusCode, result.StatusCode);
         }
         [Fact]
-        public async Task PopularProducts_WhenExecuted_CallsMediatorOnce()
+        public async Task Categories_WhenExecuted_CallsMediatorOnce()
         {
             // Arrange
 

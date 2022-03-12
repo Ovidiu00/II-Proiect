@@ -128,7 +128,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
 
             //// Act
-            var actionResult = await controller.PopularProducts(nrOfProducts);
+            var actionResult = await controller.RecentProducts(nrOfProducts);
             var result = actionResult.Result as OkObjectResult;
 
             var actualRecentProucts = (IEnumerable<RecentProductVM>)result.Value;
@@ -148,7 +148,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
 
             //// Act
-            var actionResult = await controller.PopularProducts(0);
+            var actionResult = await controller.RecentProducts(0);
             var result = actionResult.Result as OkObjectResult;
 
             var actualRecentProucts = (IEnumerable<RecentProductVM>)result.Value;
@@ -168,7 +168,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
 
             //// Act
-            var actionResult = await controller.PopularProducts(-4);
+            var actionResult = await controller.RecentProducts(-4);
             var result = actionResult.Result as OkObjectResult;
 
             var actualRecentProucts = (IEnumerable<RecentProductVM>)result.Value;
@@ -188,7 +188,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
 
             //// Act
-            var actionResult = await controller.PopularProducts(2);
+            var actionResult = await controller.RecentProducts(2);
             var result = actionResult.Result as OkObjectResult;
 
 
