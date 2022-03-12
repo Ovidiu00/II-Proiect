@@ -61,7 +61,7 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpGet]
-        [Route("{categoryId}")]
+        [Route("categories/{categoryId}/products")]
         public async Task<ActionResult<IEnumerable<ProductVM>>> GetProductsByCategory(int categoryId)
         {
             if (categoryId <= 0)
