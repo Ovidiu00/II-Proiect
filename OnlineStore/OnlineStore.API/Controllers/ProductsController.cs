@@ -43,8 +43,13 @@ namespace OnlineStore.API.Controllers
         {
             try
             {
-                return Ok(mapper.Map<IEnumerable<RecentProductVM>>(
-                    await mediator.Send(new GetRecentProductsQuery(count))));
+                if (count < 0)
+                {
+                    return Ok(new List<RecentProductVM>());
+                }
+                var productDtos = await mediator.Send(new GetRecentProductsQuery(count));
+                var recentProductVms = mapper.Map<IEnumerable<RecentProductVM>>(productDtos);
+                return Ok(recentProductVms);
             }
             catch (Exception)
             {

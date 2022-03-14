@@ -9,6 +9,7 @@ namespace OnlineStore.API.AutoMapper
         public AutoMapperApiProfile()
         {
             CreateMap<ProductDTO, PopularProductVM>();
+            CreateMap<ProductDTO, RecentProductVM>();
             CreateMap<CategoryDTO, PopularProductVM>();
             CreateMap<CategoryDTO, CategoryVM>();
             CreateMap<ProductDTO, ProductVM>();
