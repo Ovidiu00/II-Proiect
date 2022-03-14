@@ -23,9 +23,9 @@ namespace OnlineStore.DataAccess.Repositories.Implementations
             return null;          
         }
 
-        public Task<IEnumerable<Product>> GetMostRecentProducts(int count)
+        public async Task<IEnumerable<Product>> GetMostRecentProducts(int count)
         {
-            throw new System.NotImplementedException();
+            return await _db.Products.OrderByDescending(product => product.InsertedDate).Take(count).ToListAsync();
         }
     }
 }

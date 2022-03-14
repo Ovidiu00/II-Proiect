@@ -48,7 +48,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
             var actionResult = await controller.RecentProducts(2);
             var result = actionResult.Result as OkObjectResult;
 
-            var acutalRecentProducts = (IEnumerable<ProductDTO>)result.Value;
+            var acutalRecentProducts = (IEnumerable<RecentProductVM>)result.Value;
 
             //// Assert
 
@@ -131,11 +131,11 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
             var actionResult = await controller.RecentProducts(nrOfProducts);
             var result = actionResult.Result as OkObjectResult;
 
-            var actualRecentProucts = (IEnumerable<RecentProductVM>)result.Value;
+            var actualRecentProducts = (IEnumerable<RecentProductVM>)result.Value;
 
             //// Assert
             int expectedCount = 3;
-            Assert.Equal(expectedCount, actualRecentProucts.Count());
+            Assert.Equal(expectedCount, actualRecentProducts.Count());
         }
 
         [Fact]
@@ -144,18 +144,18 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
             // Arrange
             
             mockMediator.Setup(repo => repo.Send(It.IsAny<GetRecentProductsQuery>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(new List<ProductDTO>() { new ProductDTO(),new ProductDTO() });
+                .ReturnsAsync(new List<ProductDTO>() );
 
 
             //// Act
             var actionResult = await controller.RecentProducts(0);
             var result = actionResult.Result as OkObjectResult;
 
-            var actualRecentProucts = (IEnumerable<RecentProductVM>)result.Value;
+            var actualRecentProducts = (IEnumerable<RecentProductVM>)result.Value;
 
             //// Assert
             int expectedCount = 0;
-            Assert.Equal(expectedCount, actualRecentProucts.Count());
+            Assert.Equal(expectedCount, actualRecentProducts.Count());
         }
 
         [Fact]
