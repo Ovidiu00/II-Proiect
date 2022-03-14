@@ -95,7 +95,7 @@ namespace OnlineStore.UnitTests.API.CategoryController_Tests
 
 
             //// Act
-            var actionResult = await controller.GetCategoryById(It.IsAny<int>());
+            var actionResult = await controller.GetCategoryById(3);
             var result = actionResult.Result as StatusCodeResult;
 
 
