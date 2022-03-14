@@ -17,7 +17,7 @@ namespace OnlineStore.API.Controllers
         private readonly IMediator mediator;
         private readonly IMapper mapper;
 
-        public CategoryController(IMediator mediator,IMapper mapper)
+        public CategoryController(IMediator mediator, IMapper mapper)
         {
             this.mediator = mediator;
             this.mapper = mapper;
@@ -28,8 +28,9 @@ namespace OnlineStore.API.Controllers
         {
             try
             {
-                throw new NotImplementedException();
-
+                var result = await mediator.Send(new GetCategoriesQuery());
+                var resultAsVM = mapper.Map<IEnumerable<CategoryVM>>(result);
+                return Ok(resultAsVM);
             }
             catch (Exception)
             {

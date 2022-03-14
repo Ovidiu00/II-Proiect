@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using Moq;
 using OnlineStore.Business.BusinessMapper;
+using OnlineStore.Business.DTOs;
+using OnlineStore.Business.Mediator.Handlers.QueryHandlers;
+using OnlineStore.Business.Mediator.Requests.Queries;
 using OnlineStore.DataAccess.Models.Entities;
 using OnlineStore.DataAccess.Repositories;
 using System;
@@ -50,22 +53,6 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
             await Assert.ThrowsAsync<Exception>(async () => await handler.Handle(query, new System.Threading.CancellationToken()));
         }
 
-        [Fact]
-        public async Task GetProductById_DataAccesMethodDoesntFindProductWithGivenId_ReturnsNull()
-        {
-            //Arange
-            GetProductByIdQuery query = new GetProductByIdQuery(1);
-
-            mockUnitOfWork.Setup(w => w.ProductRepository.FindSingle(It.IsAny<Expression<Func<Product, bool>>>()))
-                .ReturnsAsync(null as Product);
-
-            //Act
-            var ProductReturnedWithGivenId = await handler.Handle(query, new System.Threading.CancellationToken());
-
-            //Asert
-            Assert.Null(ProductReturnedWithGivenId);
-
-        }
         [Fact]
         public async Task GetProductById_DataAccesMethodReturnsDTO_ReturnsVM()
         {

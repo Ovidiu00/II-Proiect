@@ -35,7 +35,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
         {
             //Arange
 
-            GetRecentProductsQuery query = new GetRecentProductsQuery(It.IsAny<int>());
+            GetRecentProductsQuery query = new GetRecentProductsQuery(1);
 
             List<Product> productsReturnedByDb = new List<Product>()
             {
@@ -69,7 +69,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
         public async Task GetRecentsProdutsHandler_0ProductsQueriedFromDB_ReturnsEmptyList()
         {
             //Arange
-            GetRecentProductsQuery query = new GetRecentProductsQuery(It.IsAny<int>());
+            GetRecentProductsQuery query = new GetRecentProductsQuery(1);
 
             mockUnitOfWork.Setup(w => w.ProductRepository.GetAll()).ReturnsAsync(new List<Product>());
 
@@ -84,7 +84,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
         public async Task GetRecentProductsHandler_DataAccessMethodReturnsNull_ReturnsEmptyList()
         {
             //Arange
-            GetRecentProductsQuery query = new GetRecentProductsQuery(It.IsAny<int>());
+            GetRecentProductsQuery query = new GetRecentProductsQuery(1);
 
             mockUnitOfWork.Setup(w => w.ProductRepository.GetAll()).ReturnsAsync(null as List<Product>);
 

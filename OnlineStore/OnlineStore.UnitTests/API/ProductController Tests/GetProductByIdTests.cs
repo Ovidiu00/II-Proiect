@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using OnlineStore.API.AutoMapper;
 using OnlineStore.API.Controllers;
+using OnlineStore.API.ViewModels;
 using OnlineStore.Business.DTOs;
+using OnlineStore.Business.Mediator.Requests.Queries;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -76,7 +78,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
             //// Act
             var actionResult = await controller.GetProductById(1);
-            var result = actionResult.Result as StatusCodeResult;
+            var result = actionResult.Result as OkObjectResult;
 
             //// Assert
             int expectedStatusCode = 200;
@@ -103,16 +105,16 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
             Assert.Equal(expectedStatusCode, result.StatusCode);
         }
         [Fact]
-        public async Task GetProductById_QueryReturnsCorrectCategory_CategoryReturnedByEndpointEqualsCategoryReturnedByQuery()
+        public async Task GetProductById_QueryReturnsCorrectProduct_ProductReturnedByEndpointEqualsProductReturnedByQuery()
         {
             // Arrange
-            var categoryReturned = new ProductDTO()
+            var productReturned = new ProductDTO()
             {
                 Id = 1,
                 Name = "A1"
             };
             mockMediator.Setup(repo => repo.Send(It.IsAny<GetProductByIdQuery>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(categoryReturned);
+                .ReturnsAsync(productReturned);
 
 
             //// Act
@@ -122,20 +124,20 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
 
             //// Assert
-            Assert.Equal(categoryReturned.Name, productWithGivenId.Name);
+            Assert.Equal(productReturned.Name, productWithGivenId.Name);
         }
 
         [Fact]
         public async Task GetProductById_QueryReturnsDTO_ReturnsVM()
         {
             // Arrange
-            var categoryReturned = new ProductDTO()
+            var productReturned = new ProductDTO()
             {
                 Id = 1,
                 Name = "A1"
             };
             mockMediator.Setup(repo => repo.Send(It.IsAny<GetProductByIdQuery>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(categoryReturned);
+                .ReturnsAsync(productReturned);
 
 
             //// Act
@@ -152,18 +154,18 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
         public async Task GetProductById_AllIsValid_Returns200StatusCode()
         {
             // Arrange
-            var categoryReturned = new ProductDTO()
+            var productReturned = new ProductDTO()
             {
                 Id = 1,
                 Name = "A1"
             };
             mockMediator.Setup(repo => repo.Send(It.IsAny<GetProductByIdQuery>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(categoryReturned);
+                .ReturnsAsync(productReturned);
 
 
             //// Act
             var actionResult = await controller.GetProductById(1);
-            var result = actionResult.Result as StatusCodeResult;
+            var result = actionResult.Result as OkObjectResult;
 
 
 
