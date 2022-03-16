@@ -38,7 +38,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
 
             GetCategoriesQuery query = new GetCategoriesQuery();
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.GetAll())
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategories())
                 .ReturnsAsync(new List<Category>());
 
             //Act
@@ -54,7 +54,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
 
             GetCategoriesQuery query = new GetCategoriesQuery();
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.GetAll())
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategories())
                 .ReturnsAsync(null as List<Category>);
 
             //Act
@@ -75,9 +75,9 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
               new Category(){},
               new Category(){},
               new Category(){},
-            };     
+            };
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.GetAll())
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategories())
                 .ReturnsAsync(categoriesReturnedByDb);
 
             //Act
@@ -93,9 +93,41 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
 
             GetCategoriesQuery query = new GetCategoriesQuery();
             List<Category> categoriesReturnedByDb = new List<Category>();
-         
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.GetAll())
+
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategories())
+                .ReturnsAsync(categoriesReturnedByDb);
+
+            //Act
+            var categoriesReturnerByHandler = await handler.Handle(query, new System.Threading.CancellationToken());
+
+            //Asert
+            Assert.IsAssignableFrom<IEnumerable<CategoryDTO>>(categoriesReturnerByHandler);
+        }
+        [Fact]
+        public async Task Categories_DbReturnsCollectionOfCategoryWithSubCategories_ReturnsCollectioOfCategoryDTOWithSubCategories()
+        {
+            //Arange
+
+            GetCategoriesQuery query = new GetCategoriesQuery();
+            List<Category> categoriesReturnedByDb = new List<Category>()
+            {
+                new Category()
+                {
+                    Id =1,
+                    SubCategories = new List<Category>()
+                    {
+                        new Category()
+                        {
+                            Id = 1,
+                            Name = "DA"
+                        }
+                    }
+                }
+            };
+
+
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategories())
                 .ReturnsAsync(categoriesReturnedByDb);
 
             //Act

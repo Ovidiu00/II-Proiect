@@ -23,7 +23,7 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
 
         public async Task<IEnumerable<CategoryDTO>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var categories = await unitOfWork.CategoryRepository.GetAll();
+            var categories = await unitOfWork.CategoryRepository.GetCategories();
             return mapper.Map<IEnumerable<CategoryDTO>>(categories);
         }
     }

@@ -8,5 +8,6 @@ namespace OnlineStore.DataAccess.Repositories.Interfaces
     {
         Task<Category> GetCategory(int id);
         Task<Category> GetCategoryWithProducts(int id);
+        Task<IEnumerable<Category>> GetCategories();
     }
 }

@@ -2,6 +2,7 @@
 using OnlineStore.DataAccess.Models.AppDbContext;
 using OnlineStore.DataAccess.Models.Entities;
 using OnlineStore.DataAccess.Repositories.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OnlineStore.DataAccess.Repositories.Implementations
@@ -12,6 +13,13 @@ namespace OnlineStore.DataAccess.Repositories.Implementations
         public CategoryRepository(OnlineStoreDbContext _db) : base(_db)
         {
 
+        }
+
+        public async Task<IEnumerable<Category>> GetCategories()
+        {
+            return await _db.Categories
+                .Include(x => x.SubCategories)
+                .ToListAsync();
         }
 
         public async Task<Category> GetCategory(int id)
