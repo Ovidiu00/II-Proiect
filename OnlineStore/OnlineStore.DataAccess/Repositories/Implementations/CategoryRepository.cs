@@ -3,6 +3,7 @@ using OnlineStore.DataAccess.Models.AppDbContext;
 using OnlineStore.DataAccess.Models.Entities;
 using OnlineStore.DataAccess.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineStore.DataAccess.Repositories.Implementations
@@ -24,8 +25,10 @@ namespace OnlineStore.DataAccess.Repositories.Implementations
 
         public async Task<Category> GetCategory(int id)
         {
-            return await _db.Categories.Include(category => category.SubCategories)
-                .FirstOrDefaultAsync(category => category.Id.Equals(id));
+            return( await _db.Categories
+                .Include(category => category.SubCategories)
+                .ToListAsync())
+                .FirstOrDefault(category => category.Id.Equals(id));
         }
 
         public async Task<Category> GetCategoryWithProducts(int id)
