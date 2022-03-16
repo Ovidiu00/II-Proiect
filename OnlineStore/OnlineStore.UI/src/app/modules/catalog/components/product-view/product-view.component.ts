@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
-import { faMinus, faPhone, faPlus, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product-view',
@@ -15,15 +15,20 @@ export class ProductViewComponent implements OnInit {
 
   ngOnInit(): void {
     var productId:number;
-    this.activatedRoute.paramMap.subscribe(params => productId =  Number(params.get('id')))
+    this.activatedRoute.paramMap.subscribe(params =>
+       {
+         productId =  Number(params.get('id'));
+         this.productService.getProductById(productId).subscribe(response => {
+           this.product = response
+           console.log(this.product);
+         });
+
+        })
 
 
-    this.productService.getProductById(productId).subscribe(response => this.product = response);
   }
-public product:Product;
-public faPlus = faPlus;
-public faMinus = faMinus;
-public faShoppingCart = faShoppingCart;
-public faPhone = faPhone;
+public product:Product = new Product();
+
+ public faShoppingCart = faShoppingCart;
 
 }

@@ -1,2 +1,0 @@
-
-endpoint care primeste productId+ quantity si le baga in cosul corespunzator

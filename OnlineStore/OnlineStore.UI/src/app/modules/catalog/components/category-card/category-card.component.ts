@@ -10,7 +10,8 @@ export class CategoryCardComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   @Input()
   public category: Category;

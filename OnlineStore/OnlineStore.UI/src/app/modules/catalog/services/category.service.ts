@@ -1,112 +1,103 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Category } from '../models/category.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
-
-  public categories : Category[] = [
+  public categories: Category[] = [
     {
-      id :1,
-      name : "Articole Barbati",
-      photo : "https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_88.jpg",
-      description: "Haine barbati puternici",
+      id: 1,
+      name: 'Articole Barbati',
+      filePath: 'https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_88.jpg',
       subCategories: [
         {
-          id:24,
-          name:"Incaltaminte",
-          photo:"https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_71.jpg",
-          description :"Incaltaminte pentru picioarele tale",
-          subCategories : [
+          id: 24,
+          name: 'Incaltaminte',
+          filePath: 'https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_71.jpg',
+          subCategories: [
             {
-              id :12,
-              name : "Ghete",
-              photo : "https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_98.jpg",
+              id: 12,
+              name: 'Ghete',
+              filePath:
+                'https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_98.jpg',
             },
             {
-              id :122,
-              name : "Pantofi",
-              photo : "https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_72.jpg",
+              id: 122,
+              name: 'Pantofi',
+              filePath:
+                'https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_72.jpg',
             },
             {
-              id :123,
-              name : "Incaltaminte Sport",
-              photo : "https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_74.jpg",
+              id: 123,
+              name: 'Incaltaminte Sport',
+              filePath:
+                'https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_74.jpg',
             },
-          ]
-
+          ],
         },
         {
-          id:25,
-          name:"Imbracaminte",
-          photo:"https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_71.jpg",
-          description :"Imbracaminte pentru corpul tau",
-          subCategories : [
+          id: 25,
+          name: 'Imbracaminte',
+          filePath: 'https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_88.jpg',
+          subCategories: [
             {
-              id :212,
-              name : "Bluze",
-              photo : "https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_117.jpg",
+              id: 212,
+              name: 'Bluze',
+              filePath:
+                'https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_117.jpg',
             },
             {
-              id :222,
-              name : "Trening",
-              photo : "https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_161.jpg",
+              id: 222,
+              name: 'Trening',
+              filePath:
+                'https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_161.jpg',
             },
             {
-              id :223,
-              name : "Camasi",
-              photo : "https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_123.jpg",
+              id: 223,
+              name: 'Camasi',
+              filePath:
+                'https://s.cdnmpro.com/431827071/custom/cat/cat_thumb_123.jpg',
             },
-          ]
-
-        }
-      ]
-
+          ],
+        },
+      ],
     },
     {
-      id :2,
-      name : "Articole Femei",
-      photo : "https://scontent.fomr1-1.fna.fbcdn.net/v/t1.15752-9/p1080x2048/269173873_353017836157334_3689338577468909169_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_ohc=cO_29h50hMMAX_9RFo_&_nc_ht=scontent.fomr1-1.fna&oh=03_AVKiwC3hN67soKmERj-qHhjuWlofukWTOKOF3kqxwq4bJQ&oe=61F40F25",
-      description: "Haine femei puternice"
+      id: 2,
+      name: 'Articole Femei',
+      filePath: 'https://50style.ro/media/cache/gallery/rc/gvk1dj5d/nike-bluza-cu-gluga-w-nsw-flc-gx-fnl-ftra-femei-bluze-negru-dd5836-010.jpg',
     },
     {
-      id :3,
-      name : "Articole copii",
-      photo : "https://scontent.fomr1-1.fna.fbcdn.net/v/t1.15752-9/269806032_821349505925119_592029479524565391_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_ohc=L7ysWxeklDIAX8mmQOO&_nc_ht=scontent.fomr1-1.fna&oh=03_AVJigHqKXmjONvDnQujeiO4jorgbqXzQuZCQ4Fmxeb43Kg&oe=61F6212E",
-      description: "Haine copii puternici"
+      id: 3,
+      name: 'Articole copii',
+      filePath: 'https://media1.popsugar-assets.com/files/thumbor/ICuFJn7n3UUD1dhvWoO0JVCpuQw/fit-in/728xorig/filters:format_auto-!!-:strip_icc-!!-/2021/10/06/913/n/24155406/5ff37d40615e0d3ed75611.77240046_/i/best-free-assembly-kids-clothes-at-walmart.jpg',
     },
     {
-      id :4,
-      name : "Articole generale",
-      photo : "https://scontent.fomr1-1.fna.fbcdn.net/v/t1.15752-9/269806032_821349505925119_592029479524565391_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=ae9488&_nc_ohc=L7ysWxeklDIAX8mmQOO&_nc_ht=scontent.fomr1-1.fna&oh=03_AVJigHqKXmjONvDnQujeiO4jorgbqXzQuZCQ4Fmxeb43Kg&oe=61F6212E",
-      description: "Chestii generale"
-    }
-  ]
-  constructor() { }
-  getCategories():Observable<Category[]>{
+      id: 4,
+      name: 'Articole generale',
+      filePath: 'https://cdn.shopify.com/s/files/1/0049/4423/2534/products/hosi-1_789bc507-8604-4b21-9edb-d8a56549730c_grande.jpg?v=1603186636',
+    },
+  ];
+  constructor(public http:HttpClient) {}
 
-    return of(this.categories);
+  categoriesBaseApi = "https://localhost:44350/Category";
+
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.categoriesBaseApi);
   }
 
-  getCategoryById(id:number) : Observable<Category>{
-    var mainCategory:Category =  this.categories.find(x => x.id == id)
+  getCategoryById(id: number): Observable<Category> {
+    return this.http.get<Category>(this.categoriesBaseApi+"/"+id);
+  }
 
-    var found;
-    if(!mainCategory){
-      this.categories.forEach(category =>
-        {
-         var subCategoryFound:Category = category.subCategories?.find(x => x.id == id)
-
-         if(subCategoryFound)
-            found = subCategoryFound;
-
-        })
-    }
-    else
-    return of(mainCategory);
-
-    return of(found);
+  addCategory(dto:FormData){
+    console.log(dto);
+  }
+  addSubCategory(dto:FormData,categoryId:number){
+    console.log(dto);
+    console.log("pt categoria " + categoryId);
   }
 }

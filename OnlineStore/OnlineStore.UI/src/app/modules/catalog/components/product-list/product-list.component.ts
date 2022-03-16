@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CatalogRoutes } from 'src/app/shared/routes/routes';
 import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 
@@ -19,6 +18,6 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {}
 
   selectProduct(id: number) {
-    this.router.navigate([CatalogRoutes.productView.url,id]);
+    this.router.navigate(['catalog/produs/'+id]);
   }
 }

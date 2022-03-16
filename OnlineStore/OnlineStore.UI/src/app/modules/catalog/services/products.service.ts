@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Product } from '../models/product.model';
@@ -7,86 +8,35 @@ import { Product } from '../models/product.model';
 })
 export class ProductsService {
 
-  constructor() { }
+  constructor(public http:HttpClient) { }
 
-  private products : Product[] = [
-    {
-      id:1,
-      name: "Bluza pentru tricou",
-      displayPhoto : "https://s1.cel.ro/images/mari/2020/10/31/bluza-dama-sport-zusss-bumbac-somon-777687.jpg",
-      price : 179,
-      description : 'Bluza foarte confortabila'
-    },
-    {
-      id:2,
-      name: "Papuci smecher",
-      displayPhoto : "https://cdn.shopify.com/s/files/1/0302/4945/1653/products/RjaveNaslovna_1024x1024.jpg?v=1605518397",
-      price : 102,
-      description : 'Papuci foarte caldurosi'
-    },
-    {
-      id:3,
-      name: "Tricou smecher",
-      displayPhoto : "https://static.thcdn.com/images/large/webp//productimg/1600/1600/12302898-1574807812314115.jpg",
-      price : 67.2,
-      description : 'Tricou bun'
-    },
-    {
-      id:1,
-      name: "Bluza pentru tricou",
-      displayPhoto : "https://s1.cel.ro/images/mari/2020/10/31/bluza-dama-sport-zusss-bumbac-somon-777687.jpg",
-      price : 179,
-      description : 'Bluza foarte confortabila'
-    },
-    {
-      id:2,
-      name: "Papuci smecher",
-      displayPhoto : "https://cdn.shopify.com/s/files/1/0302/4945/1653/products/RjaveNaslovna_1024x1024.jpg?v=1605518397",
-      price : 102,
-      description : 'Papuci foarte caldurosi'
-    },
-    {
-      id:3,
-      name: "Tricou smecher",
-      displayPhoto : "https://static.thcdn.com/images/large/webp//productimg/1600/1600/12302898-1574807812314115.jpg",
-      price : 67.2,
-      description : 'Tricou bun'
-    },
-    {
-      id:1,
-      name: "Bluza pentru tricou",
-      displayPhoto : "https://s1.cel.ro/images/mari/2020/10/31/bluza-dama-sport-zusss-bumbac-somon-777687.jpg",
-      price : 179,
-      description : 'Bluza foarte confortabila'
-    },
-    {
-      id:2,
-      name: "Papuci smecher",
-      displayPhoto : "https://cdn.shopify.com/s/files/1/0302/4945/1653/products/RjaveNaslovna_1024x1024.jpg?v=1605518397",
-      price : 102,
-      description : 'Papuci foarte caldurosi'
-    },
-    {
-      id:3,
-      name: "Tricou smecher",
-      displayPhoto : "https://static.thcdn.com/images/large/webp//productimg/1600/1600/12302898-1574807812314115.jpg",
-      price : 67.2,
-      description : 'Tricou bun'
-    }
+  private apiBaseURL = "https://localhost:44350";
+  private productsBaseApi = this.apiBaseURL +"/Products";
 
-  ]
-  getLatestProducts():Observable<Product[]>{
 
-    return of(this.products.slice(0,4));
+  getLatestProducts(count:number):Observable<Product[]>{
+
+    return this.http.get<Product[]>(this.productsBaseApi+"/recent-products?count=" +count);
   }
 
-  getMostPopularProducts():Observable<Product[]>{
-    return of(this.products.slice(0,4));
+  getMostPopularProducts(count:number):Observable<Product[]>{
+    return this.http.get<Product[]>(this.productsBaseApi+"/popular-products?count=" +count);
   }
 
   getProductById(id:number):Observable<Product>
   {
-    var product = this.products.find(x => x.id == id);
-    return of(product);
+      return this.http.get<Product>(this.productsBaseApi+"/"+id);
+  }
+  getProductsForCategory(categoryId:number):Observable<Product[]>{
+    return this.http.get<Product[]>(this.apiBaseURL+"/categories/"+categoryId+"/products");
+  }
+  addProduct(dto:FormData,categoryId:number):Observable<any>{
+    return of();
+  }
+  editProduct(dto:FormData):Observable<any>{
+    return of();
+  }
+  deleteProduct(productId:number){
+    return of();
   }
 }

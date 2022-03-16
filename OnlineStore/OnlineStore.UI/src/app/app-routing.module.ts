@@ -1,21 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './modules/home/home.component';
-import { CatalogRoutes } from './shared/routes/routes';
 
 const routes: Routes = [
-  {path:'',redirectTo:'home',pathMatch:"full"},
-  {path:'home',component:HomeComponent},
+  { path: 'home', component: HomeComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
-    path: CatalogRoutes.root.path,
-    loadChildren: () => import('./modules/catalog/catalog.module').then((m) => m.CatalogModule)
+    path: 'admin',
+    loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule)
   },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'enabled', // Add options right here
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

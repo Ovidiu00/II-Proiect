@@ -1,9 +1,3 @@
-.card-body {
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-  padding: 0;
-  text-align: center
-}
 
 .card-shadow{
   box-shadow: 7px 7px 7px #888888;
@@ -16,93 +10,36 @@
   transition: transform .4s; /* Animation */
   transform: scale(1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
-
-.category-description-text{
-  font-size: medium;
+.card{
+  max-width: 300px;
+  max-height: auto;
+  height: 450px;
+  margin:auto;
 }
 
-.card-img {
-  width: 350px;
-
-  overflow: hidden;
-}
-
-.star {
-  color: red
-}
-
-.bg-cart {
-  background-color: orange;
-  color: #fff
-}
-
-.bg-cart:hover.mt-50 {
-  margin-top: 50px
-}
-
-.mb-50 {
-  margin-bottom: 50px
-}
-
-.card {
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
-border: none;
-}
-
-.card-img-actions {
-  position: relative
+mat-card img{
+  max-width: 332px;
+  max-height: 400px;
+  height:400px;
 }
 
 
-.bg-buy {
-  background-color: green;
-  color: #fff;
-  padding-right: 29px
-}
-
-.card-body{
-  max-height: 500px;
-
-}
-.bg-buy:hover {
-  color: #fff
-}
-em{
-  font-size: xxx-large;
-}
-a {
-  text-decoration: none !important
-}
-
-img{
-  max-height: 500px;
-  min-height: 500px;
-  width: 100% !important;
-}
-
-.category-name{
-  font-size: xx-large;
-  display: block;
+mat-card-content span.category-name{
+  text-align: center;
   font-weight: bolder;
-  margin: 25px;
+  display: block;
+  font-size: x-large;
+  margin-top: 30px;
 }
+
 
 @media(max-width: 959px){
-  img{
-    min-height: 0px;
+  mat-card img{
+    height:300px
   }
-
-  .category-name{
-    font-size: small ;
+  mat-card.card{
+    height:350px
   }
-
-
 }
+
+
