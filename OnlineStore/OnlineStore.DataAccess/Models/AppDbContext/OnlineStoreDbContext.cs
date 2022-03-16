@@ -21,6 +21,5 @@ namespace OnlineStore.DataAccess.Models.AppDbContext
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-
     }
 }
