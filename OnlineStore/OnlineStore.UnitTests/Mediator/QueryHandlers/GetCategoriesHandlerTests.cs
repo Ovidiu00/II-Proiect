@@ -38,7 +38,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
 
             GetCategoriesQuery query = new GetCategoriesQuery();
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategories())
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetBaseCategories())
                 .ReturnsAsync(new List<Category>());
 
             //Act
@@ -54,7 +54,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
 
             GetCategoriesQuery query = new GetCategoriesQuery();
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategories())
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetBaseCategories())
                 .ReturnsAsync(null as List<Category>);
 
             //Act
@@ -77,7 +77,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
               new Category(){},
             };
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategories())
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetBaseCategories())
                 .ReturnsAsync(categoriesReturnedByDb);
 
             //Act
@@ -95,7 +95,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
             List<Category> categoriesReturnedByDb = new List<Category>();
 
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategories())
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetBaseCategories())
                 .ReturnsAsync(categoriesReturnedByDb);
 
             //Act
@@ -127,7 +127,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
             };
 
 
-            mockUnitOfWork.Setup(w => w.CategoryRepository.GetCategories())
+            mockUnitOfWork.Setup(w => w.CategoryRepository.GetBaseCategories())
                 .ReturnsAsync(categoriesReturnedByDb);
 
             //Act

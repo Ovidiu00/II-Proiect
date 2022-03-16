@@ -31,6 +31,15 @@ namespace OnlineStore.API
 
 
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMediatR(typeof(MediatrEntryPoint).Assembly);
 
@@ -56,7 +65,10 @@ namespace OnlineStore.API
 
             app.UseRouting();
 
+            app.UseCors();
+
             app.UseAuthorization();
+     
 
             app.UseEndpoints(endpoints =>
             {

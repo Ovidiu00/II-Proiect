@@ -16,10 +16,11 @@ namespace OnlineStore.DataAccess.Repositories.Implementations
 
         }
 
-        public async Task<IEnumerable<Category>> GetCategories()
+        public async Task<IEnumerable<Category>> GetBaseCategories()
         {
             return await _db.Categories
                 .Include(x => x.SubCategories)
+                .Where(x => !_db.Categories.Any(y => y.SubCategories.Contains(x)))
                 .ToListAsync();
         }
 

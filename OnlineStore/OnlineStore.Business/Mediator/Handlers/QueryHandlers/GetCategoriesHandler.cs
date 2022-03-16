@@ -5,6 +5,7 @@ using OnlineStore.Business.Mediator.Requests.Queries;
 using OnlineStore.DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
 
         public async Task<IEnumerable<CategoryDTO>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var categories = await unitOfWork.CategoryRepository.GetCategories();
+            var categories = await unitOfWork.CategoryRepository.GetBaseCategories();
             return mapper.Map<IEnumerable<CategoryDTO>>(categories);
         }
     }
