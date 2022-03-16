@@ -39,6 +39,8 @@ namespace OnlineStore.API.Controllers
             }
         }
 
+        [HttpGet("recent-products")]
+
         public async Task<ActionResult<IEnumerable<RecentProductVM>>> RecentProducts(int count)
         {
             try
