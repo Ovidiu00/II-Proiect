@@ -9,7 +9,5 @@ namespace OnlineStore.API.ViewModels
         public double Price { get; set; }
         public int Quantity { get; set; }
         public string FilePath { get; set; }
-
-        public DateTime InsertedDate { get; set; }
     }
 }

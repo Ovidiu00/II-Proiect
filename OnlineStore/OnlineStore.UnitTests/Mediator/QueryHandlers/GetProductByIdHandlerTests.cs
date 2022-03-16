@@ -54,7 +54,7 @@ namespace OnlineStore.UnitTests.Mediator.QueryHandlers
         }
 
         [Fact]
-        public async Task GetProductById_DataAccesMethodReturnsDTO_ReturnsVM()
+        public async Task GetProductById_DataAccesMethodReturnsEntity_ReturnsDTO()
         {
             //Arange
             GetProductByIdQuery query = new GetProductByIdQuery(1);

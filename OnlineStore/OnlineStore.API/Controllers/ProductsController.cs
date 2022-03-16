@@ -82,10 +82,12 @@ namespace OnlineStore.API.Controllers
             if (categoryId <= 0)
                 return BadRequest();
 
-            var result = mapper.Map<IEnumerable<ProductVM>>(await mediator.Send(new GetProductsByCategoryQuery(categoryId)));
+            var queryResult = await mediator.Send(new GetProductsByCategoryQuery(categoryId));
 
-            if (result == null)
+            if (queryResult == null)
                 return NotFound();
+
+            var result = mapper.Map<IEnumerable<ProductVM>>(queryResult);
 
             return Ok(result);
 

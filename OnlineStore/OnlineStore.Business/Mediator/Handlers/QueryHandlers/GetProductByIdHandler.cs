@@ -23,7 +23,7 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
             this.mapper = mapper;
         }
         public async Task<ProductDTO> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
-        {
+        {       
             var productWithGivenId = await unitOfWork.ProductRepository.FindSingle(x => x.Id == request.id);
             if (productWithGivenId == null)
             {

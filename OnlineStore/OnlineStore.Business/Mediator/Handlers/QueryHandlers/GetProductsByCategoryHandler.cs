@@ -22,6 +22,9 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
         }
         public async Task<IEnumerable<ProductDTO>> Handle(GetProductsByCategoryQuery request, CancellationToken cancellationToken)
         {
+            if (request.categoryId <= 0)
+                throw new Exception();
+
             var categoryById = await unitOfWork.CategoryRepository.GetCategoryWithProducts(request.categoryId);
             if (categoryById == null)
             {
