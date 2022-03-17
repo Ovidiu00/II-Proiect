@@ -1,0 +1,50 @@
+img {
+  height: 100%;
+  background-size: cover;
+}
+
+mat-card{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+}
+
+.chips-container{
+  padding:20px;
+}
+.chips-container app-subcategory-badge-list{
+  width: 100%;
+}
+
+.category-container{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 25%
+}
+.category-container .category-actions{
+  display:flex;
+  flex-direction:column;
+  flex-wrap: wrap;
+
+  justify-content: space-evenly;
+  font-weight: bold;
+  font-size:large;
+  text-align:center;
+  width:152px;
+
+}
+
+button{
+  background-color:#00468B;
+  color:white;
+  border-radius:2px;
+  border: none;
+  height:30px
+}
+button:hover{
+  background-color:#01274d;
+  cursor:pointer;
+}
+

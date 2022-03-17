@@ -1,0 +1,16 @@
+mat-card{
+  height: 100px;
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+mat-card-title{
+  font-size:xx-large
+}
+
+mat-card:hover{
+  cursor: pointer;
+}

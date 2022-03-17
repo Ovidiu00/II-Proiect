@@ -1,7 +1,0 @@
-ca si client vreau ,
-
--Sa vad pe prima pagina toate categoriile, apoi dand click pe una sa ma duca la o lista de sub category pentru acea category si apoi dand click pe o sub categorie sa tr duc la sub sub etc pana ajungi la produse
-
--Sa vad pe prima pagina toate produsele populare
-
--Sa vad pe prima pagina produsele recente.  

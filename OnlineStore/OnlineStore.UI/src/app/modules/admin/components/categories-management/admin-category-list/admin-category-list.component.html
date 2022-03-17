@@ -1,0 +1,6 @@
+<h1 style="text-align: center;">{{selectedCategory?.name}}</h1>
+
+<h3 style="text-align: left;color:red;margin:20px;" *ngIf="!categories">This category has no subcategories</h3>
+<button class="add-category-button"  (click)="addCategoryClicked()">Add cateogry</button>
+
+<app-admin-category-item [category]="item" *ngFor="let item of categories" ></app-admin-category-item>

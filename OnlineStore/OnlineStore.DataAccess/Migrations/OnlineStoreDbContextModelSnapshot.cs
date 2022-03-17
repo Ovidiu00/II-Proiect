@@ -84,6 +84,9 @@ namespace OnlineStore.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("InsertedDate")
                         .HasColumnType("datetime2");
 
@@ -152,7 +155,7 @@ namespace OnlineStore.DataAccess.Migrations
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Category", b =>
                 {
                     b.HasOne("OnlineStore.DataAccess.Models.Entities.Category", null)
-                        .WithMany("Subcategories")
+                        .WithMany("SubCategories")
                         .HasForeignKey("CategoryId");
                 });
 
@@ -193,7 +196,7 @@ namespace OnlineStore.DataAccess.Migrations
 
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Category", b =>
                 {
-                    b.Navigation("Subcategories");
+                    b.Navigation("SubCategories");
                 });
 
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>

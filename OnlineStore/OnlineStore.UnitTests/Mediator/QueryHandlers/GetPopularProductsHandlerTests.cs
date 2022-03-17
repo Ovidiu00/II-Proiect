@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MediatR;
 using Moq;
 using Newtonsoft.Json;
 using OnlineStore.Business.BusinessMapper;

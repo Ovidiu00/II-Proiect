@@ -1,11 +1,10 @@
-import { Component,OnDestroy,OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CategoryDropdownListService } from 'src/app/shared/navigation/category-dropdown-list.service';
+import { CategoryDropdownListService } from 'src/app/navigation/category-dropdown-list.service';
 import { Category } from '../catalog/models/category.model';
 import { Product } from '../catalog/models/product.model';
 import { CategoryService } from '../catalog/services/category.service';
 import { ProductsService } from '../catalog/services/products.service';
-
 
 @Component({
   selector: 'app-home',
@@ -25,8 +24,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.categoryDropdownVisbilityService.hide();
 
-    this.mostPopularProducts$ = this.productService.getMostPopularProducts();
-    this.mostRecentProducts$ = this.productService.getLatestProducts();
+    this.mostPopularProducts$ = this.productService.getMostPopularProducts(4);
+    this.mostRecentProducts$ = this.productService.getLatestProducts(4);
 
     this.mainCategories$ = this.categoryService.getCategories();
   }
@@ -34,4 +33,4 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
       this.categoryDropdownVisbilityService.show();
   }
-}
+  }

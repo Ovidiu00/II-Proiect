@@ -1,0 +1,13 @@
+<mat-chip-list
+class="example-chip"
+cdkDropList
+cdkDropListOrientation="horizontal"
+>
+<mat-chip
+  class="example-box"
+  cdkDrag
+  *ngFor="let subCategory of subCategories"
+>
+  {{ subCategory.name}}
+</mat-chip>
+</mat-chip-list>
