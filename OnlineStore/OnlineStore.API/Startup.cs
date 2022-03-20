@@ -30,7 +30,6 @@ namespace OnlineStore.API
             services.AddDbContext<OnlineStoreDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStoreDB")));
 
 
-
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
