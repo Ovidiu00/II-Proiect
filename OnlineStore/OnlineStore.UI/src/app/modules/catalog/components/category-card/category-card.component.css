@@ -1,4 +1,7 @@
 
+:host(){
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 .card-shadow{
   box-shadow: 7px 7px 7px #888888;
   cursor: pointer;
