@@ -12,5 +12,10 @@ namespace OnlineStore.DataAccess.Models.Entities
         public int Quantity { get; set; }
         public string FilePath { get; set; }
         public DateTime InsertedDate { get; set; }
+
+        public Product()
+        {
+            this.Categories = new List<Category>();
+        }
     }
 }
