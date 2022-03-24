@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Product } from 'src/app/modules/catalog/models/product.model';
 import { DialogResult } from '../../../models/dialog-result.model';
 
 @Component({
@@ -9,7 +10,9 @@ import { DialogResult } from '../../../models/dialog-result.model';
 })
 export class ProductDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ProductDialogComponent>) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public product: Product,
+    public dialogRef: MatDialogRef<ProductDialogComponent>) {}
 
   ngOnInit(): void {
   }

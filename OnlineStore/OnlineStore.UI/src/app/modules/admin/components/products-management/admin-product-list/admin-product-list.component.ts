@@ -28,7 +28,7 @@ export class AdminProductListComponent implements OnInit,OnDestroy {
     this.activatedRoute.paramMap.subscribe((params) => {
       categoryId = Number(params.get('categoryId'));
       if (categoryId) {
-        this.products$ = this.productService.getLatestProducts(5);
+        this.products$ = this.productService.getProductsForCategory(categoryId);
       }
     });
   }

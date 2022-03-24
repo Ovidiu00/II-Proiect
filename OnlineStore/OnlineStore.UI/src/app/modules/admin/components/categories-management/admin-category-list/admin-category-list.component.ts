@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -21,6 +22,7 @@ export class AdminCategoryListComponent implements OnInit,OnDestroy {
     ) { }
 
     selectedCategory:Category;
+    public emptySubCategories:boolean;
 
     public isBaseCategoriesView :boolean= true;
 
@@ -37,12 +39,16 @@ export class AdminCategoryListComponent implements OnInit,OnDestroy {
         {
           this.selectedCategory = category;
           this.categories = this.selectedCategory?.subCategories;
+
+          if(!this.categories){
+            this.emptySubCategories = true;
+          }
+
         });
         this.isBaseCategoriesView = false;
       }
       else{
         this.categoryService.getCategories().subscribe(res => {this.categories = res;this.isBaseCategoriesView=true});
-
       }
     });
   }
@@ -57,16 +63,31 @@ export class AdminCategoryListComponent implements OnInit,OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.saveClicked)
-       this.handleDialogSaveClicked(result.dto)
+       this.handleAddProductDialogSaveClicked(result.dto)
     });
-
   }
 
-  private handleDialogSaveClicked(dto:FormData){
+  private handleAddProductDialogSaveClicked(dto:FormData){
     if(this.isBaseCategoriesView)
         this.categoryService.addCategory(dto);
         else{
           this.categoryService.addSubCategory(dto,this.selectedCategory.id);
         }
+  }
+
+  deleteCategory(categoryId:number){
+    this.categoryService.deleteCategory(categoryId)
+    //TODO refresh / remove from list
+  }
+  editCategory(categoryId:number){
+    const dialogRef = this.dialog.open(AddCategoryDialogComponent, {
+      width: '300px',
+      data:this.categories.find(x => x.id == categoryId)
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.saveClicked)
+       this.handleAddProductDialogSaveClicked(result.dto)
+    });
   }
 }

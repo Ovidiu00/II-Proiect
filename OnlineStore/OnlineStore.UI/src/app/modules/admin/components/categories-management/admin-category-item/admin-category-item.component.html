@@ -4,17 +4,18 @@
 
     <div class="category-actions">
       {{ category.name }}
-       <button  [routerLink]="['/admin/categories',category.id]">
+       <button  class="action-button" [routerLink]="['/admin/categories',category.id]">
          Manage subcategories
         </button>
-        <button *ngIf="!categoryContainsSubCategories" [routerLink]="['/admin/categories',category.id,'products']">
+        <button  class="action-button"
+        *ngIf="!categoryContainsSubCategories" [routerLink]="['/admin/categories',category.id,'products']">
           Manage products
          </button>
 
-         <button (click)="onEditClicked()">
+         <button class="action-button" (click)="onEditClicked()">
           Edit
          </button>
-         <button style="background-color:red" (click)="onDeleteClicked()">
+         <button class="delete-button" (click)="onDeleteClicked()">
           Delete
          </button>
         </div>

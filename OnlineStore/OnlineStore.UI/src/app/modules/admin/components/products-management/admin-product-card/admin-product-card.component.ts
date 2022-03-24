@@ -25,17 +25,17 @@ export class AdminProductCardComponent implements OnInit {
   @Output()
   public productSelected : EventEmitter<number> = new EventEmitter<number>();
   onDeleteClicked(){
-
     this.productService.deleteProduct(this.product.id);
   }
   onEditClicked(){
     const dialogRef = this.dialog.open(ProductDialogComponent, {
       width: '300px',
+      data:this.product
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.saveClicked){
-        this.productService.editProduct(result.dto);
+        this.productService.editProduct(result.dto,this.product.id);
       }
     });
   }

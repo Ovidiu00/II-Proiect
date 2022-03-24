@@ -33,7 +33,7 @@ export class ProductsService {
   addProduct(dto:FormData,categoryId:number):Observable<any>{
     return of();
   }
-  editProduct(dto:FormData):Observable<any>{
+  editProduct(dto:FormData,productId:number):Observable<any>{
     return of();
   }
   deleteProduct(productId:number){

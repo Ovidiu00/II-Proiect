@@ -38,7 +38,6 @@ const matModules = [
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule
-
 ];
 
 const components = [];
