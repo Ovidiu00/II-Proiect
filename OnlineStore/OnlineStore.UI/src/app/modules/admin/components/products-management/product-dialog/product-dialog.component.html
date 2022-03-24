@@ -1,17 +1,17 @@
 <form class="example-form">
     <mat-form-field  appearance="fill">
       <mat-label>Name</mat-label>
-      <input type="text" matInput #categoryName placeholder="Articole femei">
+      <input [value]="product?.name" type="text" matInput #categoryName placeholder="Articole femei">
     </mat-form-field>
 
     <mat-form-field  appearance="fill">
       <mat-label>Price</mat-label>
-      <input type="number" matInput #price placeholder="100 RON">
+      <input [value]="product?.price" type="number" matInput #price placeholder="100 RON">
     </mat-form-field>
 
     <mat-form-field  appearance="fill">
       <mat-label>Quantity</mat-label>
-      <input type="number" matInput #quantity>
+      <input type="number" [value]="product?.quantity"  matInput #quantity>
     </mat-form-field>
 
       <input type="file" #file >

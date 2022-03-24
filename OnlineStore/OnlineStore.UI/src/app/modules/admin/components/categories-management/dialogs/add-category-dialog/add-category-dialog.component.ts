@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogResult } from 'src/app/modules/admin/models/dialog-result.model';
+import { Category } from 'src/app/modules/catalog/models/category.model';
 
 @Component({
   selector: 'app-add-category-dialog',
@@ -8,7 +9,9 @@ import { DialogResult } from 'src/app/modules/admin/models/dialog-result.model';
   styleUrls: ['./add-category-dialog.component.css'],
 })
 export class AddCategoryDialogComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<AddCategoryDialogComponent>) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public category: Category,
+    public dialogRef: MatDialogRef<AddCategoryDialogComponent>) {}
 
   ngOnInit(): void {}
 
@@ -24,8 +27,6 @@ export class AddCategoryDialogComponent implements OnInit {
   }
 
   private constructFormData(files: any, name: string): FormData {
-
-
     if (files.length === 0) return null;
 
     const formData = new FormData();

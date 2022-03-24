@@ -13,17 +13,10 @@
   transition: transform .4s; /* Animation */
   transform: scale(1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
-.card{
-  max-width: 300px;
-  max-height: auto;
-  height: 450px;
-  margin:auto;
-}
 
 mat-card img{
   max-width: 332px;
-  max-height: 400px;
-  height:400px;
+  height:370px;
 }
 
 

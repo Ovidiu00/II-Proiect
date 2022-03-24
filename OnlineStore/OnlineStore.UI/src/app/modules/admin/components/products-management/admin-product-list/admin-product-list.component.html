@@ -1,5 +1,8 @@
 
 <div class="row">
-    <app-admin-product-card (productSelected)="selectProduct($event)" *ngFor="let product of products$ | async" [product]="product" ></app-admin-product-card>
+    <app-admin-product-card
+     (productSelected)="selectProduct($event)"
+      *ngFor="let product of products$ | async" [product]="product"
+      ></app-admin-product-card>
 </div>
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from 'src/app/modules/catalog/models/category.model';
 
 @Component({
@@ -11,21 +11,26 @@ export class AdminCategoryItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(this.category.subCategories)
+    if(this.category.subCategories.length)
         this.categoryContainsSubCategories = true;
   }
 
   @Input()
   category:Category;
 
+  @Output()
+  categoryDeleted:EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  categoryEdited:EventEmitter<any> = new EventEmitter<any>();
 
   public categoryContainsSubCategories:boolean;
 
   onDeleteClicked(){
-
+      this.categoryDeleted.emit(this.category.id);
   }
   onEditClicked(){
-
+    this.categoryEdited.emit(this.category.id);
   }
 
 
