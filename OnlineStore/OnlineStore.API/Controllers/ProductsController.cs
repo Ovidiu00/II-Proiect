@@ -92,5 +92,18 @@ namespace OnlineStore.API.Controllers
             return Ok(result);
 
         }
+
+       [HttpPut]
+        [Route("~/addProduct/{categoryId}/products")]
+        public async Task<ActionResult<IEnumerable<ProductVM>>> AddProduct(AddProductVM product,int categoryId)
+        {
+            if (categoryId <= 0)
+                return BadRequest();
+
+            return Ok();
+
+        }
+
+
     }
 }
