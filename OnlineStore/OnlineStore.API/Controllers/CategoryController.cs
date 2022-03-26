@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using OnlineStore.Business.DTOs;
+using OnlineStore.Business.Mediator.HelperCommands;
+using OnlineStore.Business.Mediator.Requests.Commands;
 using OnlineStore.Business.Mediator.Requests.Queries;
 
 namespace OnlineStore.API.Controllers
@@ -60,5 +62,21 @@ namespace OnlineStore.API.Controllers
                 return StatusCode(500);
             }
         }
+
+        public async Task<ActionResult<CategoryVM>> AddCategory(AddCategoryVM addCategoryVm)
+        {
+            try
+            {
+                var addCategoryDto = mapper.Map<AddCategoryDTO>(addCategoryVm);
+                var categoryDto = await mediator.Send(new AddCategoryCommand(addCategoryDto));
+                var categoryVm = mapper.Map<CategoryVM>(categoryDto);
+                return CreatedAtAction(nameof(GetCategoryById),categoryVm.Id);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+        }
+    
     }
 }
