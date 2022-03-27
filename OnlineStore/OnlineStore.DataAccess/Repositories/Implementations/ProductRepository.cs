@@ -39,10 +39,6 @@ namespace OnlineStore.DataAccess.Repositories.Implementations
         {
             return await _db.Products.OrderByDescending(product => product.InsertedDate).Take(count).ToListAsync();
         }
-        public async Task<Product> AddProductToCateogry(Product product, Category category)
-        {
-
-            return await _db.Products.FindAsync();//.AddAsync(product).Contains(category); 
-        }
+        
     }
 }
