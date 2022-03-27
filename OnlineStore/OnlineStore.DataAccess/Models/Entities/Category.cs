@@ -9,5 +9,11 @@ namespace OnlineStore.DataAccess.Models.Entities
         public string Name { get; set; }
         public IEnumerable<Category> SubCategories { get; set; }
         public IEnumerable<Product> Products { get; set; }
+
+        public Category()
+        {
+            this.SubCategories = new List<Category>();
+            this.Products = new List<Product>();
+        }
     }
 }

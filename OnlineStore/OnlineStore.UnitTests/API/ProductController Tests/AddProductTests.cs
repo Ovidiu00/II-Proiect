@@ -36,7 +36,7 @@
 //            int expectedStatusCode = 400;
 
 //            //// Act
-//            var actionResult = await controller.AddProduct(null);
+//            var actionResult = await controller.AddProduct(null,2);
 //            var result = actionResult.Result as StatusCodeResult;
 
 //            //// Assert
@@ -49,7 +49,7 @@
 //                .ReturnsAsync(new ProductDTO());
 
 //            //// Act
-//            var actionResult = await controller.AddProduct(new AddProductVM());
+//            var actionResult = await controller.AddProduct(new AddProductVM(),2);
 
 //            //// Assert
 //            Assert.IsType<CreatedAtActionResult>(actionResult);
@@ -70,7 +70,7 @@
 //                .ReturnsAsync(productReturnedByMediator);
 
 //            //// Act
-//            var actionResult = await controller.AddProduct(productToBeAdded) as CreatedAtActionResult;
+//            var actionResult = await controller.AddProduct(productToBeAdded,2) as CreatedAtActionResult;
 //            var product = actionResult.Value as ProductVM;
 
 
@@ -92,7 +92,7 @@
 //                .ReturnsAsync(productReturnedByMediator);
 
 //            //// Act
-//            var actionResult = await controller.AddProduct(productToBeAdded) as CreatedAtActionResult;
+//            var actionResult = await controller.AddProduct(productToBeAdded,2) as CreatedAtActionResult;
 //            var product = actionResult.Value as ProductVM;
 
 
@@ -110,7 +110,7 @@
 
 
 //            //// Act
-//            var actionResult = await controller.AddProduct(new AddProductVM());
+//            var actionResult = await controller.AddProduct(new AddProductVM(),2);
 //            var result = actionResult.Result as StatusCodeResult;
 
 //            //// Assert
@@ -128,11 +128,25 @@
 
 
 //            //// Act
-//            var actionResult = await controller.AddProduct(new AddProductVM());
+//            var actionResult = await controller.AddProduct(new AddProductVM(),2);
 
 //            //// Assert
 
 //            mockMediator.Verify(x => x.Send(It.IsAny<AddProductCommand>()), Times.Once);
+//        }
+
+//        [Fact]
+//        public async Task AddProduct_CategoryIdIs0_ReturnsBadRequest()
+//        {
+
+//            /// Arrange
+//            var expectedStatus = 400;
+//            //// Act
+//            var actionResult = await controller.AddProduct(null, 0);
+//            var result = actionResult.Result as StatusCodeResult;
+
+//            //// Assert
+//            Assert.Equal(expectedStatusCode, result.StatusCode);
 //        }
 
 //    }
