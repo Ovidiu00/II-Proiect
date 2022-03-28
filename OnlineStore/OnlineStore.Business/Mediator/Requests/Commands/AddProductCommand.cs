@@ -6,8 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineStore.Business.Mediator.Requests.Queries
+namespace OnlineStore.Business.Mediator.Requests.Commands
 {
-    public record AddProductCommandQuery(int id) : IRequest<AddProductDTO>;
-
+    public record AddProductCommand(AddProductDTO addProductDTO, int categroryId) : IRequest<AddProductDTO>;
 }

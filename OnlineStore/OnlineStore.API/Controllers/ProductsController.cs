@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.API.ViewModels;
+using OnlineStore.Business.DTOs;
+using OnlineStore.Business.Mediator.Requests.Commands;
 using OnlineStore.Business.Mediator.Requests.Queries;
 using System;
 using System.Collections.Generic;
@@ -94,10 +96,13 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<AddProductVM>> AddProduct(int categoryId)
+        public async Task<ActionResult<ProductVM>> AddProduct(AddProductVM addProductVM, int categoryId)
         {
             if (categoryId <= 0)
                 return BadRequest();
+            var addProductDTO = mapper.Map<AddProductDTO>(addProductVM);
+
+            var result = mediator.Send(new AddProductCommand(addProductDTO,categoryId) );
             var createdResource = new { Id = categoryId };
             var actionName = nameof(ProductsController.GetProductById);
             var controllerName = "ProductsController";
