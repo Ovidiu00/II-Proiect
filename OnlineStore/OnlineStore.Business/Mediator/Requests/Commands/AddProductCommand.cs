@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace OnlineStore.Business.Mediator.Requests.Commands
 {
-    public record AddProductCommand(AddProductDTO addProductDTO, int categroryId) : IRequest<AddProductDTO>;
+    public record AddProductCommand(AddProductDTO addProductDTO, int categroryId) : IRequest<ProductDTO>;
 }

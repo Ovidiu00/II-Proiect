@@ -100,17 +100,17 @@ namespace OnlineStore.API.Controllers
         {
             if (categoryId <= 0)
                 return BadRequest();
-            var addProductDTO = mapper.Map<AddProductDTO>(addProductVM);
 
-            var result = mediator.Send(new AddProductCommand(addProductDTO,categoryId) );
-            var createdResource = new { Id = categoryId };
+            var addProductDTO = mapper.Map<AddProductDTO>(addProductVM);
+            var productDTO = mediator.Send(new AddProductCommand(addProductDTO,categoryId) );
+
+            var createdResource = new { Id = productDTO.Id };
             var actionName = nameof(ProductsController.GetProductById);
             var controllerName = "ProductsController";
             var routeValues = new { id = createdResource.Id };
             return CreatedAtAction(actionName, controllerName, routeValues, createdResource);
 
         }
-
 
     }
 }
