@@ -77,6 +77,22 @@ namespace OnlineStore.API.Controllers
                 return StatusCode(500);
             }
         }
-    
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<CategoryVM>> EditCategory(EditCategoryVM editCategoryVm, int id)
+        {
+            try
+            {
+                var editCategoryDto = mapper.Map<EditCategoryDTO>(editCategoryVm);
+                var editedCategoryDto = await mediator.Send(new EditCategoryCommand(editCategoryDto, id));
+                var categoryVm = mapper.Map<CategoryVM>(editedCategoryDto);
+                return CreatedAtAction(nameof(GetCategoryById), categoryVm.Id);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+        }
+
     }
 }
