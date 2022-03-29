@@ -14,8 +14,13 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
-        private readonly IMediator mediator;
-        
+
+        public EditCategoryCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
+        }
+
         public async Task<CategoryDTO> Handle(EditCategoryCommand request, CancellationToken cancellationToken)
         {
             var editedCategoryDto = request.EditCategoryDto;

@@ -72,7 +72,7 @@ namespace OnlineStore.API.Controllers
                 var categoryVm = mapper.Map<CategoryVM>(categoryDto);
                 return CreatedAtAction(nameof(GetCategoryById),categoryVm.Id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(500);
             }
@@ -88,7 +88,20 @@ namespace OnlineStore.API.Controllers
                 var categoryVm = mapper.Map<CategoryVM>(editedCategoryDto);
                 return CreatedAtAction(nameof(GetCategoryById), categoryVm.Id);
             }
-            catch (Exception e)
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> DeleteCategory(int id)
+        {
+            try
+            {
+                return await mediator.Send(new DeleteCategoryCommand(id));
+            }
+            catch (Exception)
             {
                 return StatusCode(500);
             }
