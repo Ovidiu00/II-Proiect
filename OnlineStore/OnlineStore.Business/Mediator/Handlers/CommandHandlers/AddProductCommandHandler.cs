@@ -29,6 +29,9 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
             var product = mapper.Map<Product>(command.addProductDTO);
             product.FilePath = await mediator.Send(new SavePhotoCommand(command.addProductDTO.Photo));
             category.Products.Add(product);
+
+            await unitOfWork.Commit(); 
+
             return  mapper.Map<ProductDTO>(product);
         }
 

@@ -103,12 +103,21 @@ namespace OnlineStore.API.Controllers
 
             var addProductDTO = mapper.Map<AddProductDTO>(addProductVM);
             var productDTO = await mediator.Send(new AddProductCommand(addProductDTO,categoryId) );
+            var productVM = mapper.Map<ProductVM>(productDTO);
 
-            var createdResource = new { Id = productDTO.Id };
-            var actionName = nameof(ProductsController.GetProductById);
-            var controllerName = "ProductsController";
-            var routeValues = new { id = createdResource.Id };
-            return CreatedAtAction(actionName, controllerName, routeValues, createdResource);
+            return CreatedAtAction(nameof(GetProductById), productVM.Id);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<ProductVM>> EditProduct(EditProductVM editProductVM,int id)
+        {
+            if (id <= 0)
+                return BadRequest();
+            var editProductDTO = mapper.Map<EditProductDTO>(editProductVM);
+            var editedProductDTO = await mediator.Send(new EditProductCommand(editProductDTO,id));
+            var productVM = mapper.Map<ProductVM>(editedProductDTO);
+
+            return CreatedAtAction(nameof(GetProductById), productVM.Id);
         }
     }
 }
