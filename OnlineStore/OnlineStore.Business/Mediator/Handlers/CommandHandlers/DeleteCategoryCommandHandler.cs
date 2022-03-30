@@ -19,17 +19,15 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
 
         public async Task<bool> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
-            try
-            {
+         
                 var category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id.Equals(request.id));
+                if (category == null)
+                {
+                    throw new Exception("The category does not exist!");
+                }
                 unitOfWork.CategoryRepository.Delete(category);
                 await unitOfWork.Commit();
                 return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
         }
     }
 }

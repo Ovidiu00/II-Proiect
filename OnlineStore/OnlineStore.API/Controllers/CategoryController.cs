@@ -69,8 +69,7 @@ namespace OnlineStore.API.Controllers
             {
                 var addCategoryDto = mapper.Map<AddCategoryDTO>(addCategoryVm);
                 var categoryDto = await mediator.Send(new AddCategoryCommand(addCategoryDto));
-                var categoryVm = mapper.Map<CategoryVM>(categoryDto);
-                return CreatedAtAction(nameof(GetCategoryById),categoryVm.Id);
+                return CreatedAtAction(nameof(GetCategoryById),categoryDto.Id);
             }
             catch (Exception)
             {
@@ -85,8 +84,7 @@ namespace OnlineStore.API.Controllers
             {
                 var editCategoryDto = mapper.Map<EditCategoryDTO>(editCategoryVm);
                 var editedCategoryDto = await mediator.Send(new EditCategoryCommand(editCategoryDto, id));
-                var categoryVm = mapper.Map<CategoryVM>(editedCategoryDto);
-                return CreatedAtAction(nameof(GetCategoryById), categoryVm.Id);
+                return CreatedAtAction(nameof(GetCategoryById), editedCategoryDto.Id);
             }
             catch (Exception)
             {

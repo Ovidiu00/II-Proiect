@@ -24,17 +24,17 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
         public async Task<CategoryDTO> Handle(EditCategoryCommand request, CancellationToken cancellationToken)
         {
             var editedCategoryDto = request.EditCategoryDto;
-                var categoryId = request.id;
-                var existingCategory = await unitOfWork.CategoryRepository.FindSingle(x => x.Id.Equals(categoryId));
-                if (existingCategory == null)
-                {
-                    throw new Exception("Category not found");
-                }
+            var categoryId = request.id;
+            var existingCategory = await unitOfWork.CategoryRepository.FindSingle(x => x.Id.Equals(categoryId));
+            if (existingCategory == null)
+            {
+                throw new Exception("Category not found");
+            }
 
-                var editedCategory = mapper.Map<Category>(editedCategoryDto);
-                unitOfWork.CategoryRepository.UpdateIfModified(existingCategory, editedCategory, nameof(categoryId));
-                await unitOfWork.Commit();
-                return mapper.Map<CategoryDTO>(existingCategory);
+            var editedCategory = mapper.Map<Category>(editedCategoryDto);
+            unitOfWork.CategoryRepository.UpdateIfModified(existingCategory, editedCategory, nameof(categoryId));
+            await unitOfWork.Commit();
+            return mapper.Map<CategoryDTO>(existingCategory);
         }
     }
 }
