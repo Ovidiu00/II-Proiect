@@ -8,7 +8,7 @@ using OnlineStore.DataAccess.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
+namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
 {
     public class AddProductCommandHandler : IRequestHandler<AddProductCommand, ProductDTO>
     {
@@ -22,11 +22,12 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
             this.mediator = mediator;
         }
 
-        public async Task<ProductDTO> Handle(AddProductCommand request, CancellationToken cancellationToken)
+        public async Task<ProductDTO> Handle(AddProductCommand command, CancellationToken cancellationToken)
         {
-            Category category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id == request.categroryId);
-            var product = mapper.Map<Product>(request.addProductDTO);
-            product.FilePath = await mediator.Send(new SavePhotoCommand(request.addProductDTO.Photo));
+            Category category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id == command.categroryId);
+
+            var product = mapper.Map<Product>(command.addProductDTO);
+            product.FilePath = await mediator.Send(new SavePhotoCommand(command.addProductDTO.Photo));
             category.Products.Add(product);
             return  mapper.Map<ProductDTO>(product);
         }

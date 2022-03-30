@@ -102,15 +102,13 @@ namespace OnlineStore.API.Controllers
                 return BadRequest();
 
             var addProductDTO = mapper.Map<AddProductDTO>(addProductVM);
-            var productDTO = mediator.Send(new AddProductCommand(addProductDTO,categoryId) );
+            var productDTO = await mediator.Send(new AddProductCommand(addProductDTO,categoryId) );
 
             var createdResource = new { Id = productDTO.Id };
             var actionName = nameof(ProductsController.GetProductById);
             var controllerName = "ProductsController";
             var routeValues = new { id = createdResource.Id };
             return CreatedAtAction(actionName, controllerName, routeValues, createdResource);
-
         }
-
     }
 }

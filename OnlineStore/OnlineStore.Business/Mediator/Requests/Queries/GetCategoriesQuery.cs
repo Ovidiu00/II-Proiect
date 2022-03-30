@@ -6,5 +6,6 @@ namespace OnlineStore.Business.Mediator.Requests.Queries
 {
     public class GetCategoriesQuery : IRequest<IEnumerable<CategoryDTO>>
     {
+       
     }
 }
