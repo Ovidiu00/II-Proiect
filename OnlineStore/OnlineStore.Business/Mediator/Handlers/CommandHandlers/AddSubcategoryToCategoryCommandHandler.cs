@@ -33,12 +33,12 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
                 throw new Exception("Child category does not exist!");
             }
 
-            if (parentCategory.SubCategories.ToList().Contains(childCategory))
+            var subcategories = parentCategory.SubCategories.ToList();
+            if (subcategories.Contains(childCategory))
             {
                 throw new Exception("This category is already a subcategory for the parent one!");
             }
-            parentCategory.SubCategories.ToList().Add(childCategory);
-            unitOfWork.CategoryRepository.UpdateIfModified(await unitOfWork.CategoryRepository.GetCategory(parentCategory.Id),parentCategory,nameof(parentCategory.Id));
+            subcategories.Add(childCategory);
             await unitOfWork.Commit();
             return true;
         }

@@ -106,12 +106,12 @@ namespace OnlineStore.API.Controllers
             }
         }
 
-        [HttpPut("{parentId}/{childId}")]
-        public async Task<ActionResult<bool>> AddSubcategoryToCategory(int parentId, int childId)
+        [HttpPut("{parentId}")]
+        public async Task<ActionResult<bool>> AddSubcategoryToCategory(int parentId, int childCategory)
         {
             try
             {
-                return await mediator.Send(new AddSubcategoryToCategoryCommand(parentId, childId));
+                return await mediator.Send(new AddSubcategoryToCategoryCommand(parentId, childCategory));
             }
             catch (Exception e)
             {
