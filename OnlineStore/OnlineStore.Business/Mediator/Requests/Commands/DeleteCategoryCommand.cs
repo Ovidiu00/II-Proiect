@@ -3,6 +3,6 @@ using OnlineStore.Business.DTOs;
 
 namespace OnlineStore.Business.Mediator.Requests.Commands
 {
-    public record DeleteCategoryCommand(int id) : IRequest<bool>;
+    public record DeleteCategoryCommand(int Id) : IRequest<bool>;
 
 }
