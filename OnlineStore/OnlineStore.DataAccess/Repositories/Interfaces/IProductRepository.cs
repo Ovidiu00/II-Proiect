@@ -9,5 +9,6 @@ namespace OnlineStore.DataAccess.Repositories.Interfaces
         Task<Dictionary<Product, int>> GetProductOrdersCountDictionary();
 
         Task<IEnumerable<Product>> GetMostRecentProducts(int count);
+        Task AddProductToCategory(Category category, Product product);
     }
 }

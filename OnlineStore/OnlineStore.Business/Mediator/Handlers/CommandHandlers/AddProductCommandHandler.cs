@@ -5,6 +5,7 @@ using OnlineStore.Business.Mediator.HelperCommands;
 using OnlineStore.Business.Mediator.Requests.Commands;
 using OnlineStore.DataAccess.Models.Entities;
 using OnlineStore.DataAccess.Repositories;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,10 +26,13 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
         public async Task<ProductDTO> Handle(AddProductCommand command, CancellationToken cancellationToken)
         {
             Category category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id == command.categroryId);
-
+            if (category == null)
+            {
+                throw new Exception("There is no product at this category");
+            }
             var product = mapper.Map<Product>(command.addProductDTO);
             product.FilePath = await mediator.Send(new SavePhotoCommand(command.addProductDTO.Photo));
-            category.Products.Add(product);
+            await unitOfWork.ProductRepository.AddProductToCategory(category, product);
 
             await unitOfWork.Commit(); 
 
