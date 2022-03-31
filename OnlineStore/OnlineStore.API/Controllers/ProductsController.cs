@@ -96,6 +96,7 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpPost]
+        [Route("~/products/{categoryId}")]
         public async Task<ActionResult<ProductVM>> AddProduct(AddProductVM addProductVM, int categoryId)
         {
             if (categoryId <= 0)
@@ -109,6 +110,7 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpPut]
+        [Route("~/products/{id}")]
         public async Task<ActionResult<ProductVM>> EditProduct(EditProductVM editProductVM, int id)
         {
             if (id <= 0)
@@ -119,7 +121,8 @@ namespace OnlineStore.API.Controllers
 
             return CreatedAtAction(nameof(GetProductById), productVM.Id);
         }
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("~/products/{id}")]
         public async Task<ActionResult<bool>> DeleteProduct(int id)
         {
             if (id <= 0)
