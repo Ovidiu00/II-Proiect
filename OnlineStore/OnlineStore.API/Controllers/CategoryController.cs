@@ -63,14 +63,17 @@ namespace OnlineStore.API.Controllers
             }
         }
 
-        public async Task<ActionResult<CategoryVM>> AddCategory(AddCategoryVM addCategoryVm)
+        public async Task<ActionResult> AddCategory(AddCategoryVM addCategoryVm)
         {
             try
             {
+                if (addCategoryVm == null)
+                    return BadRequest();
+
                 var addCategoryDto = mapper.Map<AddCategoryDTO>(addCategoryVm);
                 var categoryDto = await mediator.Send(new AddCategoryCommand(addCategoryDto));
                 var categoryVm = mapper.Map<CategoryVM>(categoryDto);
-                return CreatedAtAction(nameof(GetCategoryById),categoryVm.Id);
+                return CreatedAtAction(nameof(GetCategoryById), new {Id = categoryVm.Id });
             }
             catch (Exception)
             {
@@ -79,8 +82,10 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<CategoryVM>> EditCategory(EditCategoryVM editCategoryVm, int id)
+        public async Task<ActionResult> EditCategory(EditCategoryVM editCategoryVm, int id)
         {
+            if (id <= 0 || editCategoryVm == null)
+                return BadRequest();
             try
             {
                 var editCategoryDto = mapper.Map<EditCategoryDTO>(editCategoryVm);
@@ -95,11 +100,17 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> DeleteCategory(int id)
+        public async Task<ActionResult> DeleteCategory(int id)
         {
             try
             {
-                return await mediator.Send(new DeleteCategoryCommand(id));
+                if (id <= 0)
+                    return BadRequest();
+
+                if (await mediator.Send(new DeleteCategoryCommand(id)))
+                    return NoContent();
+
+                return StatusCode(500);
             }
             catch (Exception)
             {

@@ -23,6 +23,7 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
             {
                 var category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id.Equals(request.id));
                 unitOfWork.CategoryRepository.Delete(category);
+
                 await unitOfWork.Commit();
                 return true;
             }

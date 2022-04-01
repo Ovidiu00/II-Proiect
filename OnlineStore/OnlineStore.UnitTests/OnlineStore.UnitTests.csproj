@@ -24,4 +24,8 @@
     <ProjectReference Include="..\OnlineStore.API\OnlineStore.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mediator\CommandHandlers\Products\" />
+  </ItemGroup>
+
 </Project>
