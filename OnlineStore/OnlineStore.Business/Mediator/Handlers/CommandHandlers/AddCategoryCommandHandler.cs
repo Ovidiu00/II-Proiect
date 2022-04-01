@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
@@ -25,6 +26,10 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
 
         public async Task<CategoryDTO> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
         {
+            if (request.AddCategoryDto == null)
+            {
+                throw new Exception("Can't insert null category");
+            }
             var requestAddCategoryDto = request.AddCategoryDto;
             var filePath = await mediator.Send(new SavePhotoCommand(requestAddCategoryDto.Photo));
             var category = mapper.Map<Category>(request.AddCategoryDto);
