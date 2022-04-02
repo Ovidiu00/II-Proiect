@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.API.ViewModels;
+using OnlineStore.Business.DTOs;
+using OnlineStore.Business.Mediator.Requests.Commands;
 using OnlineStore.Business.Mediator.Requests.Queries;
 using System;
 using System.Collections.Generic;
@@ -91,6 +93,42 @@ namespace OnlineStore.API.Controllers
 
             return Ok(result);
 
+        }
+
+        [HttpPost]
+        [Route("~/products/{categoryId}")]
+        public async Task<ActionResult<ProductVM>> AddProduct(AddProductVM addProductVM, int categoryId)
+        {
+            if (categoryId <= 0)
+                return BadRequest();
+
+            var addProductDTO = mapper.Map<AddProductDTO>(addProductVM);
+            var productDTO = await mediator.Send(new AddProductCommand(addProductDTO, categoryId));
+            var productVM = mapper.Map<ProductVM>(productDTO);
+
+            return CreatedAtAction(nameof(GetProductById), productVM.Id);
+        }
+
+        [HttpPut]
+        [Route("~/products/{id}")]
+        public async Task<ActionResult<ProductVM>> EditProduct(EditProductVM editProductVM, int id)
+        {
+            if (id <= 0)
+                return BadRequest();
+            var editProductDTO = mapper.Map<EditProductDTO>(editProductVM);
+            var editedProductDTO = await mediator.Send(new EditProductCommand(editProductDTO, id));
+            var productVM = mapper.Map<ProductVM>(editedProductDTO);
+
+            return CreatedAtAction(nameof(GetProductById), productVM.Id);
+        }
+        [HttpDelete]
+        [Route("~/products/{id}")]
+        public async Task<ActionResult<bool>> DeleteProduct(int id)
+        {
+            if (id <= 0)
+                return BadRequest();
+
+            return await mediator.Send(new DeleteProductCommand(id));
         }
     }
 }

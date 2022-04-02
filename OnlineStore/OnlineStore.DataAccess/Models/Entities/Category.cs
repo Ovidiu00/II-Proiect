@@ -8,7 +8,7 @@ namespace OnlineStore.DataAccess.Models.Entities
         public string FilePath { get; set; }
         public string Name { get; set; }
         public IEnumerable<Category> SubCategories { get; set; }
-        public IEnumerable<Product> Products { get; set; }
+        public IList<Product> Products { get; set; }
 
         public Category()
         {
