@@ -5,6 +5,9 @@ using AutoMapper;
 using MediatR;
 using OnlineStore.Business.Mediator.Requests.Commands;
 using OnlineStore.DataAccess.Repositories;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
 {
@@ -20,15 +23,15 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
         public async Task<bool> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
          
-                var category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id.Equals(request.Id));
-                if (category == null)
-                {
-                    throw new Exception("The category does not exist!");
-                }
-                unitOfWork.CategoryRepository.Delete(category);
+            var category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id.Equals(request.Id));
+            if (category == null)
+            {
+                throw new Exception("The category does not exist!");
+            }
+            unitOfWork.CategoryRepository.Delete(category);
 
-                await unitOfWork.Commit();
-                return true;
+            await unitOfWork.Commit();
+            return true;
         }
     }
 }

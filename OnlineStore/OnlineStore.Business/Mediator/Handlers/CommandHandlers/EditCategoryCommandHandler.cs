@@ -35,7 +35,7 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
                 throw new Exception("Category not found");
             }
             var editedCategory = mapper.Map<Category>(editedCategoryDto);
-            unitOfWork.CategoryRepository.UpdateIfModified(existingCategory, editedCategory, nameof(categoryId));
+            unitOfWork.CategoryRepository.UpdateIfModified(existingCategory, editedCategory, nameof(editedCategory.Id));
 
             if (editedCategoryDto.Photo != null)
             {
