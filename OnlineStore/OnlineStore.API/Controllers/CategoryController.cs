@@ -55,6 +55,7 @@ namespace OnlineStore.API.Controllers
                 {
                     return NotFound();
                 }
+
                 return Ok(mapper.Map<CategoryVM>(categoryDto));
             }
             catch (Exception)
@@ -90,8 +91,7 @@ namespace OnlineStore.API.Controllers
             {
                 var editCategoryDto = mapper.Map<EditCategoryDTO>(editCategoryVm);
                 var editedCategoryDto = await mediator.Send(new EditCategoryCommand(editCategoryDto, id));
-                var categoryVm = mapper.Map<CategoryVM>(editedCategoryDto);
-                return CreatedAtAction(nameof(GetCategoryById), categoryVm.Id);
+                return CreatedAtAction(nameof(GetCategoryById), editedCategoryDto.Id);
             }
             catch (Exception)
             {
@@ -118,5 +118,18 @@ namespace OnlineStore.API.Controllers
             }
         }
 
-    }
+        [HttpPut("{parentId}")]
+        public async Task<ActionResult<bool>> AddSubcategoryToCategory(int parentId, int childCategory)
+        {
+            try
+            {
+                return await mediator.Send(new AddSubcategoryToCategoryCommand(parentId, childCategory));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+        }
+
+}
 }
