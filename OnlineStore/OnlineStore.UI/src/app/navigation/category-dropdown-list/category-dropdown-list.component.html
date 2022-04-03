@@ -1,0 +1,11 @@
+
+
+<ng-container *ngIf="isComponentVisible">
+  <div>
+    <div style="display:flex;flex-direction: row;" >
+      <app-category-dropdown  *ngFor="let category of categories$ |async" [category]="category"></app-category-dropdown>
+    </div>
+  </div>
+  <hr>
+</ng-container>
+

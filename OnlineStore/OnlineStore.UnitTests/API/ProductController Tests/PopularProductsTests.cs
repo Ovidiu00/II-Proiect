@@ -33,7 +33,6 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
 
             controller = new ProductsController(mockMediator.Object, mapper);
         }
-
         [Fact]
         public async Task PopularProducts_ExceptionIsThrown_Returns500Status()
         {
@@ -176,7 +175,7 @@ namespace OnlineStore.UnitTests.API.ProductController_Tests
             var products = new List<ProductDTO>();
         
             mockMediator.Setup(repo => repo.Send(It.IsAny<GetPopularProductsQuery>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync((IEnumerable<ProductDTO>)null);
+                .ReturnsAsync(new List<ProductDTO>());
 
 
             //// Act

@@ -1,10 +1,9 @@
 export class Product{
 
   public id:number;
-  public displayPhoto:string;
-  public otherPhotos?:string[];
+  public filePath:string;
   public price : number;
+  public quantity:number;
   public name : string;
-  public code? : string;
   public description : string;
 }

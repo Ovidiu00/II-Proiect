@@ -1,0 +1,23 @@
+<form class="example-form">
+    <mat-form-field  appearance="fill">
+      <mat-label>Name</mat-label>
+      <input #name [value]="product?.name" type="text" matInput  placeholder="Articole femei">
+    </mat-form-field>
+
+    <mat-form-field  appearance="fill">
+      <mat-label>Price</mat-label>
+      <input #price [value]="product?.price" type="number" matInput  placeholder="100 RON">
+    </mat-form-field>
+
+    <mat-form-field  appearance="fill">
+      <mat-label>Quantity</mat-label>
+      <input #quantity type="number" [value]="product?.quantity"  matInput >
+    </mat-form-field>
+
+      <input type="file" (change)="onFileSelected($event)" >
+  </form>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onExitClick()">Close</button>
+    <button mat-button (click)="onSaveClick()">Save</button>
+  </div>

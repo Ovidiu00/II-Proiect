@@ -1,5 +1,5 @@
-
-
+<h1 style="text-align: center;" *ngIf="selectedCategory">{{selectedCategory.name}}</h1>
 <div class="row">
-  <app-category-card [routerLink] = "['/catalog/categorii',category.id]" *ngFor="let category of categories$ | async"  class="col-sm-4 mt-4" [category]="category"></app-category-card>
+  <app-category-card [routerLink] = "['/catalog/categorii',category.id]" *ngFor="let category of categories$ | async"  [category]="category"></app-category-card>
 </div>
+

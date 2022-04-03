@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mediator\CommandHandlers\" />
+    <Folder Include="Mediator\CommandHandlers\Products\" />
   </ItemGroup>
 
 </Project>
