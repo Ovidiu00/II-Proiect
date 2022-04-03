@@ -84,14 +84,15 @@ namespace OnlineStore.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("InsertedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -100,8 +101,6 @@ namespace OnlineStore.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Products");
                 });
@@ -152,7 +151,7 @@ namespace OnlineStore.DataAccess.Migrations
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Category", b =>
                 {
                     b.HasOne("OnlineStore.DataAccess.Models.Entities.Category", null)
-                        .WithMany("Subcategories")
+                        .WithMany("SubCategories")
                         .HasForeignKey("CategoryId");
                 });
 
@@ -163,13 +162,6 @@ namespace OnlineStore.DataAccess.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Product", b =>
-                {
-                    b.HasOne("OnlineStore.DataAccess.Models.Entities.Order", null)
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.UserProduct", b =>
@@ -193,12 +185,7 @@ namespace OnlineStore.DataAccess.Migrations
 
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Category", b =>
                 {
-                    b.Navigation("Subcategories");
-                });
-
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>
-                {
-                    b.Navigation("Products");
+                    b.Navigation("SubCategories");
                 });
 #pragma warning restore 612, 618
         }

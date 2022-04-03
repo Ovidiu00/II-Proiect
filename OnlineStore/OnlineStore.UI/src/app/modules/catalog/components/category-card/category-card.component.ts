@@ -10,7 +10,12 @@ export class CategoryCardComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  public image:string;
+  ngOnInit(): void {
+    this.image = this.category.filePath;
+    if(this.category.filePath.indexOf("http") == -1)
+       this.image = "http://localhost:4200/assets/images/" + this.category.filePath;
+  }
 
   @Input()
   public category: Category;

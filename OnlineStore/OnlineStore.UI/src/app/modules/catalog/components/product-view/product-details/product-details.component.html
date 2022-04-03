@@ -1,0 +1,32 @@
+
+<div class="product-name">{{product.name}}</div>
+<div class="product-quantity">{{product.quantity}} available</div>
+
+<div class="description">
+  LOREM IPSUM BLA BLA
+  LOREM IPSUM BLA BLA
+  LOREM IPSUM BLA BLA
+  LOREM IPSUM BLA BLA
+  LOREM IPSUM BLA BLA
+  LOREM IPSUM BLA BLA
+  LOREM IPSUM BLA BLA
+
+
+</div>
+<div class="product-price">{{product.price | currency:"RON ":"symbol"}} </div>
+
+<div class="order-section">
+
+
+    <span style="font-size:small">Quantity</span>
+    <app-quantity-selector [availableQuantity]="product.quantity"></app-quantity-selector>
+
+
+
+
+  <button class="add-to-cart-button">Add to cart <fa-icon size="xs" [icon]="faShoppingCart"></fa-icon>
+  </button>
+
+</div>
+
+

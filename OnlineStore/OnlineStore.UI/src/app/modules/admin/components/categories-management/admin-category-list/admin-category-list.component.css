@@ -1,0 +1,28 @@
+:host(){
+  display: flex;
+  flex-direction: column;
+}
+
+app-admin-category-item{
+  border-bottom: 2px solid grey;
+}
+
+.add-category-button{
+  display:block;
+  width:10%;
+  margin:20px;
+  background-color: #3f51b5;
+}
+
+button{
+  background-color:#00468B;
+  color:white;
+  border-radius:2px;
+  border: none;
+  height:30px;
+  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+}
+button:hover{
+  background-color:#01274d;
+  cursor:pointer;
+}

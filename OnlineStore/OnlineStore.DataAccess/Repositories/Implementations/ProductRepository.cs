@@ -14,15 +14,34 @@ namespace OnlineStore.DataAccess.Repositories.Implementations
         {
         }
 
-        public Task<Dictionary<Product, int>> GetProductOrdersCountDictionary()
+        public async Task<Dictionary<Product, int>> GetProductOrdersCountDictionary()
         {
+            ///TODO : once order module is implemented
+            ///
+            //var productsOrdered = _db.Orders.SelectMany(x => x.Products);
 
-            var productsOrdered = _db.Orders.SelectMany(x => x.Products);
+            //var results = productsOrdered.GroupBy(x => x.Id);
 
-            var results = productsOrdered.GroupBy(x => x.Id);
+            var dictionary = new Dictionary<Product, int>();
+            var popularProducts = await _db.Products.ToListAsync();
 
-            return null;
-           
+            var contor = 2;
+            foreach(var product in popularProducts)
+            {
+                dictionary.Add(product, contor);
+                contor = contor + 3;
+            }
+
+            return dictionary;
+        }
+
+        public async Task<IEnumerable<Product>> GetMostRecentProducts(int count)
+        {
+            return await _db.Products.OrderByDescending(product => product.InsertedDate).Take(count).ToListAsync();
+        }
+        public async Task AddProductToCategory(Category category, Product product)
+        {
+             category.Products.Add(product);
         }
     }
 }

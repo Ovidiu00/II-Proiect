@@ -1,0 +1,10 @@
+<h1 style="text-align: center;">{{selectedCategory?.name}}</h1>
+
+<h3 style="text-align: left;color:red;margin:20px;" *ngIf="emptySubCategories">This category has no subcategories</h3>
+<button class="add-category-button"  (click)="addCategoryClicked()">Add cateogry</button>
+
+<app-admin-category-item
+(categoryDeleted)="deleteCategory($event)"
+(categoryEdited)="editCategory($event)"
+
+ [category]="item" [image]="getCategoryImage(item)" *ngFor="let item of categories" ></app-admin-category-item>

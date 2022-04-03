@@ -1,0 +1,26 @@
+<mat-card>
+  <div class="category-container">
+    <img mat-card-lg-image [src]="image" />
+
+    <div class="category-actions">
+      {{ category.name }}
+       <button  class="action-button" [routerLink]="['/admin/categories',category.id]">
+         Manage subcategories
+        </button>
+        <button  class="action-button"
+        *ngIf="!categoryContainsSubCategories" [routerLink]="['/admin/categories',category.id,'products']">
+          Manage products
+         </button>
+
+         <button class="action-button" (click)="onEditClicked()">
+          Edit
+         </button>
+         <button class="delete-button" (click)="onDeleteClicked()">
+          Delete
+         </button>
+        </div>
+  </div>
+  <div class="chips-container">
+    <app-subcategory-badge-list [subCategories]="category.subCategories" ></app-subcategory-badge-list>
+  </div>
+</mat-card>
