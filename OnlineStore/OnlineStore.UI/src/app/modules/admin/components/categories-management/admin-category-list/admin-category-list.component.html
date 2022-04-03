@@ -7,4 +7,4 @@
 (categoryDeleted)="deleteCategory($event)"
 (categoryEdited)="editCategory($event)"
 
- [category]="item" *ngFor="let item of categories" ></app-admin-category-item>
+ [category]="item" [image]="getCategoryImage(item)" *ngFor="let item of categories" ></app-admin-category-item>

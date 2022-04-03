@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
@@ -14,7 +14,7 @@ namespace OnlineStore.Business.Mediator.HelperCommands
         private readonly IWebHostEnvironment environment;
         private readonly IConfiguration configuration;
 
-        public SavePhotoCommandHandler(IWebHostEnvironment environment,IConfiguration configuration)
+        public SavePhotoCommandHandler(IWebHostEnvironment environment, IConfiguration configuration)
         {
             this.environment = environment;
             this.configuration = configuration;
@@ -25,10 +25,10 @@ namespace OnlineStore.Business.Mediator.HelperCommands
             var isValid = IsFileItemValid(request.formFile);
 
             if (!isValid)
-                return null;
+                 return null;
             var uniqueFileName = CreateUniqueFileNameForFile(request.formFile);
 
-            SaveToDisk(request.formFile, uploadDirectory,uniqueFileName);
+            SaveToDisk(request.formFile, uploadDirectory, uniqueFileName);
             return Task.FromResult(uniqueFileName);
         }
 
@@ -55,17 +55,23 @@ namespace OnlineStore.Business.Mediator.HelperCommands
 
         private string CreateUniqueFileNameForFile(IFormFile file)
         {
-            var uniqueFileName = new Guid().ToString() + "_" + file.Name;
+            var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
             return uniqueFileName;
         }
-        private void SaveToDisk(IFormFile file,string uploadDirectory,string fileName)
+        private void SaveToDisk(IFormFile file, string uploadDirectory, string fileName)
         {
-            string filePath = Path.Combine(uploadDirectory, file.FileName);
-
-            using (Stream fileStream = new FileStream(uploadDirectory, FileMode.Create))
+            string filePath = Path.Combine(uploadDirectory, fileName);
+            try
             {
+                using Stream fileStream = new FileStream(filePath, FileMode.Create);
+
                 file.CopyTo(fileStream);
+
+            }
+            catch(Exception e)
+            {
+
             }
         }
     }

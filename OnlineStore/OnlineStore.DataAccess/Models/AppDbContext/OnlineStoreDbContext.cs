@@ -14,6 +14,7 @@ namespace OnlineStore.DataAccess.Models.AppDbContext
             modelBuilder.Entity<UserProduct>()
             .HasKey(o => new { o.UserId, o.ProductId });
 
+
             base.OnModelCreating(modelBuilder);
         }
 

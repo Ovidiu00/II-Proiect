@@ -19,22 +19,22 @@ export class AddCategoryDialogComponent implements OnInit {
     this.dialogRef.close();
   }
   onSaveClick(files: any, name: string) {
+
     var dialogResult: DialogResult = new DialogResult();
     dialogResult.dto = this.constructFormData(files, name);
     dialogResult.saveClicked = true;
+
+    console.log(dialogResult.dto.get('name'));
+
 
     this.dialogRef.close(dialogResult);
   }
 
   private constructFormData(files: any, name: string): FormData {
-    if (files.length === 0) return null;
-
     const formData = new FormData();
-    for (const file of files) {
-      formData.append('file', file);
-    }
-
+    formData.append('photo', files[0]);
     formData.append('name', name);
+
     return formData;
   }
 }

@@ -18,8 +18,8 @@ export class ProductDialogComponent implements OnInit {
   }
 
 
-  @ViewChild('fileInput')
-   files:any;
+
+   fileSelected:any;
 
    @ViewChild('name')
    name:any;
@@ -35,28 +35,28 @@ export class ProductDialogComponent implements OnInit {
     this.dialogRef.close();
   }
   onSaveClick() {
+    console.log(this.name);
+
     var dialogResult: DialogResult = new DialogResult();
     dialogResult.dto = this.constructFormData();
     dialogResult.saveClicked = true;
 
     this.dialogRef.close(dialogResult);
+
   }
 
   private constructFormData(): FormData {
+    let formData = new FormData();
 
-
-    if (this.files.length === 0) return null;
-
-    const formData = new FormData();
-    for (const file of this.files) {
-      formData.append('file', file);
-    }
-
-    formData.append('name', this.name.value);
-    formData.append('price', this.name.value);
-    formData.append('quantity', this.name.quantity);
+    formData.append('photo', this.fileSelected);
+    formData.append('name', this.name.nativeElement.value);
+    formData.append('price', this.price.nativeElement.value);
+    formData.append('quantity', this.quantity.nativeElement.value);
 
     return formData;
+  }
+  onFileSelected(event:any){
+    this.fileSelected = event.target.files[0];
   }
 
 }

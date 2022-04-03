@@ -35,13 +35,16 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
                 throw new Exception("Category not found");
             }
             var editedCategory = mapper.Map<Category>(editedCategoryDto);
-            unitOfWork.CategoryRepository.UpdateIfModified(existingCategory, editedCategory, nameof(editedCategory.Id));
 
             if (editedCategoryDto.Photo != null)
             {
                 var filePath = await mediator.Send(new SavePhotoCommand(editedCategoryDto.Photo));
                 editedCategory.FilePath = filePath;
             }
+            else
+                editedCategory.FilePath = existingCategory.FilePath;
+            unitOfWork.CategoryRepository.UpdateIfModified(existingCategory, editedCategory, nameof(editedCategory.Id));
+
 
             await unitOfWork.Commit();
             return mapper.Map<CategoryDTO>(existingCategory);

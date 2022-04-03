@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -10,84 +9,108 @@ import { AddCategoryDialogComponent } from '../dialogs/add-category-dialog/add-c
 @Component({
   selector: 'app-admin-category-list',
   templateUrl: './admin-category-list.component.html',
-  styleUrls: ['./admin-category-list.component.css']
+  styleUrls: ['./admin-category-list.component.css'],
 })
-export class AdminCategoryListComponent implements OnInit,OnDestroy {
-
+export class AdminCategoryListComponent implements OnInit, OnDestroy {
   constructor(
-    public activatedRoute:ActivatedRoute,
-    public categoryService:CategoryService,
+    public activatedRoute: ActivatedRoute,
+    public categoryService: CategoryService,
     public dialog: MatDialog,
-    public categoryDropDownService:CategoryDropdownListService
-    ) { }
+    public categoryDropDownService: CategoryDropdownListService
+  ) {}
 
-    selectedCategory:Category;
-    public emptySubCategories:boolean;
+  selectedCategory: Category;
+  public emptySubCategories: boolean;
 
-    public isBaseCategoriesView :boolean= true;
+  public isBaseCategoriesView: boolean = true;
 
-    public categories: Category[];
+  public categories: Category[];
+  private categoryId: number;
 
   ngOnInit(): void {
     this.categoryDropDownService.hide();
 
-    var categoryId:number;
-    this.activatedRoute.paramMap.subscribe(params => {
-      categoryId = Number(params.get('categoryId'));
-      if(categoryId){
-        this.categoryService.getCategoryById(categoryId).subscribe( (category) =>
-        {
-          this.selectedCategory = category;
-          this.categories = this.selectedCategory?.subCategories;
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.categoryId = Number(params.get('categoryId'));
+      if (this.categoryId) {
+        this.categoryService
+          .getCategoryById(this.categoryId)
+          .subscribe((category) => {
+            this.selectedCategory = category;
+            this.categories = this.selectedCategory?.subCategories;
 
-          if(!this.categories){
-            this.emptySubCategories = true;
-          }
-
-        });
+            if (!this.categories) {
+              this.emptySubCategories = true;
+            }
+          });
         this.isBaseCategoriesView = false;
-      }
-      else{
-        this.categoryService.getCategories().subscribe(res => {this.categories = res;this.isBaseCategoriesView=true});
+      } else {
+        this.categoryService.getCategories().subscribe((res) => {
+          this.categories = res;
+          this.isBaseCategoriesView = true;
+        });
       }
     });
   }
+
   ngOnDestroy(): void {
-      this.categoryDropDownService.show();
+    this.categoryDropDownService.show();
   }
 
-  addCategoryClicked(){
+  addCategoryClicked() {
     const dialogRef = this.dialog.open(AddCategoryDialogComponent, {
       width: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result.saveClicked)
-       this.handleAddProductDialogSaveClicked(result.dto)
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.saveClicked)
+        this.handleAddProductDialogSaveClicked(result.dto);
     });
   }
 
-  private handleAddProductDialogSaveClicked(dto:FormData){
-    if(this.isBaseCategoriesView)
-        this.categoryService.addCategory(dto);
-        else{
-          this.categoryService.addSubCategory(dto,this.selectedCategory.id);
-        }
+  private handleAddProductDialogSaveClicked(dto: FormData) {
+    this.categoryService.addCategory(dto).subscribe((result: Category) => {
+      if (!this.isBaseCategoriesView) {
+        this.categoryService
+          .addSubCategory(this.categoryId, result.id)
+          .subscribe();
+      }
+      this.categories.push(result);
+    });
   }
 
-  deleteCategory(categoryId:number){
-    this.categoryService.deleteCategory(categoryId)
-    //TODO refresh / remove from list
+  deleteCategory(categoryId: number) {
+    this.categoryService.deleteCategory(categoryId).subscribe(() => {
+      this.categories = this.categories.filter((x) => x.id !== categoryId);
+    });
   }
-  editCategory(categoryId:number){
+  editCategory(categoryId: number) {
     const dialogRef = this.dialog.open(AddCategoryDialogComponent, {
       width: '300px',
-      data:this.categories.find(x => x.id == categoryId)
+      data: this.categories.find((x) => x.id == categoryId),
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result.saveClicked)
-       this.handleAddProductDialogSaveClicked(result.dto)
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.saveClicked) {
+        console.log(result.dto.get('name'));
+        this.categoryService
+          .editCategory(result.dto, categoryId)
+          .subscribe((apiResult) => {
+            var categoryEdited = this.categories.find(
+              (x) => x.id == apiResult.id
+            );
+            categoryEdited.name = apiResult.name;
+            categoryEdited.filePath = apiResult.filePath;
+
+            console.log(categoryEdited);
+          });
+      }
     });
+  }
+  getCategoryImage(category: Category): string {
+    var image = category.filePath;
+    if (category.filePath.indexOf('http') == -1)
+      image = 'http://localhost:4200/assets/images/' + category.filePath;
+    return image;
   }
 }

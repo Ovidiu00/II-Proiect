@@ -19,18 +19,17 @@ export class CategoryService {
     return this.http.get<Category>(this.categoriesBaseApi+"/"+id);
   }
 
-  addSubCategory(dto:FormData,categoryId:number){
-    console.log(dto);
-    console.log("pt categoria " + categoryId);
+  addSubCategory(parnetCategoryId:number,childCategoryId:number){
+    return this.http.put(this.categoriesBaseApi+"/"+parnetCategoryId+"/add-subcategory?childCategory="+childCategoryId,null);
   }
 
   addCategory(dto:FormData):Observable<any>{
-    return of();
+    return this.http.post(this.categoriesBaseApi,dto);
   }
-  editCategory(dto:FormData):Observable<any>{
-    return of();
+  editCategory(dto:FormData,id:number):Observable<any>{
+    return this.http.put(this.categoriesBaseApi+"/"+id,dto);
   }
   deleteCategory(categoryId:number){
-    return of();
+    return this.http.delete(this.categoriesBaseApi+"/"+categoryId);
   }
 }

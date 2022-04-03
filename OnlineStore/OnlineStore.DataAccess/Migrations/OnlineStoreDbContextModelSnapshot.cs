@@ -88,13 +88,11 @@ namespace OnlineStore.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("InsertedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -103,8 +101,6 @@ namespace OnlineStore.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Products");
                 });
@@ -168,13 +164,6 @@ namespace OnlineStore.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Product", b =>
-                {
-                    b.HasOne("OnlineStore.DataAccess.Models.Entities.Order", null)
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId");
-                });
-
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.UserProduct", b =>
                 {
                     b.HasOne("OnlineStore.DataAccess.Models.Entities.Product", "Product")
@@ -197,11 +186,6 @@ namespace OnlineStore.DataAccess.Migrations
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Category", b =>
                 {
                     b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

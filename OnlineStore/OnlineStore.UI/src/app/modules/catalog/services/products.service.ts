@@ -31,12 +31,12 @@ export class ProductsService {
     return this.http.get<Product[]>(this.apiBaseURL+"/categories/"+categoryId+"/products");
   }
   addProduct(dto:FormData,categoryId:number):Observable<any>{
-    return of();
+    return this.http.post(this.productsBaseApi+"/"+categoryId,dto);
   }
   editProduct(dto:FormData,productId:number):Observable<any>{
-    return of();
+    return this.http.put(this.productsBaseApi+"/"+productId,dto);
   }
   deleteProduct(productId:number){
-    return of();
+    return this.http.delete(this.productsBaseApi+"/"+productId);
   }
 }

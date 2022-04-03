@@ -6,6 +6,7 @@ using OnlineStore.Business.Mediator.Requests.Commands;
 using OnlineStore.DataAccess.Models.Entities;
 using OnlineStore.DataAccess.Repositories;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,10 +33,12 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
             }
             var product = mapper.Map<Product>(command.addProductDTO);
             product.FilePath = await mediator.Send(new SavePhotoCommand(command.addProductDTO.Photo));
-            await unitOfWork.ProductRepository.AddProductToCategory(category, product);
+            product.InsertedDate = DateTime.Now;
+
+            product.Categories.Add(category);
+            unitOfWork.ProductRepository.Add(product);
 
             await unitOfWork.Commit(); 
-
             return  mapper.Map<ProductDTO>(product);
         }
 

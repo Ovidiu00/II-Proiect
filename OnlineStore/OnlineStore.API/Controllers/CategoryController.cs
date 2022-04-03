@@ -8,8 +8,6 @@ using OnlineStore.Business.Mediator.Requests.Queries;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OnlineStore.Business.DTOs;
-using OnlineStore.Business.Mediator.Requests.Queries;
 
 namespace OnlineStore.API.Controllers
 {
@@ -66,15 +64,15 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddCategory(AddCategoryVM addCategoryVm)
+        public async Task<ActionResult> AddCategory([FromForm] AddCategoryVM addCategoryVm)
         {
             if (addCategoryVm == null)
                 return BadRequest();
             try
-            { 
+            {
                 var addCategoryDto = mapper.Map<AddCategoryDTO>(addCategoryVm);
                 var categoryDto = await mediator.Send(new AddCategoryCommand(addCategoryDto));
-                return CreatedAtAction(nameof(GetCategoryById), new {Id = categoryDto.Id });
+                return CreatedAtAction(nameof(GetCategoryById), new { Id = categoryDto.Id },categoryDto);
             }
             catch (Exception)
             {
@@ -83,7 +81,7 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> EditCategory(EditCategoryVM editCategoryVm, int id)
+        public async Task<ActionResult> EditCategory([FromForm] EditCategoryVM editCategoryVm, int id)
         {
             if (id <= 0 || editCategoryVm == null)
                 return BadRequest();
@@ -91,7 +89,7 @@ namespace OnlineStore.API.Controllers
             {
                 var editCategoryDto = mapper.Map<EditCategoryDTO>(editCategoryVm);
                 var editedCategoryDto = await mediator.Send(new EditCategoryCommand(editCategoryDto, id));
-                return CreatedAtAction(nameof(GetCategoryById), editedCategoryDto.Id);
+                return CreatedAtAction(nameof(GetCategoryById), new { editedCategoryDto.Id },editedCategoryDto);
             }
             catch (Exception)
             {
@@ -105,7 +103,7 @@ namespace OnlineStore.API.Controllers
             if (id <= 0)
                 return BadRequest();
             try
-            {            
+            {
                 if (await mediator.Send(new DeleteCategoryCommand(id)))
                     return NoContent();
 
@@ -117,8 +115,8 @@ namespace OnlineStore.API.Controllers
             }
         }
 
-        [HttpPut("{parentId}")]
-        public async Task<ActionResult<bool>> AddSubcategoryToCategory(int parentId, int childCategory)
+        [HttpPut("{parentId}/add-subcategory")]
+        public async Task<ActionResult<bool>> AddSubcategoryToCategory([FromRoute]int parentId, [FromQuery]int childCategory)
         {
             try
             {
@@ -129,73 +127,5 @@ namespace OnlineStore.API.Controllers
                 return StatusCode(500);
             }
         }
-
-        public async Task<ActionResult> AddCategory(AddCategoryVM addCategoryVm)
-        {
-            try
-            {
-                if (addCategoryVm == null)
-                    return BadRequest();
-
-                var addCategoryDto = mapper.Map<AddCategoryDTO>(addCategoryVm);
-                var categoryDto = await mediator.Send(new AddCategoryCommand(addCategoryDto));
-                var categoryVm = mapper.Map<CategoryVM>(categoryDto);
-                return CreatedAtAction(nameof(GetCategoryById), new {Id = categoryVm.Id });
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
-        }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult> EditCategory(EditCategoryVM editCategoryVm, int id)
-        {
-            if (id <= 0 || editCategoryVm == null)
-                return BadRequest();
-            try
-            {
-                var editCategoryDto = mapper.Map<EditCategoryDTO>(editCategoryVm);
-                var editedCategoryDto = await mediator.Send(new EditCategoryCommand(editCategoryDto, id));
-                return CreatedAtAction(nameof(GetCategoryById), editedCategoryDto.Id);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteCategory(int id)
-        {
-            try
-            {
-                if (id <= 0)
-                    return BadRequest();
-
-                if (await mediator.Send(new DeleteCategoryCommand(id)))
-                    return NoContent();
-
-                return StatusCode(500);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
-        }
-
-        [HttpPut("{parentId}")]
-        public async Task<ActionResult<bool>> AddSubcategoryToCategory(int parentId, int childCategory)
-        {
-            try
-            {
-                return await mediator.Send(new AddSubcategoryToCategoryCommand(parentId, childCategory));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500);
-            }
-        }
-
-}
+    }
 }

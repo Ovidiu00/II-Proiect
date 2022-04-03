@@ -13,6 +13,7 @@ export class ProductViewComponent implements OnInit {
 
   constructor(public activatedRoute:ActivatedRoute,public productService:ProductsService) { }
 
+  public image:string;
   ngOnInit(): void {
     var productId:number;
     this.activatedRoute.paramMap.subscribe(params =>
@@ -20,7 +21,10 @@ export class ProductViewComponent implements OnInit {
          productId =  Number(params.get('id'));
          this.productService.getProductById(productId).subscribe(response => {
            this.product = response
-           console.log(this.product);
+
+           this.image = this.product.filePath
+           if(this.product.filePath.indexOf("http") == -1)
+              this.image = "http://localhost:4200/assets/images/" + this.product.filePath;
          });
 
         })
