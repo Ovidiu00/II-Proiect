@@ -10,8 +10,8 @@ using OnlineStore.DataAccess.Models.AppDbContext;
 namespace OnlineStore.DataAccess.Migrations
 {
     [DbContext(typeof(OnlineStoreDbContext))]
-    [Migration("20220402164327_Tes")]
-    partial class Tes
+    [Migration("20220404155138_foo")]
+    partial class foo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,26 +59,6 @@ namespace OnlineStore.DataAccess.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateOfOrder")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -90,7 +70,6 @@ namespace OnlineStore.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("InsertedDate")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -155,15 +134,6 @@ namespace OnlineStore.DataAccess.Migrations
                     b.HasOne("OnlineStore.DataAccess.Models.Entities.Category", null)
                         .WithMany("SubCategories")
                         .HasForeignKey("CategoryId");
-                });
-
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>
-                {
-                    b.HasOne("OnlineStore.DataAccess.Models.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.UserProduct", b =>

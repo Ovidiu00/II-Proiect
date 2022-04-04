@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace OnlineStore.DataAccess.Models.Entities
 {
@@ -9,6 +8,5 @@ namespace OnlineStore.DataAccess.Models.Entities
         public string UserId { get; set; }
         public User User { get; set; }
         public DateTime DateOfOrder { get; set; }
-        //public IEnumerable<Product> Products { get; set; }
     }
 }
