@@ -1,9 +1,9 @@
 ﻿namespace OnlineStore.DataAccess.Models.Entities
 {
-    public class UserProduct
+    public class OrderProduct
     {
-        public string UserId { get; set; }
-        public User User { get; set; }
+        public string OrderId { get; set; }
+        public Order Order { get; set; }
 
         public int ProductId { get; set; }
         public Product Product { get; set; }
