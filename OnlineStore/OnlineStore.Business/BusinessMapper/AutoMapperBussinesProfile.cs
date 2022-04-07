@@ -14,6 +14,8 @@ namespace OnlineStore.Business.BusinessMapper
             CreateMap<EditCategoryDTO,Category>();
             CreateMap<AddProductDTO, Product>();
             CreateMap<EditProductDTO, Product>();
+
+            CreateMap<User, UserDTO>();
         }
     }
 }
