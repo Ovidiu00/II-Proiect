@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineStore.DataAccess.Models.Entities;
 
@@ -19,19 +18,8 @@ namespace OnlineStore.DataAccess.Models.AppDbContext
             modelBuilder.Entity<OrderProduct>()
            .HasKey(o => new { o.OrderId, o.ProductId });
 
-
-
-
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<IdentityUser>().Ignore(c => c.AccessFailedCount)
-            //                                  .Ignore(c => c.LockoutEnabled)
-            //                                  .Ignore(c => c.LockoutEnd)
-            //                                  .Ignore(c => c.TwoFactorEnabled)
-            //                                  .Ignore(c => c.NormalizedUserName);
-
-
-
-
+          
         }
         public DbSet<UserProduct> UserProducts { get; set; }
         public DbSet<OrderProduct> OrdersProducts { get; set; }
