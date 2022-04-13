@@ -98,7 +98,7 @@ namespace OnlineStore.API.Controllers
         [Route("{categoryId}")]
         public async Task<ActionResult> AddProduct([FromForm]AddProductVM addProductVM, int categoryId)
         {
-            if (categoryId <= 0)
+            if (categoryId <= 0 && addProductVM == null)
                 return BadRequest();
 
             var addProductDTO = mapper.Map<AddProductDTO>(addProductVM);

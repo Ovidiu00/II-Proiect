@@ -34,14 +34,14 @@ namespace OnlineStore.UnitTests.Mediator.CommandHandlers.Categories
         }
 
         [Fact]
-        public async Task AddProductCommand_ProductToBeAddedIsNull_ThrowsException()
+        public async Task AddCategoryCommand_CategoryToBeAddedIsNull_ThrowsException()
         {
             AddCategoryCommand request = new AddCategoryCommand(null);
 
             await Assert.ThrowsAsync<Exception>(async () => await handler.Handle(request, new System.Threading.CancellationToken()));
         }
         [Fact]
-        public async Task AddProductCommand_AllIsValid_SavePhotoCommandIsCalled()
+        public async Task AddCategoryCommand_AllIsValid_SavePhotoCommandIsCalled()
         {
             AddCategoryCommand request = new AddCategoryCommand(new AddCategoryDTO());
             mockUnitOfWork.Setup(w => w.CategoryRepository.Add(It.IsAny<Category>()));
@@ -50,7 +50,7 @@ namespace OnlineStore.UnitTests.Mediator.CommandHandlers.Categories
             mockMediator.Verify(x => x.Send(It.IsAny<SavePhotoCommand>(), It.IsAny<CancellationToken>()), Times.Once);
         }
         [Fact]
-        public async Task AddProductCommand_AllIsValid_CommitIsCalled()
+        public async Task AddCategoryCommand_AllIsValid_CommitIsCalled()
         {
             AddCategoryCommand request = new AddCategoryCommand(new AddCategoryDTO());
             mockUnitOfWork.Setup(w => w.CategoryRepository.Add(It.IsAny<Category>()));
@@ -60,7 +60,7 @@ namespace OnlineStore.UnitTests.Mediator.CommandHandlers.Categories
         }
 
         [Fact]
-        public async Task AddProductCommand_AllIsValid_ReturnsCategoryDTO()
+        public async Task AddCategoryCommand_AllIsValid_ReturnsCategoryDTO()
         {
             AddCategoryCommand request = new AddCategoryCommand(new AddCategoryDTO());
             mockUnitOfWork.Setup(w => w.CategoryRepository.Add(It.IsAny<Category>()));
