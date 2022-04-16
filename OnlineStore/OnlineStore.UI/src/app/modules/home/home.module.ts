@@ -1,6 +1,5 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { CatalogModule } from "../catalog/catalog.module";
 import { AdressInfoComponent } from "./components/adress-info/adress-info.component";

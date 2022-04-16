@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineStore.API.ViewModels;
 using OnlineStore.Business.DTOs;
 using OnlineStore.Business.Mediator.UserCommands;
 using System;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace OnlineStore.API.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("users")]
     public class UsersController : ControllerBase
@@ -29,11 +29,11 @@ namespace OnlineStore.API.Controllers
         {
             try
             {
-                var token = await mediator.Send(new LoginCommand(loginCredentials));
-                if (token == null)
+                var loginResponse = await mediator.Send(new LoginCommand(loginCredentials));
+                if (loginResponse == null)
                     return Unauthorized();
 
-                return Ok(token);
+                return Ok(new LoginResponseVM(loginResponse.Token,loginResponse.User));
             }
             catch (Exception ex)
             {

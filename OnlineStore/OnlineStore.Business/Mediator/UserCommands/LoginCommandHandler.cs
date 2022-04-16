@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using OnlineStore.Business.DTOs;
 using OnlineStore.DataAccess.Models.Entities;
 using System;
 using System.Threading;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineStore.Business.Mediator.UserCommands
 {
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, string>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponseDTO>
     {
         private readonly UserManager<User> userManager;
         private readonly IMediator mediator;
@@ -17,7 +18,7 @@ namespace OnlineStore.Business.Mediator.UserCommands
             this.userManager = userManager;
             this.mediator = mediator;
         }
-        public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<LoginResponseDTO> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var user = await userManager.FindByEmailAsync(request.dto.Email);
             if (user == null)
@@ -32,7 +33,7 @@ namespace OnlineStore.Business.Mediator.UserCommands
             if(string.IsNullOrEmpty(token))
                 throw new Exception("Something went wrong ...");
 
-            return token;
+            return new LoginResponseDTO(token,new UserDTO() {Nume = user.Nume,Prenume = user.Prenume});
         }
     }
 }

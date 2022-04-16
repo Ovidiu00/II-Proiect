@@ -13,7 +13,5 @@ namespace OnlineStore.Business.DTOs
         public string Prenume { get; set; }
         [Required]
         public string Password { get; set; }
-        [Required]
-        public string ConfirmPassword { get; set; }
     }
 }

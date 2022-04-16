@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { AccountModule } from "../modules/account/account-module";
 import { SharedModule } from "../shared/shared.module";
 import { CategoryDropdownListComponent } from "./category-dropdown-list/category-dropdown-list.component";
 import { CategoryDropdownComponent } from "./category-dropdown/category-dropdown.component";
@@ -19,7 +20,8 @@ import { SubCategoriesTooltipComponent } from "./sub-categories-tooltip/sub-cate
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    AccountModule
   ],
   exports:[
     SidenavListComponent,

@@ -26,9 +26,6 @@ namespace OnlineStore.Business.Mediator.UserCommands
             if (dto == null)
                 throw new NullReferenceException("Reigster Model is null!");
 
-            if (dto.Password != dto.ConfirmPassword)
-                throw new Exception("Passwords are different!");
-
             var user = new User(dto.Nume, dto.Nume, dto.Email);
             var result = await userManager.CreateAsync(user, dto.Password);
 

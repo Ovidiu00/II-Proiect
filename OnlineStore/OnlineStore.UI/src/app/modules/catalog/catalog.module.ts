@@ -10,7 +10,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProductDetailsComponent } from './components/product-view/product-details/product-details.component';
 import { QuantitySelectorComponent } from './components/product-view/product-details/quantity-selector/quantity-selector.component';
 import { CategoryProductsComponent } from './components/category-products/category-products.component';
-import { CategoryService } from './services/category.service';
 
 @NgModule({
   declarations: [
