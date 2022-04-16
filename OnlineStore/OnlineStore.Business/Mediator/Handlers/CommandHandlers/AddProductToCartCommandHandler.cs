@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using OnlineStore.Business.DTOs;
 using OnlineStore.Business.Mediator.Requests.Commands;
 using OnlineStore.DataAccess.Models.Entities;
@@ -13,14 +14,12 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
     public class AddProductToCartCommandHandler : IRequestHandler<AddProductToCartCommand, bool>
     {
         private readonly IUnitOfWork unitOfWork;
-        private readonly IMapper mapper;
-        private readonly IMediator mediator;
+        private readonly UserManager<User> userManager;
 
-        public AddProductToCartCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
+        public AddProductToCartCommandHandler(IUnitOfWork unitOfWork, UserManager<User> userManager)
         {
             this.unitOfWork = unitOfWork;
-            this.mapper = mapper;
-            this.mediator = mediator;
+            this.userManager = userManager;
         }
 
         public async Task<bool> Handle(AddProductToCartCommand command, CancellationToken cancellationToken)
@@ -33,12 +32,14 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
            
             UserProduct newUserProduct = new UserProduct()
             {
-                UserId = command.UserId.ToString(),
+                UserId = command.UserId,
                 ProductId = product.Id,
                 Quantity = command.CartProductDto.Quantity
             };
-            
-            unitOfWork.
+            var user = await userManager.FindByIdAsync(command.UserId.ToString());
+            user.Products.Add(newUserProduct);
+            await unitOfWork.Commit();
+            return true;
         }
     }
 }
