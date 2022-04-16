@@ -26,7 +26,7 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
 
         public async Task<ProductDTO> Handle(AddProductCommand command, CancellationToken cancellationToken)
         {
-            Category category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id == command.categroryId);
+            Category category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id == command.categoryId);
             if (category == null)
             {
                 throw new Exception("There is no product at this category");

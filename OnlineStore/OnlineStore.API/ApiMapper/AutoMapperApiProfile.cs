@@ -22,7 +22,7 @@ namespace OnlineStore.API.AutoMapper
             CreateMap<EditProductVM, EditProductDTO>()
                 .ForMember(dt => dt.Price, opt => opt.MapFrom(src => double.Parse(src.Price)))
                 .ForMember(dt => dt.Quantity, opt => opt.MapFrom(src => int.Parse(src.Quantity)));
-
+            CreateMap<CartProductVM, CartProductDTO>();
         }
     }
 }
