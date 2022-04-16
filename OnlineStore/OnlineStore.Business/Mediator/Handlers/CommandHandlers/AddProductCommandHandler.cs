@@ -38,8 +38,8 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
             product.Categories.Add(category);
             unitOfWork.ProductRepository.Add(product);
 
-            await unitOfWork.Commit(); 
-            return  mapper.Map<ProductDTO>(product);
+            await unitOfWork.Commit();
+            return mapper.Map<ProductDTO>(product);      
         }
 
     }

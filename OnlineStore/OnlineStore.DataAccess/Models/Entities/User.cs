@@ -13,9 +13,6 @@ namespace OnlineStore.DataAccess.Models.Entities
             Prenume = prenume;
             base.Email = email;
             base.UserName = email;
-            
-
-
         }
     }
 }

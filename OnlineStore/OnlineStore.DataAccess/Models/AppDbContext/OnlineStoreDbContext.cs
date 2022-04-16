@@ -19,7 +19,7 @@ namespace OnlineStore.DataAccess.Models.AppDbContext
            .HasKey(o => new { o.OrderId, o.ProductId });
 
             base.OnModelCreating(modelBuilder);
-          
+
         }
         public DbSet<UserProduct> UserProducts { get; set; }
         public DbSet<OrderProduct> OrdersProducts { get; set; }

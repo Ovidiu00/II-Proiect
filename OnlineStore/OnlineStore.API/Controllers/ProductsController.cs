@@ -97,7 +97,7 @@ namespace OnlineStore.API.Controllers
             return Ok(result);
 
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("{categoryId}")]
         public async Task<ActionResult> AddProduct([FromForm]AddProductVM addProductVM, int categoryId)

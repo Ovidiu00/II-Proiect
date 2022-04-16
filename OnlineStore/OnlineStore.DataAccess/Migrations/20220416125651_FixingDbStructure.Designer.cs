@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineStore.DataAccess.Models.AppDbContext;
 
 namespace OnlineStore.DataAccess.Migrations
 {
     [DbContext(typeof(OnlineStoreDbContext))]
-    partial class OnlineStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220416125651_FixingDbStructure")]
+    partial class FixingDbStructure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,44 +261,6 @@ namespace OnlineStore.DataAccess.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateOfOrder")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.OrderProduct", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrdersProducts");
-                });
-
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -428,34 +392,6 @@ namespace OnlineStore.DataAccess.Migrations
                         .HasForeignKey("CategoryId");
                 });
 
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>
-                {
-                    b.HasOne("OnlineStore.DataAccess.Models.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.OrderProduct", b =>
-                {
-                    b.HasOne("OnlineStore.DataAccess.Models.Entities.Order", "Order")
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OnlineStore.DataAccess.Models.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.UserProduct", b =>
                 {
                     b.HasOne("OnlineStore.DataAccess.Models.Entities.Product", "Product")
@@ -478,11 +414,6 @@ namespace OnlineStore.DataAccess.Migrations
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Category", b =>
                 {
                     b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
