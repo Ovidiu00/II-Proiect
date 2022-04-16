@@ -25,20 +25,22 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
 
         public async Task<bool> Handle(AddProductToCartCommand command, CancellationToken cancellationToken)
         {
-            var product = await unitOfWork.ProductRepository.FindSingle(product => product.Id.Equals(command.CartProductDto.Id));
-            if (product == null)
-            {
-                throw new Exception("The product doesn't exist!");
-            }
-           
-            UserProduct newUserProduct = new UserProduct()
-            {
-                UserId = command.UserId.ToString(),
-                ProductId = product.Id,
-                Quantity = command.CartProductDto.Quantity
-            };
-            
-            unitOfWork.
+            //var product = await unitOfWork.ProductRepository.FindSingle(product => product.Id.Equals(command.CartProductDto.Id));
+            //if (product == null)
+            //{
+            //    throw new Exception("The product doesn't exist!");
+            //}
+
+            //UserProduct newUserProduct = new UserProduct()
+            //{
+            //    UserId = command.UserId.ToString(),
+            //    ProductId = product.Id,
+            //    Quantity = command.CartProductDto.Quantity
+            //};
+
+            //unitOfWork.
+
+            return false;
         }
     }
 }
