@@ -1,4 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, HostListener, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { UserModel } from '../../modules/account/models/user.model';
+import { AccountService } from '../../modules/account/services/account.service';
 
 
 @Component({
@@ -9,9 +12,15 @@ import { Component, OnInit, Output, EventEmitter, HostListener, Input } from '@a
 export class HeaderComponent implements OnInit {
   @Output() public sidenavToggle = new EventEmitter();
 
-  constructor() { }
+  constructor(private accountService:AccountService) { }
 
+  faSignIn = faSignInAlt;
+  faUser = faUser;
+
+
+  public loggedInUser:UserModel;
   ngOnInit(): void {
+    this.accountService.getLoggedInUser().subscribe(user => this.loggedInUser = user);
   }
 
   public onlineStoreName:string = "Default  NameNameName";

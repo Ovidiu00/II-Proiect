@@ -11,8 +11,7 @@ import { NavigationModule } from './navigation/navigation.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { AccountModule } from './modules/account/account-module';
 
 
 @NgModule({
@@ -26,11 +25,11 @@ import { HttpClientModule } from '@angular/common/http';
     LayoutModule,
     HomeModule,
     CatalogModule,
+    AccountModule,
     NavigationModule,
     FontAwesomeModule,
     SharedModule,
     HttpClientModule
-
   ],
   providers: [],
   bootstrap: [AppComponent],

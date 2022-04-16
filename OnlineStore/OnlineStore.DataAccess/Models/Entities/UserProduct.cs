@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace OnlineStore.DataAccess.Models.Entities
+﻿namespace OnlineStore.DataAccess.Models.Entities
 {
     public class UserProduct
     {
