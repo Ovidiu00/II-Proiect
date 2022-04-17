@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -26,8 +27,9 @@ namespace OnlineStore.Business.Mediator.Handlers.QueryHandlers
 
         public async Task<IEnumerable<CartProductDTO>> Handle(GetCartProductsByUserIdQuery request, CancellationToken cancellationToken)
         {
-            var user = await userManager.FindByIdAsync(request.UserId);
-            var products = mapper.Map<IEnumerable<CartProductDTO>>(user.Products);
+            var cart = await unitOfWork.OrderRepository.GetProductsInCart(request.UserId);
+        
+            var products = mapper.Map<IEnumerable<CartProductDTO>>(cart);
             return products;
         }
     }

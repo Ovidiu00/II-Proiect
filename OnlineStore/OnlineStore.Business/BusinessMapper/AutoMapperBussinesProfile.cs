@@ -15,7 +15,14 @@ namespace OnlineStore.Business.BusinessMapper
             CreateMap<AddProductDTO, Product>();
             CreateMap<EditProductDTO, Product>();
             CreateMap<User, UserDTO>();
-            CreateMap<UserProduct, CartProductDTO>();
+
+            CreateMap<UserProduct, CartProductDTO>()
+                .ForMember(dt => dt.Name, opt => opt.MapFrom(src => src.Product.Name))
+                .ForMember(dt => dt.Id, opt => opt.MapFrom(src => src.ProductId));
+
+            CreateMap<OrderProduct, CartProductDTO>()
+                .ForMember(dt => dt.Name, opt => opt.MapFrom(src => src.Product.Name))
+                .ForMember(dt => dt.Id, opt => opt.MapFrom(src => src.ProductId));
         }
     }
 }

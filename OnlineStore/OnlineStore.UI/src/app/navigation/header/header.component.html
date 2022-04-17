@@ -35,7 +35,13 @@
       </ng-container>
       <ng-container *ngIf="loggedInUser">
         <li>
-          <a appRegister class="nav-item">
+          <a (click)="logout()" class="nav-item">
+            <fa-icon [icon]="faSignIn"></fa-icon>
+            Logout
+          </a>
+        </li>
+        <li>
+          <a class="nav-item">
             <fa-icon [icon]="faSignIn"></fa-icon>
             My cart
           </a>

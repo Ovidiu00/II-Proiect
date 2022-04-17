@@ -3,30 +3,36 @@ import { faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { UserModel } from '../../modules/account/models/user.model';
 import { AccountService } from '../../modules/account/services/account.service';
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
   @Output() public sidenavToggle = new EventEmitter();
 
-  constructor(private accountService:AccountService) { }
+  constructor(private accountService: AccountService) {}
 
   faSignIn = faSignInAlt;
   faUser = faUser;
 
-
-  public loggedInUser:UserModel;
+  public loggedInUser: UserModel;
   ngOnInit(): void {
-    this.accountService.getLoggedInUser().subscribe(user => this.loggedInUser = user);
+    this.loggedInUser = this.accountService.getLoggedInUser();
+    this.accountService.isLoggedIn$.subscribe((res) => this.login(res));
   }
 
-  public onlineStoreName:string = "Default  NameNameName";
+  login(result: boolean) {
+    if (result) this.loggedInUser = this.accountService.getLoggedInUser();
+    else this.loggedInUser = null;
+  }
+  logout() {
+    this.accountService.logout();
+  }
 
+  public onlineStoreName: string = 'Default  NameNameName';
 
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
-  }
+  };
 }

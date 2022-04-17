@@ -15,9 +15,26 @@ namespace OnlineStore.DataAccess.Repositories.Implementations
 
         }
 
+        public async Task<IEnumerable<Order>> GetOrders(string userId)
+        {
+            return await _db.Orders
+                .Where(x => x.UserId == userId)
+                .Include(x => x.Products).ThenInclude(x => x.Product)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<UserProduct>> GetProductsInCart(string userId)
         {
-            return await _db.UserProducts.Where(x => x.UserId == userId).ToListAsync();
+            return await _db.UserProducts
+                .Include(x => x.Product)
+                .Where(x => x.UserId == userId)
+                .ToListAsync();
+        }
+
+        public void RemoveItemsFromCart(string userId)
+        {
+            var itemsInCart = _db.UserProducts.Where(x => x.UserId == userId);
+            _db.RemoveRange(itemsInCart);
         }
     }
 }

@@ -33,7 +33,8 @@ namespace OnlineStore.Business.Mediator.UserCommands
             if(string.IsNullOrEmpty(token))
                 throw new Exception("Something went wrong ...");
 
-            return new LoginResponseDTO(token,new UserDTO() {Nume = user.Nume,Prenume = user.Prenume});
+            bool isAdmin = roles.Contains("Admin");
+            return new LoginResponseDTO(token,new UserDTO() {Nume = user.Nume,Prenume = user.Prenume,isAdmin = isAdmin});
         }
     }
 }

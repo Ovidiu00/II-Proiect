@@ -25,22 +25,16 @@ namespace OnlineStore.API.Controllers
             this.mapper = mapper;
         }
 
-        //[HttpPost]
-        //[Route("~/cart/add-to-cart")]
-        //public async Task<ActionResult> AddToCart(int userId, CartProductVM cartProductVm)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
-        //[HttpGet]
-        //[Route("~/cart/view-items")]
-        //public async Task<ActionResult<IEnumerable<CartProductVM>>> ViewCartItems(int userId)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         [HttpPost]
         public async Task<ActionResult> OrderProducts(string userId)
+        {
+            await mediator.Send(new OrderCommand(userId));
+            return Ok();
+        }
+
+        [HttpPost]
         [Route("~/cart/add-to-cart")]
         public async Task<ActionResult> AddToCart(string userId, CartProductVM cartProductVm)
         {
@@ -74,9 +68,10 @@ namespace OnlineStore.API.Controllers
 
         [HttpGet]
         [Route("history")]
-        public async Task<ActionResult<IEnumerable<OrderVM>>> ViewOrderHistory(int userId)
+        public async Task<ActionResult<IEnumerable<OrderVM>>> ViewOrderHistory(string userId)
         {
-            throw new NotImplementedException();
+            var orders = await mediator.Send(new GetOrderHistoryByUserIdQuery(userId));
+            return Ok(mapper.Map<IEnumerable<OrderVM>>(orders));
         }
     }
 }

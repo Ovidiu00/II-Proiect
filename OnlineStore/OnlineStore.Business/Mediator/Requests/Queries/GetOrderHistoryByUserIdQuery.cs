@@ -4,6 +4,6 @@ using OnlineStore.Business.DTOs;
 
 namespace OnlineStore.Business.Mediator.Requests.Queries
 {
-    public record GetOrderHistoryByUserIdQuery(int UserId) : IRequest<IEnumerable<OrderDTO>>;
+    public record GetOrderHistoryByUserIdQuery(string userId) : IRequest<IEnumerable<OrderDTO>>;
 
 }

@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { SharedModule } from "../../shared/shared.module";
-import { AccountRoutingModule } from "./account-routing-module";
 import { LoginDialogComponent } from "./components/login/login-dialog/login-dialog.component";
 import { LoginDirective } from "./components/login/login.directive";
 import { ShoppingCartComponent } from "./components/shopping-cart/shopping-cart.component";
@@ -18,7 +17,7 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
     RegisterDialogComponent,
     RegisterDirective
   ],
-  imports: [CommonModule, AccountRoutingModule,SharedModule],
+  imports: [CommonModule,SharedModule],
   exports: [
     LoginDirective,
     RegisterDirective

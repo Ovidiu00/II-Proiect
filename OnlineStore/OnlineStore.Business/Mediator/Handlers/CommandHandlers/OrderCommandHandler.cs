@@ -34,7 +34,10 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
                 Quantity = x.Quantity
             });
 
+            unitOfWork.OrderRepository.Add(newOrder);
             newOrder.Products = productsToBeOrdered.ToList();
+            unitOfWork.OrderRepository.RemoveItemsFromCart(request.UserId);
+
             await unitOfWork.Commit();
 
             return true;
