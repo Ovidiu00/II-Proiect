@@ -1,0 +1,26 @@
+<div mat-dialog-content>
+  <h3>Register</h3>
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput #email type="email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nume</mat-label>
+    <input matInput #nume type="email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Prenume</mat-label>
+    <input matInput #prenume type="email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput #password type="password">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onExitClick()">Exit</button>
+  <button mat-button (click)="onRegisterClick(email.value,password.value,nume.value,prenume.value)">Register</button>
+</div>

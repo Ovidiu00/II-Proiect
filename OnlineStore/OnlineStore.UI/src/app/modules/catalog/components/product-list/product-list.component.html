@@ -1,10 +1,4 @@
+  <app-product-card class="card" (productSelected)="selectProduct($event)" *ngFor="let product of products$ | async"  [product]="product" ></app-product-card>
 
-
-
-
-
-
-<div class="row">
-    <app-product-card (productSelected)="selectProduct($event)" *ngFor="let product of products$ | async"  class="col-sm-3 mt-4" [product]="product" ></app-product-card>
-</div>
+    
 

@@ -1,0 +1,18 @@
+:host(){
+  margin: 10px;
+}
+
+fa-icon{
+  font-size:30px;
+  position: absolute;
+  top:-15px;
+  right: -13px;
+  transition: transform .4s;
+  color:rgb(211, 0, 0);
+
+}
+
+fa-icon:hover{
+  transform: scale(1.16);
+  cursor:pointer
+}

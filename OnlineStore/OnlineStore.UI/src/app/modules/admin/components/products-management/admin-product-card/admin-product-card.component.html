@@ -1,0 +1,9 @@
+<mat-card>
+  <app-product-card [routerLink]="['/catalog/produs/'+product.id]" [showAnimation] = "showAnimation" [product]="product"></app-product-card >
+  <mat-card-actions>
+
+    <button mat-button (click)="onEditClicked()">Edit</button>
+    <button mat-button class="delete-button" (click)="onDeleteClicked()">Delete</button>
+
+  </mat-card-actions>
+</mat-card>

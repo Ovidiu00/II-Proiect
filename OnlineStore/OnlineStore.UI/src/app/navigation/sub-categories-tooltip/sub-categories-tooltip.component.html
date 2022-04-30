@@ -1,0 +1,22 @@
+<div *ngIf="this.show"  class="tool-tip">
+  <div
+    (mouseenter)="onMouseEntered()"
+    (mouseleave)="onMouseLeave()"
+    class="row"  style="display: flex;flex-direction:row;"
+  >
+    <h2 *ngFor="let subCategory of subCategories" >
+      <span [routerLink]="['/catalog/categorii',subCategory.id]" class="subCategory-name">
+        {{ subCategory.name }}
+      </span>
+
+      <span [routerLink]="['/catalog/categorii',subSubCategory.id]"
+        style="display: block"
+        *ngFor="let subSubCategory of subCategory.subCategories"
+      >
+        {{ subSubCategory.name }}
+      </span>
+    </h2>
+
+
+  </div>
+</div>

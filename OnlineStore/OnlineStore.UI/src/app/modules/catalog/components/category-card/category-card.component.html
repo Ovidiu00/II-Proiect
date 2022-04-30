@@ -1,22 +1,15 @@
-<div
+
+
+
+<mat-card
   class="card"
   (mouseenter)="mouseHover()"
   (mouseleave)="mouseHover()"
   [ngClass]="status ? 'card-shadow' : 'card-shadow-revert'"
 >
-  <div class="card-body">
-    <div class="card-img-actions">
-      <img [src]="category.photo" class="card-img img-fluid" alt="" />
-    </div>
-  </div>
-  <div class="card-body bg-light text-center">
-    <div class="mb-2">
-      <span class="font-weight-semibold mb-2" >
-        <a href="#" class="text-muted category-description-text">{{
-          category.description
-        }}</a>
-      </span>
-        <em class="category-name"> {{ category.name }} </em>
-    </div>
-  </div>
-</div>
+  <img mat-card-image [src]="image" />
+  <mat-card-content>
+    <span class="category-name">{{ category.name }}</span>
+
+  </mat-card-content>
+</mat-card>

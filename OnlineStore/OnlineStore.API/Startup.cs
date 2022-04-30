@@ -1,15 +1,18 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using OnlineStore.API.AutoMapper;
+using OnlineStore.API.Extensions;
 using OnlineStore.Business;
 using OnlineStore.Business.BusinessMapper;
 using OnlineStore.DataAccess.Models.AppDbContext;
+using OnlineStore.DataAccess.Models.Entities;
 using OnlineStore.DataAccess.Repositories;
 
 namespace OnlineStore.API
@@ -29,8 +32,26 @@ namespace OnlineStore.API
             services.AddAutoMapper(typeof(AutoMapperBussinesProfile), typeof(AutoMapperApiProfile));
             services.AddDbContext<OnlineStoreDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStoreDB")));
 
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 3;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+            })
+              .AddEntityFrameworkStores<OnlineStoreDbContext>();
 
+            services.AddAuthenticationService(Configuration.GetValue<string>("TokenKey"));
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMediatR(typeof(MediatrEntryPoint).Assembly);
 
@@ -56,7 +77,13 @@ namespace OnlineStore.API
 
             app.UseRouting();
 
+
+            app.UseCors();
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
+
 
             app.UseEndpoints(endpoints =>
             {

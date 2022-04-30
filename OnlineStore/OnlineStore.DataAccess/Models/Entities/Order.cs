@@ -9,6 +9,11 @@ namespace OnlineStore.DataAccess.Models.Entities
         public string UserId { get; set; }
         public User User { get; set; }
         public DateTime DateOfOrder { get; set; }
-        public IEnumerable<Product> Products { get; set; }
+        public ICollection<OrderProduct> Products { get; set; }
+
+        public Order()
+        {
+            Products = new List<OrderProduct>();
+        }
     }
 }

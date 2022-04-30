@@ -1,0 +1,66 @@
+img {
+  height: 100%;
+  background-size: cover;
+}
+
+mat-card{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+}
+
+.chips-container{
+  padding:20px;
+}
+.chips-container app-subcategory-badge-list{
+  width: 100%;
+}
+
+.category-container{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 25%
+}
+.category-container .category-actions{
+  display:flex;
+  flex-direction:column;
+  flex-wrap: wrap;
+
+  justify-content: space-evenly;
+  font-weight: bold;
+  font-size:large;
+  text-align:center;
+  width:152px;
+
+}
+
+.action-button{
+  background-color: white;
+  color:#000000de;
+  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+  border-radius:2px;
+  border: none;
+  height:30px
+}
+.action-button:hover{
+  background-color: rgb(211, 211, 211);
+  cursor:pointer;
+}
+
+.delete-button{
+  background-color:#f44336;
+  border: none;
+  color:white
+}
+
+.delete-button:hover{
+  background-color: rgb(168, 0, 0) ;
+  cursor: pointer;
+}
+
+button{
+  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+
+}

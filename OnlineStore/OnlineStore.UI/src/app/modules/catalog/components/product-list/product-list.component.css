@@ -1,0 +1,15 @@
+
+:host(){
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  row-gap:5em;
+
+}
+
+.card{
+  flex: 1 0 21%;
+
+}
+

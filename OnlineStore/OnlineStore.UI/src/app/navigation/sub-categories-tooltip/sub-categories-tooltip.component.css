@@ -1,0 +1,29 @@
+.tool-tip{
+  background-color: whitesmoke;
+  z-index: 1000;
+  margin: 20px;
+  margin-top: -5px;
+  padding: 20px;
+  border: 1px solid black;
+  position: absolute;
+}
+
+.subCategory-name{
+  font-size: xx-large;
+   border-bottom: 2px solid
+}
+
+
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+.row > h2{
+  margin: 20px;
+}
+
+span:hover{
+  cursor: pointer;
+  color: gray;
+}

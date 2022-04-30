@@ -11,18 +11,15 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
-import { TranslateModule } from '@ngx-translate/core';
-import { HeaderComponent } from './navigation/header/header.component';
-import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
-import { LayoutComponent } from './layout/layout.component';
-import { CategoryDropdownComponent } from './navigation/category-dropdown/category-dropdown.component';
-import { CategoryDropdownListComponent } from './navigation/category-dropdown-list/category-dropdown-list.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SubCategoriesTooltipComponent } from './navigation/sub-categories-tooltip/sub-categories-tooltip.component';
 import { RouterModule } from '@angular/router';
-import { ContactInfoComponent } from './navigation/contact-info/contact-info.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AlertifyComponent } from './services/alertify-service/component/alertify.component';
 
 const matModules = [
   MatPaginatorModule,
@@ -39,41 +36,34 @@ const matModules = [
   MatCardModule,
   MatMenuModule,
   MatRadioModule,
+  MatChipsModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSnackBarModule
 ];
-const ngxModules = [TranslateModule];
-const navigationComponents = [
-  HeaderComponent,
-  SidenavListComponent,
-  CategoryDropdownComponent,
-  CategoryDropdownListComponent,
-  SubCategoriesTooltipComponent,
-  ContactInfoComponent,
-];
+
 const components = [];
 const services = [];
 
 @NgModule({
-  declarations: [navigationComponents, LayoutComponent],
   imports: [
     CommonModule,
     ...matModules,
-    ngxModules,
-    FlexLayoutModule,
-    NgbModule,
     FontAwesomeModule,
     RouterModule,
+    FlexLayoutModule
   ],
   providers: [],
   exports: [
     CommonModule,
     ...matModules,
-    ngxModules,
-    navigationComponents,
-    LayoutComponent,
-    FlexLayoutModule,
-    NgbModule,
     FontAwesomeModule,
     RouterModule,
+    FlexLayoutModule
+  ],
+  declarations: [
+    AlertifyComponent
   ],
 })
 export class SharedModule {}

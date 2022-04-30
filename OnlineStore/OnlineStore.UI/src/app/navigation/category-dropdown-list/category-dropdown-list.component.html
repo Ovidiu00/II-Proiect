@@ -1,0 +1,8 @@
+
+
+<!-- <ng-container  *ngIf="isComponentVisible"> -->
+    <div  [class.opacity-1] = "isComponentVisible" class="opacity-0" style="display:flex;flex-direction: row;" >
+      <app-category-dropdown  *ngFor="let category of categories$ |async" [category]="category"></app-category-dropdown>
+    </div>
+<!-- </ng-container> -->
+

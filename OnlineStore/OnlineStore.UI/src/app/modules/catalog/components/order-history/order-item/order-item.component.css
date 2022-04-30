@@ -1,0 +1,8 @@
+:host{
+  border-bottom: 1px solid silver;
+  display: block;
+}
+
+app-cart-item:hover{
+cursor: pointer;
+}

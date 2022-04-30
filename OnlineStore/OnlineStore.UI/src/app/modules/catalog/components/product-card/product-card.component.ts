@@ -9,7 +9,13 @@ import { Product } from '../../models/product.model';
 export class ProductCardComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  image:string;
+  ngOnInit(): void {
+    this.image = this.product.filePath;
+    if(this.product.filePath.indexOf("http") == -1)
+       this.image = "http://localhost:4200/assets/images/" + this.product.filePath;
+
+  }
 
 
   status: boolean = false;
@@ -21,11 +27,13 @@ export class ProductCardComponent implements OnInit {
 
   @Input()
   public product: Product;
+  @Input()
+  showAnimation:boolean = true;
   @Output()
   public productSelected : EventEmitter<number> = new EventEmitter<number>();
 
 
   mouseHover() {
-    this.status = !this.status;
+    this.status = !this.status && this.showAnimation === true;
   }
 }

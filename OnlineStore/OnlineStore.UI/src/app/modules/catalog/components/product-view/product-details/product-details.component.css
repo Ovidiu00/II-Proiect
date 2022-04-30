@@ -1,0 +1,70 @@
+:host(){
+    margin-left:40px;
+}
+
+
+.product-name{
+  font-size: xx-large;
+  font-weight: bolder;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  display:block;
+  margin-top:15px
+}
+
+.product-quantity{
+  font-size: small;
+  color: red;
+  font-weight: 300;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+
+.product-price{
+  font-size: large;
+  font-weight: bold;
+  margin-top: 70px;
+}
+
+.description{
+  margin-top:30px;
+  word-wrap: break-word;
+  max-width:700px
+}
+
+.order-section{
+  margin-top: 40px;
+  background-color: rgba(243, 239, 239, 0.788);
+  width:300px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-to-cart-button{
+  width: 100%;
+  margin-top:10px;
+  background-color: rgb(121, 202, 0);
+  border:none;
+  font-size: large;
+  font-style: italic;
+  color:white;
+  cursor: pointer;
+
+}
+
+.add-to-cart-button:hover{
+  background-color: green;
+}
+
+
+:host(){
+  opacity: 0;
+  transition: opacity 1.2s;
+  display: block;
+}
+
+:host(.show-view){
+  opacity: 1;
+}

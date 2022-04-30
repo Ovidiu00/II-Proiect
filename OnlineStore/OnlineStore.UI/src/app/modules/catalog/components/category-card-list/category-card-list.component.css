@@ -1,0 +1,22 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: space-evenly;
+}
+
+
+.row > app-category-card{
+  margin: 25px;
+}
+
+:host(){
+  margin:20px;
+  opacity: 0;
+  transition: opacity 1s;
+  display: block;
+}
+
+:host(.show-view){
+  opacity: 1;
+}

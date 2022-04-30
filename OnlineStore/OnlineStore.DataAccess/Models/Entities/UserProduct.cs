@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace OnlineStore.DataAccess.Models.Entities
+﻿namespace OnlineStore.DataAccess.Models.Entities
 {
     public class UserProduct
     {
@@ -9,7 +7,6 @@ namespace OnlineStore.DataAccess.Models.Entities
 
         public int ProductId { get; set; }
         public Product Product { get; set; }
-
 
         public int Quantity { get; set; }
     }

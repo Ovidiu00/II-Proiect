@@ -1,0 +1,15 @@
+hr{
+  margin-bottom: 100px;
+}
+
+.opacity-0{
+  opacity: 0;
+  display:none;
+  transition: opacity 0.2s;
+  position: fixed;
+}
+
+.opacity-1{
+  opacity: 1;
+  position:relative;
+}

@@ -1,0 +1,9 @@
+
+  <div style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+    <h4>{{order.orderDate | date}}</h4>
+
+    <div style="display: flex;flex-wrap:wrap">
+      <app-cart-item *ngFor="let item of order.productVms" [item]="item" [routerLink]="['/catalog/produs/'+item.id]"></app-cart-item>
+    </div>
+
+  </div>

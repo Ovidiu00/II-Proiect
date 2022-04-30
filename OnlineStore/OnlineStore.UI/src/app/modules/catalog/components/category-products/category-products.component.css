@@ -1,0 +1,23 @@
+.container{
+width:70%;
+}
+
+:host(){
+  display: flex;
+  justify-content: space-around;
+}
+
+.filters{
+  height:100px;
+}
+
+
+.opacity-0{
+  opacity: 0;
+  transition: opacity 1s;
+  display:block;
+}
+
+.opacity-1{
+  opacity: 1;
+}

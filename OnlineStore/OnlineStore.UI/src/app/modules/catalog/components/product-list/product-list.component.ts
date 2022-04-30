@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CatalogRoutes } from 'src/app/shared/routes/routes';
 import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 
@@ -16,9 +15,16 @@ export class ProductListComponent implements OnInit {
   @Input()
   products$: Observable<Product[]>;
 
+  @HostBinding('class.show-view') 
+  showView: boolean = false;
+  ngAfterViewInit(){
+    this.showView = true;
+  }
   ngOnInit(): void {}
+  
+
 
   selectProduct(id: number) {
-    this.router.navigate([CatalogRoutes.productView.url,id]);
+    this.router.navigate(['catalog/produs/'+id]);
   }
 }

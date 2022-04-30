@@ -1,0 +1,9 @@
+
+<button class="add-product-button"  (click)="addProductClicked()">Add product</button>
+<div class="row">
+    <app-admin-product-card (refresh)="refreshData()"
+     (productSelected)="selectProduct($event)" [showAnimation] = "false"
+      *ngFor="let product of products$ | async" [product]="product"
+      ></app-admin-product-card>
+</div>
+
