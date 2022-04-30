@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
 import { Category } from 'src/app/modules/catalog/models/category.model';
 
 @Component({
@@ -16,6 +16,8 @@ export class SubCategoriesTooltipComponent implements OnInit {
   @Output()
   public mouseLeave:EventEmitter<void> = new EventEmitter()
 
+
+  
   ngOnInit(): void {
   }
 

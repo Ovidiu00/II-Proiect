@@ -1,3 +1,21 @@
 .home-content{
   margin: 20px;
 }
+
+.products-header{
+
+  font-family: fantasy;
+  font-size: xx-large;
+  padding:15px;
+}
+
+:host(){
+  opacity: 0;
+  transition: opacity 1.6s;
+  display:block;
+
+}
+
+:host(.show-view){
+  opacity: 1;
+}

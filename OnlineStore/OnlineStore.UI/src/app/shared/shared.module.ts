@@ -18,6 +18,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AlertifyComponent } from './services/alertify-service/component/alertify.component';
 
 const matModules = [
   MatPaginatorModule,
@@ -37,7 +39,8 @@ const matModules = [
   MatChipsModule,
   MatDialogModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatSnackBarModule
 ];
 
 const components = [];
@@ -58,6 +61,9 @@ const services = [];
     FontAwesomeModule,
     RouterModule,
     FlexLayoutModule
+  ],
+  declarations: [
+    AlertifyComponent
   ],
 })
 export class SharedModule {}

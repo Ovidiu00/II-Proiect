@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {  Subject } from 'rxjs';
+import {  catchError, Subject, tap } from 'rxjs';
+import { AlertifyService } from '../../../shared/services/alertify-service/alertify.service';
 import { LoginModel } from '../models/login-model';
 import { RegisterModel } from '../models/register-model';
 import { UserModel } from '../models/user.model';
@@ -9,7 +10,7 @@ import { UserModel } from '../models/user.model';
   providedIn: 'root',
 })
 export class AccountService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private alertify:AlertifyService) {
     this.loggedInUser.next(true);
   }
 
@@ -27,6 +28,7 @@ export class AccountService {
       .subscribe((x) => {
         sessionStorage.setItem('token', x.token);
         sessionStorage.setItem('user',JSON.stringify(x.user));
+        this.alertify.success("Autentificare realizata cu succes");
 
         this.loggedInUser.next(true);
         success = true;
@@ -35,7 +37,10 @@ export class AccountService {
   }
 
   register(dto: RegisterModel) {
-    return this.http.post(this.userersAPI + 'register', dto);
+    return this.http.post(this.userersAPI + 'register', dto).pipe(
+      tap(() => this.alertify.success("Te-ai inregistrat cu succes!")),
+      catchError(async () => this.alertify.error("Eroare la inregistrare!"))
+    );
   }
   getToken(){
     return localStorage.getItem('token');

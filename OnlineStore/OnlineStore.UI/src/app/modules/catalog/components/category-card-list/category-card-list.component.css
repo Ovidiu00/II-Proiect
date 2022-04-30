@@ -11,6 +11,12 @@
 }
 
 :host(){
-  margin:20px
+  margin:20px;
+  opacity: 0;
+  transition: opacity 1s;
+  display: block;
 }
 
+:host(.show-view){
+  opacity: 1;
+}

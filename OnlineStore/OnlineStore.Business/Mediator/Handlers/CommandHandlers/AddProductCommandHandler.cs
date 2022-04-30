@@ -32,7 +32,7 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
                 throw new Exception("There is no product at this category");
             }
             var product = mapper.Map<Product>(command.addProductDTO);
-            product.FilePath = await mediator.Send(new SavePhotoCommand(command.addProductDTO.Photo));
+            product.FilePath = (await mediator.Send(new SavePhotoCommand(command.addProductDTO.Photo))) ?? product.FilePath;
             product.InsertedDate = DateTime.Now;
 
             product.Categories.Add(category);

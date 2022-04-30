@@ -1,0 +1,5 @@
+<div class="list" *ngIf="orders.length != 0">
+  <app-order-item *ngFor="let item of orders" [order]="item"></app-order-item>
+</div>
+
+<h3 *ngIf="orders.length == 0">Nu ai nici o comanda comentan!</h3>

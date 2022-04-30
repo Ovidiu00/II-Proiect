@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CategoryDropdownListService } from 'src/app/navigation/category-dropdown-list.service';
 import { Category } from '../catalog/models/category.model';
@@ -21,7 +21,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   public mainCategories$:Observable<Category[]>
   public mostPopularProducts$:Observable<Product[]>;
   public mostRecentProducts$:Observable<Product[]>;
+  
+  @HostBinding('class.show-view') 
+  showView: boolean = false;
+
   ngOnInit(): void {
+
     this.categoryDropdownVisbilityService.hide();
 
     this.mostPopularProducts$ = this.productService.getMostPopularProducts(4);
@@ -30,6 +35,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mainCategories$ = this.categoryService.getCategories();
   }
 
+  ngAfterViewInit(){
+    this.showView = true;
+  }
   ngOnDestroy(): void {
       this.categoryDropdownVisbilityService.show();
   }

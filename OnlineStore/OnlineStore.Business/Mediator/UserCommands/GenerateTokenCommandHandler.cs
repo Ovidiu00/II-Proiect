@@ -28,7 +28,7 @@ namespace OnlineStore.Business.Mediator.UserCommands
             foreach (var role in request.roles)
             {
                 Claims.Add(new Claim(ClaimTypes.Role, role));
-            }
+            }   
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(TokenKey);

@@ -1,14 +1,15 @@
-.row{
-    display:flex;
-    flex-direction: row;
-    flex-wrap:wrap;
-    justify-content: space-evenly;
-}
 
 :host(){
-  margin-top: 25px;
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  row-gap:5em;
+
 }
 
-.row > app-product-card{
-  margin: 25px;
+.card{
+  flex: 1 0 21%;
+
 }
+

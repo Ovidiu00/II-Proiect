@@ -25,8 +25,6 @@ namespace OnlineStore.API.Controllers
             this.mapper = mapper;
         }
 
-
-
         [HttpPost]
         public async Task<ActionResult> OrderProducts(string userId)
         {
@@ -70,7 +68,7 @@ namespace OnlineStore.API.Controllers
         [Route("history")]
         public async Task<ActionResult<IEnumerable<OrderVM>>> ViewOrderHistory(string userId)
         {
-            var orders = await mediator.Send(new GetOrderHistoryByUserIdQuery(userId));
+            var orders = await mediator.Send(new GetOrderHistoryByUserIdQuery(userId)); 
             return Ok(mapper.Map<IEnumerable<OrderVM>>(orders));
         }
     }

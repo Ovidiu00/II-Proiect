@@ -3,10 +3,23 @@
   flex-wrap: wrap;
   max-height: 400px;
   max-width: 100%;
-
+  margin-left:25%;
+  margin-right:10%;
+  margin-top:10%;
+  justify-content:space-evenly;
 }
 
 
 img{
   height:400px;
+}
+
+.opacity-0{
+  opacity: 0;
+  transition: opacity 3s;
+  display:block;
+}
+
+.opacity-1{
+  opacity: 1;
 }

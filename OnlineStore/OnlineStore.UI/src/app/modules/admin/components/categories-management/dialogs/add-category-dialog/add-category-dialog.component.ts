@@ -11,21 +11,20 @@ import { Category } from 'src/app/modules/catalog/models/category.model';
 export class AddCategoryDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public category: Category,
-    public dialogRef: MatDialogRef<AddCategoryDialogComponent>) {}
+    public dialogRef: MatDialogRef<AddCategoryDialogComponent>
+  ) {}
 
   ngOnInit(): void {}
 
   onExitClick() {
-    this.dialogRef.close();
+    let dialogResult: DialogResult = new DialogResult();
+    dialogResult.saveClicked = false;
+    this.dialogRef.close(dialogResult);
   }
   onSaveClick(files: any, name: string) {
-
     var dialogResult: DialogResult = new DialogResult();
     dialogResult.dto = this.constructFormData(files, name);
     dialogResult.saveClicked = true;
-
-    console.log(dialogResult.dto.get('name'));
-
 
     this.dialogRef.close(dialogResult);
   }

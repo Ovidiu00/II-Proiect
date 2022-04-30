@@ -16,6 +16,7 @@ export class CategoryProductsComponent implements OnInit {
     public productService:ProductsService
     ) { }
 
+  public showComponent:boolean = false;
   public products$ :Observable<Product[]>;
 
   ngOnInit(): void {
@@ -24,5 +25,9 @@ export class CategoryProductsComponent implements OnInit {
      console.log("aici")
 
     })
+  }
+
+  ngAfterViewInit(){
+    this.showComponent = true;
   }
 }

@@ -37,7 +37,6 @@ export class AdminProductListComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(){
-
     this.categoryDropdownService.show();
   }
   selectProduct(id: number) {

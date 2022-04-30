@@ -21,6 +21,8 @@ namespace OnlineStore.Business.Mediator.HelperCommands
         }
         public Task<string> Handle(SavePhotoCommand request, CancellationToken cancellationToken)
         {
+            if (request.formFile == null)
+                return null;
             var uploadDirectory = GetDirectoryToUpload();
             var isValid = IsFileItemValid(request.formFile);
 

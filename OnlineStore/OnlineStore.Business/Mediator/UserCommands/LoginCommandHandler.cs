@@ -34,7 +34,7 @@ namespace OnlineStore.Business.Mediator.UserCommands
                 throw new Exception("Something went wrong ...");
 
             bool isAdmin = roles.Contains("Admin");
-            return new LoginResponseDTO(token,new UserDTO() {Nume = user.Nume,Prenume = user.Prenume,isAdmin = isAdmin});
+            return new LoginResponseDTO(token,new UserDTO() {Nume = user.Nume,Prenume = user.Prenume,isAdmin = isAdmin,UserId = user.Id});
         }
     }
 }

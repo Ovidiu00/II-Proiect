@@ -63,13 +63,14 @@ export class AdminCategoryListComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result.saveClicked)
+      if (result?.saveClicked)
         this.handleAddProductDialogSaveClicked(result.dto);
     });
   }
 
   private handleAddProductDialogSaveClicked(dto: FormData) {
     this.categoryService.addCategory(dto).subscribe((result: Category) => {
+      if (!result) return;
       if (!this.isBaseCategoriesView) {
         this.categoryService
           .addSubCategory(this.categoryId, result.id)
@@ -92,7 +93,6 @@ export class AdminCategoryListComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result.saveClicked) {
-        console.log(result.dto.get('name'));
         this.categoryService
           .editCategory(result.dto, categoryId)
           .subscribe((apiResult) => {
@@ -101,8 +101,6 @@ export class AdminCategoryListComponent implements OnInit, OnDestroy {
             );
             categoryEdited.name = apiResult.name;
             categoryEdited.filePath = apiResult.filePath;
-
-            console.log(categoryEdited);
           });
       }
     });

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArchive, faBars, faShoppingCart, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { UserModel } from '../../modules/account/models/user.model';
 import { AccountService } from '../../modules/account/services/account.service';
 
@@ -15,7 +15,8 @@ export class HeaderComponent implements OnInit {
 
   faSignIn = faSignInAlt;
   faUser = faUser;
-
+  faCart = faShoppingCart;
+  faOrders = faBars;
   public loggedInUser: UserModel;
   ngOnInit(): void {
     this.loggedInUser = this.accountService.getLoggedInUser();

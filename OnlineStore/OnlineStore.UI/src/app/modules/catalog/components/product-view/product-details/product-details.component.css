@@ -57,3 +57,14 @@
 .add-to-cart-button:hover{
   background-color: green;
 }
+
+
+:host(){
+  opacity: 0;
+  transition: opacity 1.2s;
+  display: block;
+}
+
+:host(.show-view){
+  opacity: 1;
+}
