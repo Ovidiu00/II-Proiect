@@ -26,6 +26,11 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
 
         public async Task<ProductDTO> Handle(AddProductCommand command, CancellationToken cancellationToken)
         {
+            if (command.addProductDTO == null)
+            {
+                throw new Exception("Cant't add null product");
+            }    
+
             Category category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id == command.categoryId);
             if (category == null)
             {
