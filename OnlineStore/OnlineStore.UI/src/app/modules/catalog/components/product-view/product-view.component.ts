@@ -7,32 +7,33 @@ import { ProductsService } from '../../services/products.service';
 @Component({
   selector: 'app-product-view',
   templateUrl: './product-view.component.html',
-  styleUrls: ['./product-view.component.css']
+  styleUrls: ['./product-view.component.css'],
 })
 export class ProductViewComponent implements OnInit {
+  constructor(
+    public activatedRoute: ActivatedRoute,
+    public productService: ProductsService
+  ) {}
 
-  constructor(public activatedRoute:ActivatedRoute,public productService:ProductsService) { }
-
-  public image:string;
-  ngOnInit(): void {
-    var productId:number;
-    this.activatedRoute.paramMap.subscribe(params =>
-       {
-         productId =  Number(params.get('id'));
-         this.productService.getProductById(productId).subscribe(response => {
-           this.product = response
-
-           this.image = this.product.filePath
-           if(this.product.filePath.indexOf("http") == -1)
-              this.image = "http://localhost:4200/assets/images/" + this.product.filePath;
-         });
-
-        })
-
-
+  public showImg:boolean = false;
+  ngAfterViewInit(){
+    this.showImg = true;;
   }
-public product:Product = new Product();
+  public image: string;
+  ngOnInit(): void {
+    var productId: number;
+    this.activatedRoute.paramMap.subscribe((params) => {
+      productId = Number(params.get('id'));
+      this.productService.getProductById(productId).subscribe((response) => {
+        this.product = response;
 
- public faShoppingCart = faShoppingCart;
-
+        this.image = this.product.filePath;
+        if (this.product.filePath.indexOf('http') == -1)
+          this.image =
+            'http://localhost:4200/assets/images/' + this.product.filePath;
+      });
+    });
+  }
+  public product: Product = new Product();
+  public faShoppingCart = faShoppingCart;
 }

@@ -10,7 +10,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProductDetailsComponent } from './components/product-view/product-details/product-details.component';
 import { QuantitySelectorComponent } from './components/product-view/product-details/quantity-selector/quantity-selector.component';
 import { CategoryProductsComponent } from './components/category-products/category-products.component';
-import { CategoryService } from './services/category.service';
+import { CartItemsDialogComponent } from './components/cart-items/cart-items-dialog/cart-items-dialog.component';
+import { CartDirective } from './components/cart-items/cart.directive';
+import { CartItemComponent } from './components/cart-items/cart-item/cart-item.component';
+import { OrdersHistoryDirective } from './components/order-history/orders-history.directive';
+import { OrderHistoryDialogComponent } from './components/order-history/order-history-dialog/order-history-dialog.component';
+import { OrderItemComponent } from './components/order-history/order-item/order-item.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +27,12 @@ import { CategoryService } from './services/category.service';
     ProductDetailsComponent,
     QuantitySelectorComponent,
     CategoryProductsComponent,
+    CartItemsDialogComponent,
+    CartDirective,
+    CartItemComponent,
+    OrdersHistoryDirective,
+    OrderHistoryDialogComponent,
+    OrderItemComponent,
   ],
   imports: [CommonModule, CatalogRoutingModule,SharedModule],
   exports: [
@@ -30,6 +41,8 @@ import { CategoryService } from './services/category.service';
     ProductListComponent,
     ProductCardComponent,
     ProductViewComponent,
+    CartDirective,
+    OrdersHistoryDirective
   ],
 })
 export class CatalogModule {}

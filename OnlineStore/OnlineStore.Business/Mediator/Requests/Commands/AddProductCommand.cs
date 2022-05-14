@@ -3,5 +3,5 @@ using OnlineStore.Business.DTOs;
 
 namespace OnlineStore.Business.Mediator.Requests.Commands
 {
-    public record AddProductCommand(AddProductDTO addProductDTO, int categroryId) : IRequest<ProductDTO>;
+    public record AddProductCommand(AddProductDTO addProductDTO, int categoryId) : IRequest<ProductDTO>;
 }

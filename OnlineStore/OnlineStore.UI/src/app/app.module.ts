@@ -10,9 +10,9 @@ import { CatalogModule } from './modules/catalog/catalog.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
-
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AccountModule } from './modules/account/account-module';
+import { AuthInterceptorService } from './modules/account/interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -26,13 +26,19 @@ import { HttpClientModule } from '@angular/common/http';
     LayoutModule,
     HomeModule,
     CatalogModule,
+    AccountModule,
     NavigationModule,
     FontAwesomeModule,
     SharedModule,
     HttpClientModule
-
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+     },
+  ],
   bootstrap: [AppComponent],
   exports:[]
 })

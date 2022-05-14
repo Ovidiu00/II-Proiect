@@ -26,23 +26,20 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
 
         public async Task<ProductDTO> Handle(AddProductCommand command, CancellationToken cancellationToken)
         {
-            if (command.addProductDTO == null)
-                throw new Exception();
-
-            Category category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id == command.categroryId);
+            Category category = await unitOfWork.CategoryRepository.FindSingle(x => x.Id == command.categoryId);
             if (category == null)
             {
                 throw new Exception("There is no product at this category");
             }
             var product = mapper.Map<Product>(command.addProductDTO);
-            product.FilePath = await mediator.Send(new SavePhotoCommand(command.addProductDTO.Photo));
+            product.FilePath = (await mediator.Send(new SavePhotoCommand(command.addProductDTO.Photo))) ?? product.FilePath;
             product.InsertedDate = DateTime.Now;
 
             product.Categories.Add(category);
             unitOfWork.ProductRepository.Add(product);
 
-            await unitOfWork.Commit(); 
-            return  mapper.Map<ProductDTO>(product);
+            await unitOfWork.Commit();
+            return mapper.Map<ProductDTO>(product);      
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.API.ViewModels;
 using OnlineStore.Business.DTOs;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace OnlineStore.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CategoryController : ControllerBase
@@ -24,6 +26,7 @@ namespace OnlineStore.API.Controllers
             this.mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryVM>>> Categories()
         {
@@ -39,6 +42,7 @@ namespace OnlineStore.API.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryVM>> GetCategoryById(int id)
         {
@@ -63,6 +67,7 @@ namespace OnlineStore.API.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> AddCategory([FromForm] AddCategoryVM addCategoryVm)
         {
@@ -80,6 +85,7 @@ namespace OnlineStore.API.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult> EditCategory([FromForm] EditCategoryVM editCategoryVm, int id)
         {
@@ -97,6 +103,7 @@ namespace OnlineStore.API.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCategory(int id)
         {
@@ -115,6 +122,7 @@ namespace OnlineStore.API.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{parentId}/add-subcategory")]
         public async Task<ActionResult<bool>> AddSubcategoryToCategory([FromRoute]int parentId, [FromQuery]int childCategory)
         {

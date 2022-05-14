@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
+import { AlertifyService } from '../../../shared/services/alertify-service/alertify.service';
 import { Category } from '../models/category.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  constructor(public http:HttpClient) {}
+  constructor(public http:HttpClient,private alertify:AlertifyService) {}
 
   categoriesBaseApi = "https://localhost:44350/Category";
 
@@ -24,12 +25,21 @@ export class CategoryService {
   }
 
   addCategory(dto:FormData):Observable<any>{
-    return this.http.post(this.categoriesBaseApi,dto);
+    return this.http.post(this.categoriesBaseApi,dto).pipe(
+      tap(() => this.alertify.success("Categorie adaugata cu succes!")),
+      catchError(async () => this.alertify.error("Eroare la adaugare categorie!"))
+    );
   }
   editCategory(dto:FormData,id:number):Observable<any>{
-    return this.http.put(this.categoriesBaseApi+"/"+id,dto);
+    return this.http.put(this.categoriesBaseApi+"/"+id,dto).pipe(
+      tap(() => this.alertify.success("Categorie editata cu succes!")),
+      catchError(async () => this.alertify.error("Eroare la editare categorie!"))
+      );
   }
   deleteCategory(categoryId:number){
-    return this.http.delete(this.categoriesBaseApi+"/"+categoryId);
+    return this.http.delete(this.categoriesBaseApi+"/"+categoryId).pipe(
+      tap(() => this.alertify.success("Categorie stearsa cu succes!")),
+      catchError(async () => this.alertify.error("Eroare la stergere categorie!"))
+    );
   }
 }

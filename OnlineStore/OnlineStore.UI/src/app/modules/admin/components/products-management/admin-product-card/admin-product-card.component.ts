@@ -19,6 +19,9 @@ export class AdminProductCardComponent implements OnInit {
   @Input()
   product:Product;
 
+  @Input()
+  showAnimation:boolean;
+
   ngOnInit(): void {
   }
 

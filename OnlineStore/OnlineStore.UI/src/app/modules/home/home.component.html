@@ -5,13 +5,15 @@
 
   <app-category-card-list [categories$] = "mainCategories$"></app-category-card-list>
 
-  <h1 class="products-header">Produse populare!</h1>
-  <hr>
-  <app-product-list [products$]="mostPopularProducts$"></app-product-list>
+  <div class="products-header"><span> Produse populare </span></div>
+  <br>  
+
+  <app-product-list  [products$]="mostPopularProducts$"></app-product-list>
 
   <br><br><br>
-  <h1  class="products-header">Produse noi!</h1>
-  <hr>
+  <div class="products-header"><span> Produse noi </span></div>
+    <br>
+
   <app-product-list [products$]="mostRecentProducts$"></app-product-list>
 
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.API.ViewModels;
 using OnlineStore.Business.DTOs;
@@ -24,7 +25,7 @@ namespace OnlineStore.API.Controllers
             this.mapper = mapper;
         }
 
-
+        [AllowAnonymous]
         [HttpGet("popular-products")]
         public async Task<ActionResult<IEnumerable<PopularProductVM>>> PopularProducts(int count)
         {
@@ -41,8 +42,8 @@ namespace OnlineStore.API.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("recent-products")]
-
         public async Task<ActionResult<IEnumerable<RecentProductVM>>> RecentProducts(int count)
         {
             try
@@ -63,6 +64,7 @@ namespace OnlineStore.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<ProductVM>> GetProductById(int id)
         {
             if (id <= 0)
@@ -77,6 +79,7 @@ namespace OnlineStore.API.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("~/categories/{categoryId}/products")]
         public async Task<ActionResult<IEnumerable<ProductVM>>> GetProductsByCategory(int categoryId)
@@ -94,6 +97,7 @@ namespace OnlineStore.API.Controllers
             return Ok(result);
 
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("{categoryId}")]
         public async Task<ActionResult> AddProduct([FromForm]AddProductVM addProductVM, int categoryId)
@@ -107,6 +111,7 @@ namespace OnlineStore.API.Controllers
             return CreatedAtAction(nameof(GetProductById), new { Id = productDTO.Id }, productDTO);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("{id}")]
         public async Task<ActionResult> EditProduct([FromForm] EditProductVM editProductVM, int id)
@@ -119,6 +124,8 @@ namespace OnlineStore.API.Controllers
 
             return CreatedAtAction(nameof(GetProductById), new { Id = editedProductDTO.Id }, editedProductDTO);
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("{id}")]
         public async Task<ActionResult> DeleteProduct(int id)

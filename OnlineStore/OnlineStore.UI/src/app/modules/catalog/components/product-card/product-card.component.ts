@@ -27,11 +27,13 @@ export class ProductCardComponent implements OnInit {
 
   @Input()
   public product: Product;
+  @Input()
+  showAnimation:boolean = true;
   @Output()
   public productSelected : EventEmitter<number> = new EventEmitter<number>();
 
 
   mouseHover() {
-    this.status = !this.status;
+    this.status = !this.status && this.showAnimation === true;
   }
 }

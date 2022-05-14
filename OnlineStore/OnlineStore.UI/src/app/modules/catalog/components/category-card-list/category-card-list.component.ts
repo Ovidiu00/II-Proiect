@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Category } from '../../models/category.model';
@@ -19,6 +19,12 @@ export class CategoryCardListComponent implements OnInit {
   @Input()
   categories$ : Observable<Category[]>
   selectedCategory:Category;
+  
+  @HostBinding('class.show-view') 
+  showView: boolean = false;
+  ngAfterViewInit(){
+    this.showView = true;
+  }
 
   ngOnInit(): void {
     var categoryId:number;

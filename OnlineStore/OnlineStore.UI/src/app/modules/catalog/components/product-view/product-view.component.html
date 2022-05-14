@@ -1,7 +1,10 @@
 
-<img [src]="image">
+  <div>
+    <img class="opacity-0" [class.opacity-1] = "showImg" [src]="image">
+    
+  </div>
 
-<app-product-details [product]="product"></app-product-details>
+  <app-product-details  [product]="product"></app-product-details>
 
 
 

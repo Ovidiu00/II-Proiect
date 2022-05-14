@@ -1,28 +1,58 @@
 <mat-toolbar class="navbar-color">
-    <div fxHide.gt-xs>
-        <button mat-icon-button (click)="onToggleSidenav()">
-            <mat-icon>menu</mat-icon>
-        </button>
-    </div>
-    <div>
-        <a routerLink="home" class="store-name"> <EM>{{onlineStoreName}}</EM></a>
-    </div>
-    <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
-        <ul fxLayout fxLayoutGap="15px" class="navigation-items">
-          <!-- <li>
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a routerLink="home" class="store-name">
+      <EM>{{ onlineStoreName }}</EM></a
+    >
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+      <!-- <li>
             <div class="input-group rounded">
               <input type="search" class="form-control rounded" placeholder="Cauta produs..." aria-label="Search"
               aria-describedby="search-addon" />
               <span class="input-group-text border-0" id="search-addon">
               </span>
             </div>
-          </li>
-            <li>
-                <a routerLink="/catalog" class="nav-item">Toate produsele</a>
-            </li> -->
-            <!-- <li>
-                <a routerLink="/account" class="nav-item">Contact</a>
-            </li> -->
-        </ul>
-    </div>
-  </mat-toolbar>
+          </li> -->
+      <ng-container *ngIf="!loggedInUser">
+        <li>
+          <a appLogin class="nav-item">
+            <fa-icon [icon]="faUser"></fa-icon>
+            Login
+          </a>
+        </li>
+        <li>
+          <a appRegister class="nav-item">
+            <fa-icon [icon]="faSignIn"></fa-icon>
+            Register
+          </a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="loggedInUser">
+        <li>
+          <a (click)="logout()" class="nav-item">
+            <fa-icon [icon]="faSignIn"></fa-icon>
+            Logout
+          </a>
+        </li>
+        <li>
+          <a  appCart class="nav-item">
+            <fa-icon  [icon]="faCart"></fa-icon>
+            My cart
+          </a>
+        </li>
+        <li>
+          <a  appOrdersHistory class="nav-item">
+            <fa-icon  [icon]="faOrders"></fa-icon>
+            My orders
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</mat-toolbar>

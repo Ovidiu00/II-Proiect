@@ -19,12 +19,12 @@
 
 
     <span style="font-size:small">Quantity</span>
-    <app-quantity-selector [availableQuantity]="product.quantity"></app-quantity-selector>
+    <app-quantity-selector (quantity)="quantitySelected = $event" [availableQuantity]="product.quantity"></app-quantity-selector>
 
 
 
 
-  <button class="add-to-cart-button">Add to cart <fa-icon size="xs" [icon]="faShoppingCart"></fa-icon>
+  <button class="add-to-cart-button" (click)="onAddToCart()">Add to cart <fa-icon size="xs" [icon]="faShoppingCart"></fa-icon>
   </button>
 
 </div>

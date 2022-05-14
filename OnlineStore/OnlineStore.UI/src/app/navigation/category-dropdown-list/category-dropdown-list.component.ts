@@ -16,6 +16,7 @@ export class CategoryDropdownListComponent implements OnInit {
      this.service.isVisible().subscribe(x => this.isComponentVisible = x);
   }
 
+
   @Input()
   public categories$ :Observable<Category[]>;
 }

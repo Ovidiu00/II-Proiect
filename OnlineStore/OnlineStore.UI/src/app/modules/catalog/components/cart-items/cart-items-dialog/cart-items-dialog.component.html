@@ -1,0 +1,13 @@
+<div *ngIf="itemsInCart && itemsInCart.length == 0" style="text-align: center;">
+<h3>Nu exista produse in cosul de cumparaturi</h3>
+  </div>
+<div *ngIf=" itemsInCart && itemsInCart.length != 0">
+  <div class = "item-list">
+    <app-cart-item [fromCartView]="true" *ngFor="let item of itemsInCart" [item]="item"></app-cart-item>
+  </div>
+
+  <button mat-flat-button	(click)="onOrderClicked()" style="width: 100%;margin-top: 15px;">Order cart</button>
+</div>
+
+
+
