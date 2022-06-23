@@ -31,6 +31,12 @@ namespace OnlineStore.DataAccess.Repositories.Implementations
                 .ToListAsync();
         }
 
+        public void RemoveItemFromCart(UserProduct cartItemToBeRemoved)
+        {
+            _db.UserProducts.Remove(cartItemToBeRemoved);
+            _db.SaveChanges();
+        }
+
         public void RemoveItemsFromCart(string userId)
         {
             var itemsInCart = _db.UserProducts.Where(x => x.UserId == userId);

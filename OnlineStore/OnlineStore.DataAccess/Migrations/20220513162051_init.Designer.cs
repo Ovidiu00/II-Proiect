@@ -10,7 +10,7 @@ using OnlineStore.DataAccess.Models.AppDbContext;
 namespace OnlineStore.DataAccess.Migrations
 {
     [DbContext(typeof(OnlineStoreDbContext))]
-    [Migration("20220407164605_init")]
+    [Migration("20220513162051_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -283,21 +283,16 @@ namespace OnlineStore.DataAccess.Migrations
 
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.OrderProduct", b =>
                 {
-                    b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ProductId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId1")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("OrderId", "ProductId");
-
-                    b.HasIndex("OrderId1");
 
                     b.HasIndex("ProductId");
 
@@ -447,8 +442,10 @@ namespace OnlineStore.DataAccess.Migrations
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.OrderProduct", b =>
                 {
                     b.HasOne("OnlineStore.DataAccess.Models.Entities.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId1");
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("OnlineStore.DataAccess.Models.Entities.Product", "Product")
                         .WithMany()
@@ -470,7 +467,7 @@ namespace OnlineStore.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("OnlineStore.DataAccess.Models.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -483,6 +480,16 @@ namespace OnlineStore.DataAccess.Migrations
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Category", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.User", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

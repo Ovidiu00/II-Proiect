@@ -9,5 +9,6 @@ namespace OnlineStore.DataAccess.Repositories.Interfaces
         Task<IEnumerable<UserProduct>> GetProductsInCart(string userId);
         Task<IEnumerable<Order>> GetOrders(string userId);
         void RemoveItemsFromCart(string userId);
+        void RemoveItemFromCart(UserProduct cartItemToBeRemoved);
     }
 }

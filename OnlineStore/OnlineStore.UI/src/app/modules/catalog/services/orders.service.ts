@@ -39,4 +39,7 @@ export class OrdersService {
   getOrders():Observable<Order[]>{
     return this.http.get<Order[]>(this.ordersBaseApi+"/history?userId="+this.currentUser.userId);
   }
+  removeFromCart(id:number){
+    return this.http.post(this.ordersBaseApi+"/remove-from-cart?id="+id+"&userId="+this.currentUser.userId,null);
+  }
 }

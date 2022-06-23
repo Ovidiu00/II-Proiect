@@ -38,6 +38,11 @@ namespace OnlineStore.Business.Mediator.Handlers.CommandHandlers
             newOrder.Products = productsToBeOrdered.ToList();
             unitOfWork.OrderRepository.RemoveItemsFromCart(request.UserId);
 
+            foreach (var product in productsInCart)
+            {
+                product.Product.Quantity -= product.Quantity;
+            }
+
             await unitOfWork.Commit();
 
             return true;

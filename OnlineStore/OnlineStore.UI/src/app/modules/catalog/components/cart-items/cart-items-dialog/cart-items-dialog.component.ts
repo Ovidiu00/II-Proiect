@@ -28,4 +28,8 @@ export class CartItemsDialogComponent implements OnInit {
   onOrderClicked() {
     this.orderService.orderProductsFromCart().subscribe();
   }
+
+  refresh(){
+    this.orderService.getItemsInCart().subscribe(x => this.itemsInCart = x);
+  }
 }

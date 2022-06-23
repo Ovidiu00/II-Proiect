@@ -3,7 +3,7 @@
 <mat-card>
 
   <mat-card-title-group style="position: relative;">
-    <fa-icon *ngIf="showDeleteButton" [icon]="trash"></fa-icon>
+    <fa-icon *ngIf="showDeleteButton" (click) = "removeFromCart(item.id)" [icon]="trash"></fa-icon>
     <mat-card-title>{{item.name}}</mat-card-title>
     <mat-card-subtitle><i>Quantity : </i>{{item.quantity}}</mat-card-subtitle>
     <img mat-card-sm-image [src]="image" >

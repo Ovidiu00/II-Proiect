@@ -1,6 +1,7 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { CartItem } from '../../../models/cart-item.model';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { OrdersService } from '../../../services/orders.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -9,7 +10,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class CartItemComponent implements OnInit {
 
-  constructor() { }
+  constructor(private orderService:OrdersService) { }
   @Input()
   fromCartView:boolean = false;
 
@@ -24,6 +25,12 @@ export class CartItemComponent implements OnInit {
     this.showDeleteButton = false && this.fromCartView;
   }
 
+  @Output()
+  itemRemoved:EventEmitter<any> = new EventEmitter<any>();
+
+  removeFromCart(id:number){
+    this.orderService.removeFromCart(id).subscribe(x => this.itemRemoved.emit());
+  }
 
   trash= faTrash;
   @Input()

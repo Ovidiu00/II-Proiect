@@ -11,8 +11,8 @@ import { OrdersService } from '../../../services/orders.service';
 export class ProductDetailsComponent implements OnInit {
 
   constructor(private orderService:OrdersService) { }
-  
-  @HostBinding('class.show-view') 
+
+  @HostBinding('class.show-view')
   showView: boolean = false;
   ngAfterViewInit(){
     this.showView = true;
@@ -28,6 +28,10 @@ export class ProductDetailsComponent implements OnInit {
 
 
   onAddToCart(){
+    if(this.product.quantity === 0)
+        return;
+
+        console.log(this.quantitySelected);
     this.orderService.addItemToCart(this.product.id,this.quantitySelected).subscribe(x => console.log("Dad"));
   }
 }

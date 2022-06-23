@@ -71,5 +71,13 @@ namespace OnlineStore.API.Controllers
             var orders = await mediator.Send(new GetOrderHistoryByUserIdQuery(userId)); 
             return Ok(mapper.Map<IEnumerable<OrderVM>>(orders));
         }
+
+        [HttpPost("remove-from-cart")]
+        public async Task<ActionResult> RemoveFromCart(int id,string userId)
+        {
+            
+            await mediator.Send(new RemoveFromCartCommand(id,userId));
+            return Ok();
+        }
     }
 }

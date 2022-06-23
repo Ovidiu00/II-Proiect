@@ -465,7 +465,7 @@ namespace OnlineStore.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("OnlineStore.DataAccess.Models.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -481,6 +481,11 @@ namespace OnlineStore.DataAccess.Migrations
                 });
 
             modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.Order", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("OnlineStore.DataAccess.Models.Entities.User", b =>
                 {
                     b.Navigation("Products");
                 });
